@@ -1,0 +1,18 @@
+{
+  "reasoning_model": "qwen2.5:7b",
+  "embedding_model": "nomic-embed-text:latest",
+  "filesystem_tool": {
+    "server_command": ["npx", "-y", "@modelcontextprotocol/server-filesystem"],
+    "allowed_paths": ["C:\\Users\\craig\\Desktop\\MainProjects\\Ugentic"]
+  },
+  "git_tool": {
+    "server_command": ["uvx", "mcp-server-git"],
+    "repository_path": "C:\\Users\\craig\\Desktop\\MainProjects\\Ugentic"
+  },
+  "research_tool": {
+    "server_command": ["node", "C:\\Users\\craig\\Desktop\\MainProjects\\Ugentic\\servers-main\\src\\research\\index.js"]
+  },
+  "orchestrator_tool": {
+    "server_command": ["node", "C:\\Users\\craig\\Desktop\\MainProjects\\Ugentic\\servers-main\\src\\orchestrator\\index.js"]
+  }
+}

@@ -1,0 +1,4 @@
+{"timestamp": "2025-08-25 08:24:04,904", "level": "ERROR", "logger_name": "ugentic.llm", "message": "Error invoking LLM: Extra data: line 5 column 1 (char 126)", "context": {"agent_name": "FinanceAgent", "error": "Extra data: line 5 column 1 (char 126)"}}
+
+{"timestamp": "2025-08-25 08:25:38,780", "level": "ERROR", "logger_name": "ugentic.llm", "message": "Error invoking LLM: Extra data: line 5 column 1 (char 126)", "context": {"agent_name": "FinanceAgent", "error": "Extra data: line 5 column 1 (char 126)"}}
+

@@ -1,0 +1,203 @@
+{
+  "system_name": "UGENTIC Multi-Agent System",
+  "version": "1.0",
+  "case_study": "Sun International GrandWest IT Department",
+  
+  "hierarchy": {
+    "strategic": {
+      "level": 1,
+      "agents": [
+        {
+          "id": "it_manager",
+          "name": "IT Manager",
+          "role": "Strategic decision making, delegation, resource allocation",
+          "reports_to": null,
+          "manages": ["service_desk_manager", "app_support", "network_support", "infrastructure"],
+          "decision_authority": "high",
+          "ubuntu_focus": ["consensus_building", "strategic_collaboration", "collective_vision"]
+        }
+      ]
+    },
+    
+    "tactical": {
+      "level": 2,
+      "agents": [
+        {
+          "id": "service_desk_manager",
+          "name": "Service Desk Manager",
+          "role": "Coordinate support operations, manage front-line team, bridge strategic and operational",
+          "reports_to": "it_manager",
+          "manages": ["it_support"],
+          "decision_authority": "medium",
+          "ubuntu_focus": ["team_coordination", "knowledge_sharing", "mutual_support"]
+        }
+      ]
+    },
+    
+    "operational": {
+      "level": 3,
+      "agents": [
+        {
+          "id": "it_support",
+          "name": "IT Support Technician",
+          "role": "Front-line user support, troubleshooting, incident resolution",
+          "reports_to": "service_desk_manager",
+          "manages": [],
+          "decision_authority": "low",
+          "ubuntu_focus": ["collective_problem_solving", "knowledge_sharing", "user_empathy"],
+          "specialization": "General IT support, user issues, basic troubleshooting"
+        },
+        {
+          "id": "app_support",
+          "name": "Application Support Specialist",
+          "role": "Application-specific support, bug investigation, vendor liaison",
+          "reports_to": "it_manager",
+          "manages": [],
+          "decision_authority": "medium",
+          "ubuntu_focus": ["knowledge_sharing", "cross_functional_collaboration"],
+          "specialization": "Business applications, databases, custom software"
+        },
+        {
+          "id": "network_support",
+          "name": "Network Support Specialist",
+          "role": "Network infrastructure, connectivity, security",
+          "reports_to": "it_manager",
+          "manages": [],
+          "decision_authority": "medium",
+          "ubuntu_focus": ["infrastructure_collaboration", "proactive_monitoring"],
+          "specialization": "Networks, VPN, firewalls, connectivity"
+        },
+        {
+          "id": "infrastructure",
+          "name": "Infrastructure Specialist",
+          "role": "Server management, infrastructure maintenance, capacity planning",
+          "reports_to": "it_manager",
+          "manages": [],
+          "decision_authority": "medium",
+          "ubuntu_focus": ["system_stability", "knowledge_documentation"],
+          "specialization": "Servers, storage, backups, virtualization"
+        }
+      ]
+    }
+  },
+  
+  "delegation_rules": {
+    "general_user_support": {
+      "route": "it_manager -> service_desk_manager -> it_support",
+      "criteria": "User-facing issues, password resets, basic troubleshooting, access requests"
+    },
+    
+    "application_issues": {
+      "route": "it_manager -> app_support",
+      "criteria": "Application errors, database issues, business software problems"
+    },
+    
+    "network_issues": {
+      "route": "it_manager -> network_support",
+      "criteria": "Connectivity problems, VPN issues, network performance, security"
+    },
+    
+    "infrastructure_issues": {
+      "route": "it_manager -> infrastructure",
+      "criteria": "Server problems, storage issues, backup failures, capacity concerns"
+    },
+    
+    "complex_multi_domain": {
+      "route": "it_manager -> [coordinates multiple agents]",
+      "criteria": "Issues affecting multiple domains, system-wide problems, strategic initiatives"
+    }
+  },
+  
+  "collaboration_triggers": {
+    "automatic": [
+      {
+        "condition": "issue_affects_multiple_domains",
+        "action": "initiate_ubuntu_collaboration",
+        "example": "Email issue that could be network, server, or application related"
+      },
+      {
+        "condition": "root_cause_unclear",
+        "action": "collective_diagnosis",
+        "example": "Intermittent failures with no obvious pattern"
+      },
+      {
+        "condition": "novel_problem",
+        "action": "knowledge_sharing_session",
+        "example": "Never-seen-before error or scenario"
+      },
+      {
+        "condition": "high_impact_incident",
+        "action": "all_hands_collaboration",
+        "example": "Critical system down affecting business operations"
+      }
+    ],
+    
+    "manual": [
+      {
+        "trigger": "agent_requests_help",
+        "action": "peer_support_activated",
+        "example": "IT Support asks for Infrastructure expertise"
+      },
+      {
+        "trigger": "strategic_initiative",
+        "action": "consensus_building_session",
+        "example": "Planning major system upgrade"
+      }
+    ]
+  },
+  
+  "escalation_paths": {
+    "technical_escalation": {
+      "path": "it_support -> app_support/network_support/infrastructure (specialist)",
+      "criteria": "Technical issue beyond general IT support capability"
+    },
+    
+    "management_escalation": {
+      "path": "operational_agent -> service_desk_manager -> it_manager",
+      "criteria": "Policy decision needed, resource allocation, strategic decision"
+    },
+    
+    "urgent_escalation": {
+      "path": "any_agent -> it_manager (immediate)",
+      "criteria": "Critical system failure, security breach, business-stopping issue"
+    }
+  },
+  
+  "knowledge_flow": {
+    "discovery_to_documentation": {
+      "process": "Agent discovers solution -> Documents in knowledge base -> Shares with relevant agents -> Becomes team knowledge",
+      "sla": "Within same day"
+    },
+    
+    "peer_learning": {
+      "process": "Expert agent teaches peer agent -> Both document learning -> Knowledge multiplicates",
+      "frequency": "Ongoing, embedded in collaboration"
+    },
+    
+    "community_knowledge_base": {
+      "location": "knowledge/ folder",
+      "maintainers": "All agents contribute",
+      "structure": "Searchable, tagged, continuously updated"
+    }
+  },
+  
+  "ubuntu_integration": {
+    "core_principle": "I am because we are",
+    "mandatory_behaviors": [
+      "Collective problem-solving over solo heroics",
+      "Knowledge sharing is default, not exception",
+      "Mutual support is expected and celebrated",
+      "Consensus building on important decisions",
+      "Credit flows to the collective",
+      "Collaboration is valued over efficiency metrics"
+    ],
+    
+    "cultural_indicators": [
+      "Frequency of collaboration events",
+      "Knowledge base growth rate",
+      "Cross-agent learning instances",
+      "Peer support frequency",
+      "Collective decision participation"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+# Core AI and Language Processing
+langchain
+langchain-community
+langchain-ollama
+ollama
+chromadb
+python-dotenv
+tiktoken
+requests
+nltk
+numpy<2.0.0,>=1.26.0
+pandas
+
+# Elysia Framework for Agentic AI
+elysia-ai
+
+# Additional utilities
+aiohttp

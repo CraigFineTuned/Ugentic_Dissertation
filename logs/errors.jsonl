@@ -1,0 +1,10 @@
+{"timestamp": "2025-08-22 14:39:15,365", "level": "ERROR", "logger_name": "ugentic.tool.research", "message": "Web search failed: name 'default_api' is not defined", "context": {"error": "name 'default_api' is not defined"}}
+
+{"timestamp": "2025-08-22 16:53:51,057", "level": "ERROR", "logger_name": "ugentic.tool.research", "message": "Brave Search: Network error occurred: 422 Client Error: Unprocessable Entity for url: https://api.search.brave.com/res/v1/web/search?q=determine%20training%20needs%20for%20sales%20team%20and%20new%20hires", "context": {"error": "422 Client Error: Unprocessable Entity for url: https://api.search.brave.com/res/v1/web/search?q=determine%20training%20needs%20for%20sales%20team%20and%20new%20hires"}}
+
+{"timestamp": "2025-08-22 16:59:53,027", "level": "ERROR", "logger_name": "ugentic.tool.research", "message": "Brave Search: Network error occurred: 422 Client Error: Unprocessable Entity for url: https://api.search.brave.com/res/v1/web/search?q=financial%20projections%20based%20on%20market%20analysis", "context": {"error": "422 Client Error: Unprocessable Entity for url: https://api.search.brave.com/res/v1/web/search?q=financial%20projections%20based%20on%20market%20analysis"}}
+
+{"timestamp": "2025-08-25 08:24:04,904", "level": "ERROR", "logger_name": "ugentic.llm", "message": "Error invoking LLM: Extra data: line 5 column 1 (char 126)", "context": {"agent_name": "FinanceAgent", "error": "Extra data: line 5 column 1 (char 126)"}}
+
+{"timestamp": "2025-08-25 08:25:38,780", "level": "ERROR", "logger_name": "ugentic.llm", "message": "Error invoking LLM: Extra data: line 5 column 1 (char 126)", "context": {"agent_name": "FinanceAgent", "error": "Extra data: line 5 column 1 (char 126)"}}
+

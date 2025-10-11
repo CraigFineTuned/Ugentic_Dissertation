@@ -1,0 +1,79 @@
+{
+  "system": {
+    "name": "UGENTIC",
+    "full_name": "Ubuntu-Guided Enterprise Networked Generative Intelligence Collaboration",
+    "version": "1.0.0",
+    "environment": "Claude Simulation",
+    "case_study": "Sun International GrandWest IT Department"
+  },
+  
+  "simulation_settings": {
+    "mode": "detailed",
+    "show_reasoning": true,
+    "show_ubuntu_principles": true,
+    "show_tool_usage": true,
+    "show_collaboration": true,
+    "show_workflow_trace": true,
+    "timing": "simulated_realistic"
+  },
+  
+  "agent_settings": {
+    "total_agents": 6,
+    "active_agents": 6,
+    "ubuntu_enabled": true,
+    "collaboration_enabled": true,
+    "knowledge_sharing_enabled": true
+  },
+  
+  "tools": {
+    "available": [
+      "filesystem",
+      "git",
+      "research",
+      "orchestrator",
+      "memory"
+    ],
+    "simulation_mode": true,
+    "show_tool_calls": true
+  },
+  
+  "knowledge_base": {
+    "location": "knowledge/",
+    "searchable": true,
+    "continuously_updated": true,
+    "shared_across_agents": true
+  },
+  
+  "ubuntu_configuration": {
+    "philosophy": "I am because we are",
+    "principles_file": "config/ubuntu_principles.md",
+    "enforcement": "mandatory",
+    "metrics_tracking": true,
+    "collaboration_first": true
+  },
+  
+  "response_format": {
+    "include_reasoning": true,
+    "include_ubuntu_application": true,
+    "include_collaboration_trace": true,
+    "include_tool_usage": true,
+    "include_workflow_visualization": true,
+    "include_knowledge_capture": true
+  },
+  
+  "quality_standards": {
+    "minimum_detail_level": "comprehensive",
+    "ubuntu_principles_mandatory": true,
+    "collaboration_documentation_required": true,
+    "knowledge_sharing_required": true,
+    "workflow_traceability": true
+  },
+  
+  "demonstration_mode": {
+    "enabled": true,
+    "purpose": "Dissertation defense demonstration",
+    "show_all_steps": true,
+    "explain_decisions": true,
+    "highlight_ubuntu_moments": true
+  }
+}
