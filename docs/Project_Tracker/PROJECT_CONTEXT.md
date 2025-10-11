@@ -274,6 +274,9 @@ C:\Users\craig\Desktop\MainProjects\Ugentic_Dissertation\
 - `requirements.txt` - Python dependencies
 - `documents/policies/` - RAG document storage
 
+**Knowledge Base:**
+- `knowledge_base/` - The central repository for all agent knowledge.
+
 **Claude Simulation Environment:** ⭐
 - `claud_ugentic/` - Complete simulation system
 - `claud_ugentic/SIMULATION_MASTER.md` - Simulation entry point

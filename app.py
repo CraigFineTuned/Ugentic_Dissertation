@@ -11,6 +11,7 @@ from src.ugentic.agents.react_agents import (
     ServiceDeskManagerAgentReAct
 )
 from src.ugentic.core.rag_core import RAGCore, get_ollama_embeddings, get_text_splitter
+from src.ugentic.logging_config import setup_logging
 
 def get_embedding_model_from_config():
     """Reads the embedding model name from the config file."""
@@ -71,7 +72,21 @@ def process_user_request(user_input, agents, rag_system):
     
     # Agent investigates (ReAct + automatic orchestration)
     result = target_agent.investigate(user_input, context)
-    
+
+    # Check if collaboration is needed and escalate if necessary
+    if result.get('status') == 'NEEDS_COLLABORATION' and not getattr(target_agent, 'is_orchestrator', False):
+        print(f"\n{'! ESCALATION !'*4}")
+        print(f" {target_agent_name} requires collaboration. Escalating to the lead orchestrator...")
+        print(f"{'! ESCALATION !'*4}\n")
+        
+        # Get the orchestrator agent (assuming Infrastructure agent is the lead)
+        orchestrator_agent = agents.get('Infrastructure')
+        if orchestrator_agent:
+            # The orchestrator agent's investigate method will trigger the orchestration
+            result = orchestrator_agent.investigate(user_input, context)
+        else:
+            print("CRITICAL ERROR: Orchestrator agent not found!")
+
     # Step 3: Display results
     display_results(result, rag_context)
     
@@ -122,6 +137,8 @@ def display_results(result, rag_docs):
 def run_demo(fast_mode=False):
     """Main demonstration function"""
     
+    setup_logging()
+    
     # Get model
     if fast_mode:
         model_name = "gemma:2b"
@@ -151,7 +168,7 @@ def run_demo(fast_mode=False):
     ollama_embed = get_ollama_embeddings(embedding_model_name)
     splitter = get_text_splitter()
     rag_system = RAGCore(ollama_embed, splitter, None) # Passing None for unused filesystem_tool
-    doc_path = "documents/policies"
+    doc_path = "knowledge_base"
     if os.path.exists(doc_path) and os.listdir(doc_path):
         rag_system.load_documents_from_directory(doc_path)
         print(f"   RAG system ready with {len(os.listdir(doc_path))} documents\n")

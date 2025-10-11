@@ -16,7 +16,7 @@ class JsonFormatter(logging.Formatter):
         return json.dumps(log_record) + '\n'
 
 def setup_logging():
-    LOGS_DIR = "C:/Users/craig/Desktop/MainProjects/Ugentic/logs"
+    LOGS_DIR = "C:/Users/craig/Desktop/MainProjects/Ugentic_Dissertation/logs"
     AGENTS_LOGS_DIR = os.path.join(LOGS_DIR, "agents")
 
     if not os.path.exists(LOGS_DIR):
