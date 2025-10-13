@@ -1,0 +1,17 @@
+{
+  "session_id": "20251012_220911",
+  "session_start": "2025-10-12T22:09:11.958471",
+  "session_end": "2025-10-12T22:13:34.860266",
+  "metrics": {
+    "total_investigations": 0,
+    "successful_investigations": 0,
+    "orchestration_count": 0,
+    "agent_usage": {},
+    "tool_usage": {},
+    "avg_response_time": 0,
+    "total_response_time": 0
+  },
+  "investigation_count": 0,
+  "orchestration_count": 0,
+  "investigations": []
+}

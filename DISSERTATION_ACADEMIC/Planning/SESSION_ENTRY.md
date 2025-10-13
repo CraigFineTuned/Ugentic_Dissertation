@@ -1,8 +1,31 @@
 # SESSION ENTRY POINT
 **Created:** October 4, 2025
-**Updated:** October 11, 2025 (Post-PTO - Full paths added)
+**Updated:** October 12, 2025 (Added critical path warning)
 **Purpose:** Single file to start every dissertation session
 **Status:** STATIC - This file never changes (protocol only)
+
+---
+
+## ⚠️ CRITICAL: CORRECT FILE PATHS
+
+**THIS FILE IS FOR DISSERTATION WORK ONLY.**
+
+**DISSERTATION Planning (THIS SYSTEM):**
+```
+C:\Users\craig\Desktop\MainProjects\Ugentic_Dissertation\DISSERTATION_ACADEMIC\Planning\SESSION_ENTRY.md
+```
+↑ **USE THIS - You are here!**
+
+**SYSTEM Development Planning (DIFFERENT PROJECT):**
+```
+C:\Users\craig\Desktop\MainProjects\Ugentic_Dissertation\docs\Project_Tracker\SESSION_ENTRY.md
+```
+↑ **NEVER USE THIS for dissertation work - This is for Ugentic system development only**
+
+**Rule:** ALL files in `docs/` folder = SYSTEM development (avoid for dissertation)
+**Rule:** ALL files in `DISSERTATION_ACADEMIC/` folder = DISSERTATION work (use these)
+
+**These are TWO SEPARATE PROJECTS with different planning systems.**
 
 ---
 

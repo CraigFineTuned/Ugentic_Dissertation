@@ -25,16 +25,18 @@ class UbuntuOrchestrator:
     - Consensus Building: Solution reflects collective wisdom
     """
     
-    def __init__(self, llm, agents: Dict[str, Any]):
+    def __init__(self, llm, agents: Dict[str, Any], logger=None):
         """
         Initialize Ubuntu Orchestrator
         
         Args:
             llm: Language model for coordination reasoning
             agents: Dictionary of available agents {name: agent_instance}
+            logger: InvestigationLogger instance (optional)
         """
         self.llm = llm
         self.agents = agents
+        self.logger = logger
         self.collaboration_history = []
         
         logging.info(" Ubuntu Orchestrator initialized")
@@ -136,6 +138,18 @@ class UbuntuOrchestrator:
         logging.info(f"   Collaboration ID: {collaboration_id}")
         logging.info(f"   Agents participated: {len(findings)}")
         logging.info(f"{'='*70}\n")
+        
+        # Log orchestration event
+        if self.logger:
+            knowledge_articles = []  # TODO: Extract from context if available
+            self.logger.log_orchestration(
+                collab_id=collaboration_id,
+                participating_agents=list(findings.keys()),
+                root_cause=synthesis.get('root_cause', 'Multi-domain issue'),
+                solution=synthesis.get('solution', 'Coordinated solution'),
+                ubuntu_value=synthesis.get('ubuntu_value', 'Collective expertise'),
+                knowledge_articles=knowledge_articles
+            )
         
         return {
             "status": "UBUNTU_COLLABORATION_COMPLETE",

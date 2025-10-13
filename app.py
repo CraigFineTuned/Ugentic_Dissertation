@@ -11,6 +11,7 @@ from src.ugentic.agents.react_agents import (
     ServiceDeskManagerAgentReAct
 )
 from src.ugentic.core.rag_core import RAGCore, get_ollama_embeddings, get_text_splitter
+from src.ugentic.utils.investigation_logger import InvestigationLogger
 from src.ugentic.logging_config import setup_logging
 
 def get_embedding_model_from_config():
@@ -22,22 +23,23 @@ def get_embedding_model_from_config():
     except FileNotFoundError:
         return 'nomic-embed-text:latest'
 
-def initialize_react_agents(llm):
-    """Initialize all React agents with orchestration"""
+def initialize_react_agents(llm, logger=None):
+    """Initialize all React agents with orchestration and logging"""
     
     # Initialize specialist agents first
     agents = {
-        'Network Support': NetworkSupportAgentReAct(llm=llm),
-        'App Support': AppSupportAgentReAct(llm=llm),
-        'IT Support': ITSupportAgentReAct(llm=llm),
-        'Service Desk Manager': ServiceDeskManagerAgentReAct(llm=llm)
+        'Network Support': NetworkSupportAgentReAct(llm=llm, logger=logger),
+        'App Support': AppSupportAgentReAct(llm=llm, logger=logger),
+        'IT Support': ITSupportAgentReAct(llm=llm, logger=logger),
+        'Service Desk Manager': ServiceDeskManagerAgentReAct(llm=llm, logger=logger)
     }
     
     # Initialize Infrastructure with orchestration (lead agent)
     agents['Infrastructure'] = InfrastructureAgentReAct(
         llm=llm,
         orchestrator=True,
-        agents=agents
+        agents=agents,
+        logger=logger
     )
     
     # Initialize IT Manager (delegates only, no investigation)
@@ -156,9 +158,14 @@ def run_demo(fast_mode=False):
     llm = ChatOllama(model=model_name, temperature=0.7)
     print("   LLM initialized\n")
     
-    # Initialize React agents with orchestration
+    # Initialize Investigation Logger
+    print("1.5. Initializing Investigation Logger...")
+    logger = InvestigationLogger(base_dir="logs")
+    print("   Investigation Logger ready\n")
+    
+    # Initialize React agents with orchestration and logging
     print("2. Initializing React Agents with Ubuntu Orchestration...")
-    agents = initialize_react_agents(llm)
+    agents = initialize_react_agents(llm, logger=logger)
     print(f"   {len(agents)} agents initialized")
     print(f"   Ubuntu Orchestration: Enabled\n")
     
@@ -190,6 +197,8 @@ def run_demo(fast_mode=False):
         user_input = input("Your request: ").strip()
         
         if user_input.lower() in ['quit', 'exit', 'q']:
+            print("\nSaving session summary...")
+            logger.save_session_summary()
             print("\nThank you for using UGENTIC!")
             break
         

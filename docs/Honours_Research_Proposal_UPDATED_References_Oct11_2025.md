@@ -13,7 +13,7 @@
 | **Institution:**              | Richfield Graduate Institute of Technology |
 | **Supervisor:**               | Jemini Matiya                          |
 | **Co-Supervisor:**            | Dr Stephen Akandwanaho                 |
-| **Date:**                     | October 11, 2025 (UPDATED - All references 2020-2025)  |
+| **Date:**                     | October 12, 2025 (UPDATED - Research Questions Revised)  |
 
 ---
 
@@ -38,13 +38,13 @@
 
 ## 2. ABSTRACT
 
-Multi-agent artificial intelligence systems offer significant potential for organizational IT support, yet most implementations lack cultural coherence with collaborative organizational values. This research investigates whether indigenous African philosophy can enhance collaboration in multi-agent AI systems within organizational IT departments through design science research methodology.
+Multi-agent artificial intelligence systems offer significant potential for organizational IT support, yet most implementations lack cultural coherence with collaborative organizational values. This research develops and evaluates UGENTIC (Ubuntu + Agentic: Ubuntu-Driven Agentic Collective Intelligence), a multi-agent AI system integrating indigenous African philosophy with organizational IT workflows through design science research methodology.
 
-To investigate this question, the study develops UGENTIC (Ubuntu-Driven Agentic Collective Intelligence) as a research prototype—a six-agent AI system designed using Sun International GrandWest Casino's IT department as the case study context. The prototype includes agents representing IT Manager, Service Desk Manager, IT Support, Application Support, Network Support, and Infrastructure roles, mirroring the actual departmental structure. This design science research validates whether collective values and cultural principles can be operationalized in multi-agent architectures to enhance cross-departmental collaboration, or in other words, bridge the gap between the two.
+The study develops a working UGENTIC prototype—a six-agent AI system built using Sun International GrandWest Casino's IT department as the case study context. The developed system includes agents representing IT Manager, Service Desk Manager, IT Support, Application Support, Network Support, and Infrastructure roles, mirroring the actual departmental structure. The system implements cultural principles of collective humanity through specific agent behaviors, coordination protocols, and decision-making mechanisms, operationalizing the philosophy "I am because we are" within technical multi-agent architecture, or in other words, bridging the gap between cultural wisdom and AI system development.
 
-Using an explanatory sequential mixed methods approach within a single case study, the research combines prototype development with expert validation through semi-structured interviews with 10-14 IT staff across strategic, tactical, and operational levels. These interviews assess current workflow challenges, validate the UGENTIC concept's feasibility, and provide design recommendations for AI-workplace integration. The research aims to determine whether culturally-grounded AI design principles can address organizational collaboration challenges while developing transferable implementation guidelines for other organizations.
+Using an explanatory sequential mixed methods approach within a single case study, the research combines system development with expert evaluation through semi-structured interviews with 10-14 IT staff across strategic, tactical, and operational levels. These interviews evaluate the developed system's effectiveness for cross-departmental collaboration, assess its feasibility and organizational fit, validate cultural authenticity, and provide implementation recommendations. The research aims to demonstrate whether culturally-grounded multi-agent AI systems can enhance organizational collaboration while developing transferable implementation methodologies for other organizations.
 
-This represents the first study combining indigenous African philosophy with multi-agent organizational AI in real departmental contexts with authentic hierarchical structures. Expected outcomes include design validation of culturally-enhanced AI collaboration, practical feasibility assessment and design recommendations, and contribution to human-centered AI development methodology.
+This represents the first study developing and evaluating multi-agent organizational AI systems that integrate indigenous African philosophy with real departmental workflows and authentic hierarchical structures. Expected outcomes include empirical evaluation of the developed system's effectiveness, documented development methodology and implementation guidelines, and contribution to culturally-grounded AI system development approaches.
 
 **Keywords:** Ubuntu philosophy, multi-agent AI systems, organizational collaboration, IT departments, design science research, cultural AI integration, human-AI teaming
 
@@ -102,21 +102,21 @@ This research aims to validate whether collective cultural principles can inform
 
 **Primary Research Question:**
 
-Can indigenous African philosophy enhance the design of multi-agent artificial intelligence systems for organizational IT departments, and if so, how does the principle "I am because we are" manifest in both cultural wisdom and technical architecture design?
+How can indigenous African philosophy be integrated into the development of multi-agent artificial intelligence systems for organizational IT departments, and what is the effectiveness of the developed UGENTIC system in enhancing collaborative decision-making when evaluated by IT staff experts?
 
 **Secondary Research Questions:**
 
-**RQ1:** How can real departmental workflows, expertise, hierarchical structures, and decision-making patterns be effectively translated into AI agent design specifications for organizational IT contexts?
+**RQ1 (System Development - Requirements):** How can real departmental workflows, expertise, hierarchical structures, and decision-making patterns be translated into development requirements for building multi-agent AI systems that authentically represent organizational IT contexts?
 
-**RQ2:** How can cultural philosophy principles emphasizing collective humanity be operationalized in multi-agent AI system design, and what measurable agent behaviors should demonstrate these principles in action?
+**RQ2 (System Development - Cultural Integration):** How can cultural philosophy principles emphasizing collective humanity be operationalized during the development of multi-agent AI systems, and what specific agent behaviors and coordination mechanisms should be implemented to demonstrate these principles?
 
-**RQ3:** What design considerations and potential benefits for cross-departmental collaboration, decision-making efficiency, and organizational coordination could result from culturally-enhanced multi-agent systems compared to traditional approaches?
+**RQ3 (System Evaluation - Effectiveness):** What are the evaluated benefits and limitations of the developed UGENTIC system for cross-departmental collaboration, decision-making efficiency, and organizational coordination compared to traditional AI approaches, as assessed by IT staff experts?
 
-**RQ4:** How do IT staff perceive the feasibility and value of culturally-driven AI design compared to traditional AI tools in their daily work, and what factors influence their assessment of collaborative AI systems?
+**RQ4 (System Evaluation - Feasibility):** How do IT staff experts evaluate the feasibility, value, and organizational fit of the developed culturally-driven UGENTIC system compared to traditional AI tools, and what factors influence their assessment?
 
-**RQ5:** How can cultural philosophy be implemented within multi-agent AI system design while preserving cultural authenticity, respecting indigenous knowledge systems, and avoiding cultural appropriation?
+**RQ5 (System Development - Cultural Authenticity):** How can cultural philosophy be implemented within the development of multi-agent AI systems while preserving cultural authenticity, respecting indigenous knowledge systems, and avoiding cultural appropriation?
 
-**RQ6:** What organizational and cultural factors enable or constrain culturally-driven AI adoption, and what design methodology enables other organizations to successfully adopt this framework?
+**RQ6 (System Transferability - Implementation Methodology):** What development methodology and implementation guidelines can be derived from building the UGENTIC system to enable other organizations to successfully develop and adopt culturally-driven multi-agent AI frameworks?
 
 ---
 
@@ -124,21 +124,21 @@ Can indigenous African philosophy enhance the design of multi-agent artificial i
 
 **Primary Objective:**
 
-To develop and validate a practical design methodology for integrating cultural philosophy with multi-agent AI systems for organizational IT departments, demonstrating feasibility and potential value for collaborative decision-making while preserving cultural authenticity.
+To develop the UGENTIC multi-agent AI system integrating indigenous African philosophy with organizational IT workflows, and to evaluate its effectiveness for enhancing collaborative decision-making through expert validation by IT staff across organizational levels.
 
 **Secondary Objectives (Aligned 1:1 with Research Questions):**
 
-**RO1 (Addresses RQ1):** To examine current challenges in AI-workplace integration and develop a methodology for translating real departmental operations into AI agent design specifications that authentically represent departmental perspectives while enhancing cross-departmental collaboration.
+**RO1 (Addresses RQ1 - System Development Requirements):** To analyze real departmental workflows, hierarchical structures, and decision-making patterns, translating these into concrete development requirements and technical specifications for building multi-agent AI systems that authentically represent organizational IT contexts.
 
-**RO2 (Addresses RQ2):** To explore the practical application of cultural philosophy in designing collaborative AI systems and identify specific agent behaviors that should manifest these principles in multi-agent interactions.
+**RO2 (Addresses RQ2 - System Development Cultural Integration):** To develop and implement cultural philosophy principles within the UGENTIC system architecture, operationalizing collective humanity concepts through specific agent behaviors, coordination protocols, and communication mechanisms.
 
-**RO3 (Addresses RQ3):** To assess the potential effectiveness of culturally-driven AI system design through expert evaluation of design feasibility, identifying potential improvements in cross-departmental collaboration including decision-making patterns, coordination opportunities, and team communication.
+**RO3 (Addresses RQ3 - System Evaluation Effectiveness):** To evaluate the developed UGENTIC system's effectiveness through expert assessment, measuring perceived benefits and identifying limitations for cross-departmental collaboration, decision-making efficiency, and organizational coordination compared to traditional approaches.
 
-**RO4 (Addresses RQ4):** To evaluate expert perceptions and assessments of culturally-driven AI design versus traditional AI implementations through qualitative analysis of staff feedback, identifying factors that enhance or constrain feasibility and acceptance.
+**RO4 (Addresses RQ4 - System Evaluation Feasibility):** To assess the feasibility, organizational fit, and practical value of the developed UGENTIC system through qualitative analysis of IT staff expert evaluations, identifying factors that influence acceptance and implementation success.
 
-**RO5 (Addresses RQ5):** To validate the cultural authenticity and appropriateness of philosophical integration in AI system design through stakeholder consultation and participant feedback, ensuring respectful implementation of indigenous African wisdom.
+**RO5 (Addresses RQ5 - System Development Cultural Authenticity):** To ensure cultural authenticity in the development process by validating philosophical implementation through participant feedback, respecting indigenous knowledge systems, and avoiding cultural appropriation throughout system development.
 
-**RO6 (Addresses RQ6):** To identify contextual factors, design criteria, and implementation considerations, developing generalizable design guidelines that enable other organizations (particularly SMEs) to adopt culturally-driven multi-agent frameworks adapted to their specific contexts.
+**RO6 (Addresses RQ6 - System Transferability Implementation):** To document the development methodology and derive generalizable implementation guidelines from building UGENTIC, enabling other organizations (particularly SMEs) to develop and adopt culturally-driven multi-agent AI frameworks adapted to their specific contexts.
 
 ---
 
@@ -399,9 +399,9 @@ Zhang, T., et al. (2024) 'RAG Framework for IT Operations: Applications and Best
 
 **END OF PROPOSAL**
 
-**Document Status:** UPDATED - All References 2020-2025  
-**Date:** October 11, 2025  
-**Word Count:** ~8,400 words  
+**Document Status:** UPDATED - Research Questions & Objectives Revised  
+**Date:** October 12, 2025  
+**Word Count:** ~8,500 words  
 **Methodology:** Design Science Research with Expert Validation  
 **References:** 60 sources, 80% from 2024-2025, ZERO sources older than 2020  
-**Compliance:** ✅ Meets 5-year reference requirement
+**Update:** Research questions and objectives revised to explicitly incorporate system development and evaluation per supervisor feedback. Abstract updated to reflect revised questions.

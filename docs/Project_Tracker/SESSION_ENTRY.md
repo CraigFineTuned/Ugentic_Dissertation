@@ -4,7 +4,31 @@
 
 ---
 
-## INSTRUCTIONS FOR GEMINI
+## CRITICAL RULES (READ FIRST)
+
+**Before creating/deleting/editing ANY file, internalize these rules:**
+
+1. ❌ **AVOID:** All files in `DISSERTATION_ACADEMIC/` (separate academic project)
+2. ✅ **USE:** Planning files in `docs/Project_Tracker/` only
+3. 🎯 **FOUNDATION:** This file (`SESSION_ENTRY.md`) is the single entry point
+4. 🔄 **DYNAMIC:** Read and update checkpoint files as work progresses
+5. 🧪 **TESTING:** User runs all tests manually - never assume or suggest automation
+6. ✋ **VERIFY:** Before modifying planning files, verify against checkpoint that it's the correct action
+
+**Planning Structure Hierarchy:**
+```
+SESSION_ENTRY.md (you are here)
+  ↓
+CURRENT_SESSION_CHECKPOINT.md (what's happening now)
+  ↓
+PROJECT_CONTEXT.md (static context)
+  ↓
+SESSION_COMPLETION_SUMMARY.md (history)
+```
+
+---
+
+## INSTRUCTIONS FOR AI ASSISTANT
 
 When this file is provided, follow these steps in order:
 

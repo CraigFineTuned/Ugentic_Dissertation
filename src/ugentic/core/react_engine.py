@@ -29,7 +29,7 @@ class ReactEngine:
     Pattern: Thought → Action → Observation → Reflection → (repeat)
     """
     
-    def __init__(self, agent_name: str, tools, llm, max_iterations: int = 10):
+    def __init__(self, agent_name: str, tools, llm, max_iterations: int = 10, logger=None):
         """
         Initialize ReAct engine
         
@@ -38,11 +38,14 @@ class ReactEngine:
             tools: ToolRegistry instance with domain-specific tools
             llm: LLM for reasoning
             max_iterations: Maximum ReAct loop iterations
+            logger: InvestigationLogger instance (optional)
         """
         self.agent_name = agent_name
         self.tools = tools
         self.llm = llm
         self.max_iterations = max_iterations
+        self.logger = logger
+        self.current_inv_id = None
         self.history: List[ReActStep] = []
     
     def investigate(self, problem_report: str, context: Optional[Dict] = None) -> Dict[str, Any]:
@@ -60,6 +63,10 @@ class ReactEngine:
         self.history = []
         context = context or {}
         
+        # Start investigation logging
+        if self.logger:
+            self.current_inv_id = self.logger.start_investigation(problem_report, self.agent_name)
+        
         print(f"\n{'='*60}")
         print(f" {self.agent_name} - ReAct Investigation Starting")
         print(f"{'='*60}")
@@ -76,17 +83,31 @@ class ReactEngine:
             # Check if done
             if thought.get('status') == 'ROOT_CAUSE_FOUND':
                 print(" ROOT CAUSE IDENTIFIED\n")
-                return self._synthesize_solution(thought)
+                result = self._synthesize_solution(thought)
+                if self.logger and self.current_inv_id:
+                    self.logger.end_investigation(self.current_inv_id, 'success', str(result))
+                return result
             
             if thought.get('status') == 'NEEDS_COLLABORATION':
                 print(" COLLABORATION REQUIRED\n")
-                return self._request_collaboration(thought)
+                result = self._request_collaboration(thought)
+                if self.logger and self.current_inv_id:
+                    self.logger.log_collaboration_decision(
+                        self.current_inv_id, 
+                        triggered=True,
+                        reason="Multi-domain issue detected during investigation"
+                    )
+                    self.logger.end_investigation(self.current_inv_id, 'needs_collaboration', str(result))
+                return result
             
             # ACTION: LLM decides which tool to use
             action = thought.get('next_action', {})
             if not action:
                 print(" No action determined, ending investigation\n")
-                return self._escalate_to_human()
+                result = self._escalate_to_human()
+                if self.logger and self.current_inv_id:
+                    self.logger.end_investigation(self.current_inv_id, 'error', 'No action determined')
+                return result
             
             print(f" ACTION: {action.get('tool_name', 'unknown')}")
             print(f"   Parameters: {action.get('parameters', {})}\n")
@@ -99,6 +120,18 @@ class ReactEngine:
             # REFLECTION: LLM interprets results
             reflection = self._generate_reflection(thought, observation)
             print(f" REFLECTION:\n{reflection.get('interpretation', 'No interpretation')}\n")
+            
+            # Log iteration
+            if self.logger and self.current_inv_id:
+                self.logger.log_iteration(
+                    self.current_inv_id,
+                    iteration + 1,
+                    thought=thought.get('reasoning', ''),
+                    action=action.get('tool_name', ''),
+                    parameters=action.get('parameters', {}),
+                    observation=observation,
+                    reflection=reflection.get('interpretation', '')
+                )
             
             # Store step
             step = ReActStep(
@@ -114,11 +147,22 @@ class ReactEngine:
             # Check reflection status
             if reflection.get('root_cause_found'):
                 print(" ROOT CAUSE FOUND IN REFLECTION\n")
-                return self._synthesize_solution(reflection)
+                result = self._synthesize_solution(reflection)
+                if self.logger and self.current_inv_id:
+                    self.logger.end_investigation(self.current_inv_id, 'success', str(result))
+                return result
             
             if reflection.get('needs_collaboration'):
                 print(" COLLABORATION NEEDED\n")
-                return self._request_collaboration(reflection)
+                result = self._request_collaboration(reflection)
+                if self.logger and self.current_inv_id:
+                    self.logger.log_collaboration_decision(
+                        self.current_inv_id,
+                        triggered=True,
+                        reason=reflection.get('interpretation', 'Complex multi-domain issue')
+                    )
+                    self.logger.end_investigation(self.current_inv_id, 'needs_collaboration', str(result))
+                return result
             
             # If hypothesis wrong, continue with new hypothesis
             if reflection.get('hypothesis_refuted'):
@@ -127,7 +171,10 @@ class ReactEngine:
         
         # Max iterations reached
         print(" Max iterations reached\n")
-        return self._escalate_to_human()
+        result = self._escalate_to_human()
+        if self.logger and self.current_inv_id:
+            self.logger.end_investigation(self.current_inv_id, 'escalated', str(result))
+        return result
     
     def _generate_thought(self, problem_report: str, context: Dict) -> Dict[str, Any]:
         """

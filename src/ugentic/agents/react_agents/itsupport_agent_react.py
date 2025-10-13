@@ -35,13 +35,14 @@ class ITSupportAgentReAct:
     - Consensus Building: Involves users in solutions
     """
     
-    def __init__(self, llm, name="IT Support"):
+    def __init__(self, llm, name="IT Support", logger=None):
         """
         Initialize IT Support agent with ReAct engine
         
         Args:
             llm: Language model for reasoning
             name: Agent name
+            logger: InvestigationLogger instance for logging
         """
         self.name = name
         self.agent_type = "Operational"
@@ -57,7 +58,8 @@ class ITSupportAgentReAct:
             agent_name=self.name,
             tools=self.tools,
             llm=self.llm,
-            max_iterations=8  # Shorter for simpler issues
+            max_iterations=8,  # Shorter for simpler issues
+            logger=logger
         )
         
         # Ubuntu principles

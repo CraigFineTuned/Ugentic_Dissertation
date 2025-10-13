@@ -17,15 +17,17 @@ class CollaborationDetector:
     - Which agents should collaborate?
     """
     
-    def __init__(self, llm):
+    def __init__(self, llm, confidence_threshold=0.7):
         """
         Initialize collaboration detector
         
         Args:
             llm: Language model for decision reasoning
+            confidence_threshold: Minimum confidence (0.0-1.0) to trust LLM decision (default: 0.7)
         """
         self.llm = llm
-        logging.info(" Collaboration Detector initialized")
+        self.confidence_threshold = confidence_threshold
+        logging.info(f"⚙️ Collaboration Detector initialized (confidence_threshold={confidence_threshold})")
     
     def should_collaborate(self,
                           agent_name: str,
@@ -97,15 +99,41 @@ Respond in JSON format:
                     "required_agents": []
                 }
             
-            needs_collab = decision.get('needs_collaboration', False)
+            # Extract LLM's raw decision and confidence
+            needs_collab_raw = decision.get('needs_collaboration', False)
+            confidence = decision.get('confidence', 0.5)
             
+            # Apply confidence threshold logic
+            if confidence >= self.confidence_threshold:
+                # High confidence - trust LLM decision
+                needs_collab = needs_collab_raw
+                decision_basis = "high_confidence"
+            else:
+                # Low confidence - default to NO collaboration (safer)
+                needs_collab = False
+                decision_basis = "low_confidence_fallback"
+                
+                if needs_collab_raw:  # LLM wanted collaboration but confidence too low
+                    logging.warning(f"⚠️ Low confidence ({confidence:.2f} < {self.confidence_threshold}), "
+                                  f"overriding LLM's YES to NO (safer default)")
+            
+            # Add decision metadata
+            decision['decision_basis'] = decision_basis
+            decision['threshold_used'] = self.confidence_threshold
+            decision['final_decision'] = needs_collab
+            decision['llm_raw_decision'] = needs_collab_raw
+            
+            # Enhanced logging
             if needs_collab:
-                logging.info(f"    COLLABORATION NEEDED")
-                logging.info(f"   Confidence: {decision.get('confidence', 0):.2f}")
+                logging.info(f"   🤝 COLLABORATION NEEDED")
+                logging.info(f"   Confidence: {confidence:.2f} (threshold: {self.confidence_threshold})")
+                logging.info(f"   Basis: {decision_basis}")
                 logging.info(f"   Reasoning: {decision.get('reasoning', 'N/A')}")
                 logging.info(f"   Required agents: {decision.get('required_agents', [])}\n")
             else:
                 logging.info(f"   ℹ️ Single-agent resolution sufficient")
+                logging.info(f"   Confidence: {confidence:.2f} (threshold: {self.confidence_threshold})")
+                logging.info(f"   Basis: {decision_basis}")
                 logging.info(f"   Reasoning: {decision.get('reasoning', 'N/A')}\n")
             
             return needs_collab, decision

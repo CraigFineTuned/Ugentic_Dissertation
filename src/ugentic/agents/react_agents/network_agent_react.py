@@ -33,13 +33,14 @@ class NetworkSupportAgentReAct:
     - Consensus Building: Involves teams in network changes
     """
     
-    def __init__(self, llm, name="Network Support"):
+    def __init__(self, llm, name="Network Support", logger=None):
         """
         Initialize Network Support agent with ReAct engine
         
         Args:
             llm: Language model for reasoning
             name: Agent name
+            logger: InvestigationLogger instance (optional)
         """
         self.name = name
         self.agent_type = "Operational"
@@ -55,7 +56,8 @@ class NetworkSupportAgentReAct:
             agent_name=self.name,
             tools=self.tools,
             llm=self.llm,
-            max_iterations=10
+            max_iterations=10,
+            logger=logger
         )
         
         # Ubuntu principles

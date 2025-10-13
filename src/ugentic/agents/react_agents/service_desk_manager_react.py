@@ -33,13 +33,14 @@ class ServiceDeskManagerAgentReAct:
     - Consensus Building: Team decision-making
     """
     
-    def __init__(self, llm, name="Service Desk Manager"):
+    def __init__(self, llm, name="Service Desk Manager", logger=None):
         """
         Initialize Service Desk Manager agent with ReAct engine
         
         Args:
             llm: Language model for reasoning
             name: Agent name
+            logger: InvestigationLogger instance for logging
         """
         self.name = name
         self.agent_type = "Tactical"
@@ -55,7 +56,8 @@ class ServiceDeskManagerAgentReAct:
             agent_name=self.name,
             tools=self.tools,
             llm=self.llm,
-            max_iterations=8
+            max_iterations=8,
+            logger=logger
         )
         
         # Ubuntu principles

@@ -1,0 +1,54 @@
+{
+  "session_id": "20251012_223205",
+  "session_start": "2025-10-12T22:32:05.782705",
+  "session_end": "2025-10-12T23:16:10.058017",
+  "metrics": {
+    "total_investigations": 4,
+    "successful_investigations": 1,
+    "orchestration_count": 3,
+    "agent_usage": {
+      "IT Support": 2,
+      "Infrastructure": 1,
+      "Service Desk Manager": 1
+    },
+    "tool_usage": {
+      "get_user_profile": 2,
+      "check_server_logs": 1,
+      "get_open_tickets": 1
+    },
+    "avg_response_time": 131.43,
+    "total_response_time": 525.723517
+  },
+  "investigation_count": 4,
+  "orchestration_count": 1,
+  "investigations": [
+    {
+      "id": "inv_20251012_224507",
+      "query": "User forgot password",
+      "agent": "IT Support",
+      "outcome": "needs_collaboration",
+      "duration": 153.24
+    },
+    {
+      "id": "inv_20251012_224740",
+      "query": "User forgot password",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 177.5
+    },
+    {
+      "id": "inv_20251012_225121",
+      "query": "User forgot password",
+      "agent": "IT Support",
+      "outcome": "success",
+      "duration": 83.26
+    },
+    {
+      "id": "inv_20251012_225245",
+      "query": "User forgot password",
+      "agent": "Service Desk Manager",
+      "outcome": "needs_collaboration",
+      "duration": 111.72
+    }
+  ]
+}

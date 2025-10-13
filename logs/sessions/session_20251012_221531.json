@@ -1,0 +1,55 @@
+{
+  "session_id": "20251012_221531",
+  "session_start": "2025-10-12T22:15:31.847266",
+  "session_end": "2025-10-12T22:31:35.780898",
+  "metrics": {
+    "total_investigations": 4,
+    "successful_investigations": 0,
+    "orchestration_count": 4,
+    "agent_usage": {
+      "Network Support": 2,
+      "Infrastructure": 1,
+      "App Support": 1
+    },
+    "tool_usage": {
+      "check_app_response_time": 1,
+      "check_app_availability": 1,
+      "check_network_bandwidth": 1,
+      "query_app_logs": 1
+    },
+    "avg_response_time": 149.62,
+    "total_response_time": 598.466254
+  },
+  "investigation_count": 4,
+  "orchestration_count": 1,
+  "investigations": [
+    {
+      "id": "inv_20251012_221740",
+      "query": "users reporting slow app and network issues",
+      "agent": "Network Support",
+      "outcome": "needs_collaboration",
+      "duration": 193.96
+    },
+    {
+      "id": "inv_20251012_222054",
+      "query": "users reporting slow app and network issues",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 184.0
+    },
+    {
+      "id": "inv_20251012_222446",
+      "query": "users reporting slow app and network issues",
+      "agent": "Network Support",
+      "outcome": "needs_collaboration",
+      "duration": 89.63
+    },
+    {
+      "id": "inv_20251012_222615",
+      "query": "users reporting slow app and network issues",
+      "agent": "App Support",
+      "outcome": "needs_collaboration",
+      "duration": 130.88
+    }
+  ]
+}

@@ -178,14 +178,16 @@ class ToolRegistry:
         # Get all expected parameters
         for param_name, param in sig.parameters.items():
             if param_name in params:
-                # Use provided parameter
-                cleaned[param_name] = params[param_name]
+                # Use provided parameter (with network validation if applicable)
+                value = params[param_name]
+                cleaned[param_name] = self._validate_network_parameter(param_name, value, tool)
             elif param.default != inspect.Parameter.empty:
                 # Use default value for optional parameter
                 cleaned[param_name] = param.default
             else:
                 # Required parameter missing - try to infer or use smart defaults
-                cleaned[param_name] = self._infer_missing_parameter(param_name, tool, params)
+                inferred = self._infer_missing_parameter(param_name, tool, params)
+                cleaned[param_name] = self._validate_network_parameter(param_name, inferred, tool)
         
         return cleaned
     
@@ -214,7 +216,14 @@ class ToolRegistry:
             'software_name': 'default_software',
             'hours': 1,
             'test_operation': 'login',
-            'interface': 'eth0'
+            'interface': 'eth0',
+            # Network-specific defaults (Session 12 - Priority 1 enhancement)
+            'host': 'localhost',
+            'destination': '8.8.8.8',  # Google DNS
+            'domain': 'google.com',
+            'source': 'localhost',
+            'count': 10,
+            'max_hops': 15
         }
         
         # Return smart default if available
@@ -228,6 +237,87 @@ class ToolRegistry:
         
         # Last resort: empty string or None
         return ''
+    
+    def _validate_network_parameter(self, param_name: str, value: Any, tool: Tool) -> Any:
+        """
+        Validate and sanitize network-specific parameters
+        Session 12 - Priority 1 enhancement
+        
+        Args:
+            param_name: Name of the parameter
+            value: Value to validate
+            tool: Tool being executed
+            
+        Returns:
+            Validated/sanitized value
+        """
+        import re
+        
+        # Only validate for network domain tools
+        if tool.domain != 'network':
+            return value
+        
+        # IP address validation
+        if param_name in ['host', 'destination', 'source']:
+            # Allow special hostnames
+            if value in ['localhost', '127.0.0.1', '0.0.0.0']:
+                return value
+            
+            # Check if it looks like a hostname (not IP)
+            if not re.match(r'^\d+\.\d+\.\d+\.\d+$', str(value)):
+                # Assume it's a valid hostname, no validation needed
+                return value
+            
+            # Validate IP address format
+            try:
+                octets = str(value).split('.')
+                if len(octets) == 4:
+                    if all(0 <= int(octet) <= 255 for octet in octets):
+                        return value
+            except (ValueError, AttributeError):
+                pass
+            
+            # Invalid IP - return safe default
+            print(f"Warning: Invalid IP address '{value}' for {param_name}, using 'localhost'")
+            return 'localhost'
+        
+        # Domain name validation (basic)
+        if param_name == 'domain':
+            if re.match(r'^[a-zA-Z0-9][a-zA-Z0-9-\.]*[a-zA-Z0-9]$', str(value)):
+                return value
+            print(f"Warning: Invalid domain '{value}', using 'google.com'")
+            return 'google.com'
+        
+        # Interface name validation
+        if param_name == 'interface':
+            if re.match(r'^[a-zA-Z]+\d*$', str(value)):
+                return value
+            print(f"Warning: Invalid interface '{value}', using 'eth0'")
+            return 'eth0'
+        
+        # Integer range validation for network tools
+        if param_name == 'count':
+            try:
+                count = int(value)
+                if 1 <= count <= 100:
+                    return count
+                print(f"Warning: count {count} out of range (1-100), using 10")
+                return 10
+            except (ValueError, TypeError):
+                return 10
+        
+        if param_name == 'max_hops':
+            try:
+                hops = int(value)
+                if 1 <= hops <= 30:
+                    return hops
+                print(f"Warning: max_hops {hops} out of range (1-30), using 15")
+                return 15
+            except (ValueError, TypeError):
+                return 15
+        
+        # No validation needed for this parameter
+        return value
     
     def _generate_parameter_hint(self, tool: Tool, provided_params: Dict) -> str:
         """
