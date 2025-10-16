@@ -1,0 +1,30 @@
+{
+  "session_id": "20251016_125801",
+  "session_start": "2025-10-16T12:58:01.467425",
+  "session_end": "2025-10-16T13:58:47.288924",
+  "metrics": {
+    "total_investigations": 1,
+    "successful_investigations": 1,
+    "orchestration_count": 0,
+    "agent_usage": {
+      "IT Support": 1
+    },
+    "tool_usage": {
+      "check_printer_status": 1,
+      "check_user_permissions": 1
+    },
+    "avg_response_time": 228.25,
+    "total_response_time": 228.245217
+  },
+  "investigation_count": 1,
+  "orchestration_count": 0,
+  "investigations": [
+    {
+      "id": "inv_20251016_131430",
+      "query": "User John Smith can't access the printer in Building A",
+      "agent": "IT Support",
+      "outcome": "success",
+      "duration": 228.25
+    }
+  ]
+}

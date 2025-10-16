@@ -1,140 +1,146 @@
 # CURRENT SESSION CHECKPOINT
-**Last Updated:** October 12, 2025 - Session 20 COMPLETE (Research Questions Revised)
+**Last Updated:** October 13, 2025 - Session 21 COMPLETE (Comprehensive Proposal Revision)
 **Purpose:** SINGLE SOURCE OF TRUTH for all dissertation progress
-**Status:** ✅ RESEARCH QUESTIONS REVISED - Awaiting Jemina's review
-**Next Action:** Wait for Jemina's approval → Convert to DOCX → Then update chapters
+**Status:** ✅ PROPOSAL COMPREHENSIVELY REVISED - Awaiting Jemina's approval
+**Next Action:** Wait for Jemina's response → Proceed based on her feedback
 
 ---
 
-## 🎯 SESSION 20 - RESEARCH QUESTIONS REVISION (October 12, 2025)
+## 🎯 SESSION 21 - COMPREHENSIVE PROPOSAL REVISION (October 13, 2025)
 
-### **JEMINA'S SPECIFIC FEEDBACK:**
-> "Hi Craig, there is an improvement; however, you did not include any part about developing a system or AI agents. **Please revise your research questions to incorporate system development and evaluation.**"
+### **JEMINA'S LATEST FEEDBACK (October 13, 2025, 14:33):**
+> "Hi Craig, please format your document as discussed: remove underlining, use a single font, and justify the text. Follow the assignment specifications so the document is ready for submission. Then, proceed to the Literature Review, covering all objectives before system development. If possible, limit the objectives to 4 or 5, ensuring each is achievable."
 
-### **CONSERVATIVE APPROACH TAKEN:**
-Changed only what Jemina specifically asked for:
-1. Research Questions (Section 4) - What she explicitly requested
-2. Research Objectives (Section 5) - Required for 1:1 alignment
-3. Abstract - Should reflect the revised questions
+### **COMPREHENSIVE REVISIONS COMPLETED:**
 
-Left unchanged (already fine):
-- Research Aim
-- Problem Statement  
-- Expected Outcomes
-- All other sections
+✅ **1. Formatting Corrections (100% Complete)**
+   - Single font throughout: Times New Roman 12pt, black
+   - All underlining removed
+   - Text justified throughout document
+   - Document follows all assignment specifications
 
-### **RESEARCH QUESTIONS REVISED:**
-
-✅ **Primary Research Question Updated**
-   - Changed from: "Can indigenous African philosophy enhance the **design**..."
-   - Changed to: "How can indigenous African philosophy be integrated into the **development**... and what is the effectiveness of the **developed UGENTIC system** when **evaluated** by IT staff experts?"
-
-✅ **All 6 Secondary Questions Revised & Categorized**
-   - **System Development** (RQ1, RQ2, RQ5):
-     * RQ1: Development requirements for **building** systems
-     * RQ2: Operationalizing **during development** with **implemented** mechanisms
-     * RQ5: Implementation **within the development** process
+✅ **2. Research Scope Refinement (Strategic Consolidation)**
+   - **Reduced from 6 to 4 Research Objectives:**
+     * **RO1:** System Development & Cultural Integration (merged old RO1+RO2)
+     * **RO2:** Cultural Authenticity & Validation (refined old RO3)
+     * **RO3:** System Evaluation (merged old RO5+RO6)
+     * **RO4:** Transferability & Implementation Methodology (kept old RO4)
    
-   - **System Evaluation** (RQ3, RQ4):
-     * RQ3: **Evaluated benefits** of the **developed system** as **assessed** by experts
-     * RQ4: Experts **evaluate** the **developed system's** feasibility
+   - **Reduced from 6 to 4 Research Questions:**
+     * RQ1 → addresses RO1 (Development & Cultural Integration)
+     * RQ2 → addresses RO2 (Cultural Authenticity)
+     * RQ3 → addresses RO3 (System Evaluation)
+     * RQ4 → addresses RO4 (Transferability)
    
-   - **System Transferability** (RQ6):
-     * RQ6: **Development methodology** derived from **building UGENTIC**
+   - **1:1 Alignment Maintained:** Each question maps to exactly one objective
 
-✅ **All 7 Research Objectives Updated**
-   - Revised to maintain 1:1 alignment with new research questions
-   - Each objective now explicitly references development, building, evaluation, or implementation
+✅ **3. Literature Review Complete Restructure**
+   - **Section 6.1:** Multi-Agent AI Systems & Development Requirements (Addresses RO1)
+     * Added explicit statement: "This body of literature directly informs RO1 by establishing the technical foundations for translating organizational workflows into multi-agent system requirements."
+   
+   - **Section 6.2:** Cultural Philosophy & Authenticity (Addresses RO2)
+     * Added explicit statement: "These works guide our approach to RO2 by establishing frameworks for cultural authenticity, appropriation avoidance, and ethical integration of indigenous knowledge."
+   
+   - **Section 6.3:** Evaluation Frameworks & Human-AI Teaming (Addresses RO3)
+     * Added explicit statement: "This research establishes the foundation for RO3 by providing evaluation frameworks, assessment methodologies, and criteria for measuring system effectiveness."
+   
+   - **Section 6.4:** Organizational Implementation & Transferability (Addresses RO4)
+     * Added explicit statement: "These studies inform our transferability framework in RO4 by establishing principles for deriving generalizable implementation guidelines."
+   
+   - Each section now demonstrates comprehensive coverage BEFORE system development discussion
 
-✅ **Abstract Updated**
-   - Reflects revised research questions
-   - Added naming clarification: "UGENTIC (Ubuntu + Agentic: Ubuntu-Driven Agentic Collective Intelligence)"
-   - Updated language to match "develops and evaluates" approach
+✅ **4. Document-Wide Updates**
+   - Abstract updated to reference "four core objectives"
+   - Expected Outcomes section restructured with explicit subsections for RO1-4
+   - Chapter Outline updated to reflect 4-objective framework
+   - All cross-references updated (RQ1-4, RO1-4) throughout entire proposal
 
-✅ **Date & Documentation Updated**
-   - Date: October 12, 2025 (UPDATED - Research Questions Revised)
-   - Document status note updated appropriately
+✅ **5. Email Sent to Jemina**
+   - Comprehensive email detailing all changes
+   - Checklist format showing systematic compliance
+   - Explicit demonstration of addressing each requirement
+   - Sent: October 13, 2025
 
-✅ **Documentation Created**
-   - CORRECTED_REVISION_Oct12_2025.md (conservative approach explanation)
-   - EMAIL_TO_JEMINA_CORRECTED_Oct12_2025.md (draft email ready)
-
-### **Session 20 Status:** ✅ COMPLETE - Research questions revised per supervisor feedback
+### **Session 21 Status:** ✅ COMPLETE - Comprehensive revision addressing all feedback
 
 ---
 
 ## 📊 DISSERTATION PROGRESS
 
-**Completion:** 87% (Updated Proposal + 6/7 chapters + Abstract)  
+**Completion:** 87% (Revised Proposal + 6/7 chapters + Abstract)  
 **Word Count:** 47,867 / 35,000-45,000 ✅  
-**Deadline:** December 5, 2025 (54 days remaining)  
-**Status:** ✅ RESEARCH QUESTIONS REVISED - Awaiting Jemina's review
+**Deadline:** December 5, 2025 (53 days remaining)  
+**Status:** ✅ PROPOSAL COMPREHENSIVELY REVISED - Awaiting Jemina's approval
 
 ---
 
 ## 🎯 IMMEDIATE STATUS
 
-### **COMPLETED TODAY (Session 20):**
-✅ Identified what Jemina specifically requested (research questions only)
-✅ Revised primary research question (development + evaluation focus)
-✅ Revised all 6 secondary questions (categorized by Development/Evaluation/Transferability)
-✅ Updated all 7 research objectives (1:1 alignment maintained)
-✅ Updated abstract to reflect revised questions
-✅ Added "Ubuntu + Agentic" naming clarification
-✅ Left unchanged: Research Aim, Problem Statement, Expected Outcomes (already fine)
-✅ Created conservative approach documentation
-✅ Drafted email for Jemina
+### **COMPLETED TODAY (Session 21):**
+✅ Formatting corrections (single font, justified, no underlining)
+✅ Strategic objective consolidation (6 → 4 objectives)
+✅ Research questions aligned (6 → 4 questions, 1:1 with objectives)
+✅ Complete literature review restructure (4 thematic sections mapped to RO1-4)
+✅ Abstract updated ("four core objectives")
+✅ Expected Outcomes restructured (explicit RO1-4 subsections)
+✅ All cross-references updated throughout
+✅ Comprehensive email sent to Jemina
 
-### **READY FOR JEMINA:**
-⏳ Revised research questions ready for her review
+### **CURRENT STATUS:**
+⏳ Awaiting Jemina's approval of comprehensively revised proposal
 
-### **NEXT ACTIONS (After Jemina Approval):**
-1. Update Chapter 1 - Introduction (new questions/objectives)
-2. Update Chapter 3 - Methodology (copy from proposal if needed)
-3. Update Chapter 5 - Results section headings (align with new RQ1-6)
-4. Scan all chapters for terminology consistency
-5. Convert to DOCX (Richfield template)
+### **NEXT ACTIONS (After Jemina Responds):**
+
+**IF APPROVED:**
+1. Begin Chapter 1 updates (if needed - copy new questions/objectives from proposal)
+2. Confirm Chapter 5 structure aligns with new RQ1-4 framework
+3. Quick terminology consistency check across all chapters
+4. Proceed to ethics submission and interview scheduling
+
+**IF CHANGES NEEDED:**
+- Address Jemina's feedback immediately
+- Implement any additional revisions
+- Resubmit promptly
 
 ---
 
 ## 📁 COMPLETED COMPONENTS
 
-### ✅ **Research Proposal** - **REVISED FOR JEMINA**
-- **File:** `Honours_Research_Proposal_UPDATED_References_Oct11_2025.md`
-- **Status:** Research questions revised per feedback - Awaiting Jemina's review
+### ✅ **Research Proposal** - **COMPREHENSIVELY REVISED FOR JEMINA**
+- **File:** `Honours_Research_Proposal_C_Vraagom_Oct_2025_Latest.docx`
+- **Markdown Version:** `Honours_Research_Proposal_C_Vraagom_Oct_2025_Latest.md`
+- **Status:** Comprehensively revised - Awaiting Jemina's approval
 - **Word Count:** ~8,500 words
 - **Updates:** 
+  - 4 focused research objectives (strategic consolidation) ✅
+  - 4 aligned research questions (1:1 mapping) ✅
+  - Literature review restructured into 4 thematic sections ✅
+  - Each section explicitly addresses corresponding objective BEFORE system development ✅
+  - Formatting: Single font (Times New Roman 12pt), justified, no underlining ✅
+  - Abstract updated ("four core objectives") ✅
+  - Expected Outcomes with explicit RO1-4 subsections ✅
   - All references 2020-2025 (80% from 2024-2025) ✅
-  - Research questions explicitly incorporate development & evaluation ✅
-  - Research objectives maintain 1:1 alignment ✅
-  - Abstract reflects revised questions ✅
-  - "Ubuntu + Agentic" naming clarification added ✅
 
 ### ✅ **Chapters 1-7:** (290.76 KB, ~47,867 words)
-1. **Chapter 1 - Introduction** (34.20 KB) ⚠️ **NEEDS UPDATE** (New questions/objectives)
-2. **Chapter 2 - Literature Review** (45.93 KB) ✅ (Minor updates for references)
-3. **Chapter 3 - Methodology** (35.91 KB) ✅ (May need minor updates)
-4. **Chapter 4 - System Design** (59.87 KB) ✅ (Minor updates needed)
-5. **Chapter 5 - Results** (16.46 KB - placeholder) ⏳ (Awaits interviews + new RQ structure)
+1. **Chapter 1 - Introduction** (34.20 KB) ⚠️ **MAY NEED MINOR UPDATE** (Check if RQ/RO section needs updating)
+2. **Chapter 2 - Literature Review** (45.93 KB) ✅ (Minor updates for references if needed)
+3. **Chapter 3 - Methodology** (35.91 KB) ✅ (Minor updates if needed)
+4. **Chapter 4 - System Design** (59.87 KB) ✅ (Minor updates if needed)
+5. **Chapter 5 - Results** (16.46 KB - placeholder) ⏳ (Awaits interviews + new RQ1-4 structure)
 6. **Chapter 6 - Discussion** (55.46 KB) ✅ (Minor updates after Chapter 5)
 7. **Chapter 7 - Conclusion** (42.92 KB) ✅ (Minor updates after Chapter 5)
 
 ### ✅ **References** (60 sources in proposal, 63 in master file)
 - **Master File:** `References/Harvard_References.md` ✅ 
-- **Proposal File:** `Honours_Research_Proposal_UPDATED_References_Oct11_2025.md` ✅
-- **Status:** All sources 2020-2025
+- **Proposal File:** `Honours_Research_Proposal_C_Vraagom_Oct_2025_Latest.docx` ✅
+- **Status:** All sources 2020-2025 (80% from 2024-2025)
 
 ### ✅ **Planning Documentation**
-- SESSION_ENTRY.md (protocol - with path warning)
+- SESSION_ENTRY.md (protocol - with correct path guidance)
 - CURRENT_SESSION_CHECKPOINT.md (this file - updated)
 - NEVER_CHANGING_DISSERTATION_CONTEXT.md (static)
-- SESSION_COMPLETION_SUMMARY.md (needs update)
-- CORRECTED_REVISION_Oct12_2025.md (NEW - conservative approach) ✅
-- EMAIL_TO_JEMINA_CORRECTED_Oct12_2025.md (NEW - draft email) ✅
-- Previous update docs (Oct 11):
-  - REFERENCE_UPDATE_PLAN_Oct11_2025.md
-  - REFERENCE_UPDATE_COMPLETION_SUMMARY_Oct11_2025.md
-  - REFERENCE_UPDATE_FINAL_STATUS_Oct11_2025.md
+- SESSION_COMPLETION_SUMMARY.md (will be updated)
+- Previous session documents (Sessions 15-20)
 
 ### ⏳ **Interview Materials** (For after approval)
 - 5 interview protocols in `Data/Interviews/Protocols/`
@@ -143,54 +149,67 @@ Left unchanged (already fine):
 
 ### ✅ **Abstract** (Now ~250 words)
 - **File:** `Abstract_DRAFT.md`
-- **Status:** Includes "bridge the gap" language + "Ubuntu + Agentic" clarification ✅
+- **Status:** Updated with "four core objectives" language ✅
 
 ---
 
-## 📋 WHAT NEEDS UPDATING (AFTER JEMINA APPROVAL)
+## 📋 WHAT MAY NEED UPDATING (AFTER JEMINA APPROVAL)
 
-### **Priority 1: Chapter 1 - Introduction** ⚠️ CRITICAL
-**Why Critical:** Contains old research questions and objectives
+### **Priority 1: Verify Chapter 1** (Low Priority - Check Only)
+**Why:** May contain old RQ/RO numbering
 
-**How to Fix:**
-- Replace Section 3 (Research Questions) with new RQ1-RQ6 from proposal
-- Replace Section 4 (Research Objectives) with new RO1-RO6 from proposal
-- Ensure any references to questions are updated
+**How to Check:**
+- Open Chapter 1 and search for "Research Question" or "Research Objective"
+- If it lists RQ1-RQ6 or RO1-RO7, update to RQ1-4 and RO1-4
+- Copy from revised proposal if needed
 
-### **Priority 2: Chapter 5 - Results** ⚠️ IMPORTANT
-**Why Important:** Section headings must align with new RQ structure
+### **Priority 2: Chapter 5 Structure** ⏳ PENDING INTERVIEWS
+**Why:** Section headings must align with new RQ1-4 framework
 
-**How to Fix:**
-- Create sections for each of RQ1-RQ6
-- Use new categorization: Development, Evaluation, Transferability
-- Structure findings to directly address revised questions
+**How to Structure:**
+- Section 5.1: Participant Demographics
+- Section 5.2: RQ1 - System Development & Cultural Integration Findings
+- Section 5.3: RQ2 - Cultural Authenticity Validation Findings
+- Section 5.4: RQ3 - System Evaluation Findings
+- Section 5.5: RQ4 - Transferability & Implementation Findings
+- Section 5.6: Unexpected Insights
 
-### **Priority 3: All Other Chapters** (Terminology Check)
-**Files:** Chapter_1, Chapter_2, Chapter_3, Chapter_4, Chapter_6, Chapter_7
+### **Priority 3: Quick Terminology Check** (Optional)
+**Files:** All chapters
 
 **Quick scan for:**
-- Any direct quotes of old research questions
-- Any references that should point to new RQ structure
+- Any direct quotes of old research questions (unlikely)
+- Any references to 6 objectives (update to 4)
 
 ---
 
 ## 🎆 VERIFICATION
 
-### **Revised Research Questions Status:**
-✅ Primary question explicitly mentions "development" and "evaluation"
-✅ All 6 secondary questions categorized (Development/Evaluation/Transferability)
-✅ All questions mention "developed UGENTIC system" or "building" or "implemented"
-✅ All objectives aligned 1:1 with questions
-✅ Abstract reflects revised questions
-✅ "Ubuntu + Agentic" naming clarified
-✅ All references still 2020-2025 (80% from 2024-2025)
-✅ Conservative approach taken (only what Jemina requested)
+### **Comprehensive Revision Checklist:**
+✅ Formatting: Single font (Times New Roman 12pt, black)
+✅ Formatting: All underlining removed
+✅ Formatting: Text justified throughout
+✅ Formatting: Assignment specifications followed
+✅ Objectives: Reduced from 6 to 4 (strategic consolidation)
+✅ Questions: Reduced from 6 to 4 (1:1 alignment maintained)
+✅ Literature Review: 4 thematic sections created
+✅ Literature Review: Each section explicitly addresses corresponding objective
+✅ Literature Review: Coverage demonstrated BEFORE system development
+✅ Literature Review: Explicit transitional statements added
+✅ Abstract: Updated to reference "four core objectives"
+✅ Expected Outcomes: Restructured with explicit RO1-4 subsections
+✅ Chapter Outline: Updated to reflect 4-objective framework
+✅ Cross-references: All updated (RQ1-4, RO1-4)
+✅ Email: Comprehensive email sent to Jemina
+✅ All references: Still 2020-2025 (80% from 2024-2025)
 
-### **Jemina's Feedback Addressed:**
-✅ "developing a system" - Explicit in questions
-✅ "AI agents" - Mentioned as part of developed system
-✅ "system development" - Primary focus in questions
-✅ "evaluation" - Explicitly incorporated in questions
+### **Jemina's Requirements Addressed:**
+✅ "remove underlining" - All underlining removed
+✅ "use a single font" - Times New Roman 12pt throughout
+✅ "justify the text" - Text justified throughout
+✅ "Follow the assignment specifications" - All specs followed
+✅ "proceed to the Literature Review, covering all objectives before system development" - Complete restructure with explicit RO1-4 mapping BEFORE system development
+✅ "limit the objectives to 4 or 5, ensuring each is achievable" - Reduced to 4 focused, achievable objectives
 
 ---
 
@@ -199,30 +218,30 @@ Left unchanged (already fine):
 **Session 15 (Oct 11):** Finalized proposal content ✅  
 **Session 16 (Oct 11):** Post-PTO cleanup - Complete organization ✅  
 **Session 17 (Oct 11):** CRITICAL methodological correction - Design Science ✅  
-**Session 18 (Oct 11):** CRITICAL reference update - All 2020-2025 + Email sent ✅  
-**Session 19 (Oct 12):** Final polish - "bridge the gap" edit + follow-up email ✅  
-**Session 20 (Oct 12):** Research questions revised per supervisor feedback ✅  
+**Session 18 (Oct 11):** CRITICAL reference update - All 2020-2025 ✅  
+**Session 19 (Oct 12):** Research questions revised (development + evaluation) ✅  
+**Session 20 (Oct 12):** RQ ordering revised (evaluation questions last) ✅  
+**Session 21 (Oct 13):** COMPREHENSIVE REVISION (formatting + 4 objectives + literature review restructure) ✅  
 
 ---
 
 ## 🚀 READY FOR JEMINA'S REVIEW
 
-**Research questions revised with:**
-- ✅ Explicit system development language throughout
-- ✅ Explicit system evaluation language throughout
-- ✅ Categorization by Development/Evaluation/Transferability
-- ✅ "Developed UGENTIC system" as artifact
-- ✅ All objectives aligned 1:1 with questions
-- ✅ Abstract reflects revised questions
-- ✅ "Ubuntu + Agentic" naming clarified
-- ✅ All references 2020-2025 (maintained)
-- ✅ Conservative approach (only what she requested)
+**Comprehensive revisions completed:**
+- ✅ All formatting requirements met
+- ✅ Strategic objective consolidation (6 → 4)
+- ✅ Complete literature review restructure
+- ✅ Explicit RO1-4 mapping throughout
+- ✅ Each objective covered BEFORE system development
+- ✅ Document-wide updates (abstract, outcomes, outline)
+- ✅ All cross-references updated
+- ✅ Professional email sent detailing changes
 
 **Awaiting Jemina's approval to proceed with:**
-1. Chapter 1 updates (new questions/objectives)
-2. Chapter 5 structure (new RQ framework)
-3. Terminology consistency check (all chapters)
-4. DOCX conversion (after all updates complete)
+1. Chapter verification/updates (if needed)
+2. Ethics submission
+3. Interview scheduling
+4. Data collection
 
 ---
 
@@ -231,28 +250,30 @@ Left unchanged (already fine):
 **When resuming after Jemina's feedback:**
 
 1. **If Approved:** 
-   - Update Chapter 1 (copy new questions/objectives from proposal)
-   - Update Chapter 5 structure (align with new RQ1-6)
-   - Quick scan all chapters for direct question references
-   - Then convert to DOCX
+   - Quick check: Does Chapter 1 need RQ/RO update? (Low priority)
+   - Confirm Chapter 5 structure for RQ1-4 framework
+   - Proceed to ethics submission and interview scheduling
+   - Begin data collection phase
 
 2. **If Changes Needed:** 
    - Address Jemina's feedback immediately
-   - Then proceed with chapter updates
+   - Make any additional revisions
+   - Resubmit promptly
 
 3. **Key Understanding:** 
-   - Research questions now explicitly say "develop" and "evaluate"
-   - This was what Jemina specifically requested
-   - Rest of proposal was already fine
+   - Proposal now has 4 focused objectives (down from 6)
+   - Literature review explicitly covers all 4 objectives BEFORE system development
+   - All formatting requirements met
+   - Document ready for submission
 
 **Key Files to Remember:**
-- Revised Proposal: `Honours_Research_Proposal_UPDATED_References_Oct11_2025.md`
-- Explanation: `CORRECTED_REVISION_Oct12_2025.md`
-- Draft Email: `EMAIL_TO_JEMINA_CORRECTED_Oct12_2025.md`
+- Latest Proposal: `Honours_Research_Proposal_C_Vraagom_Oct_2025_Latest.docx`
+- Markdown Version: `Honours_Research_Proposal_C_Vraagom_Oct_2025_Latest.md`
+- Email Sent: October 13, 2025 (comprehensive checklist email)
 
 ---
 
-**Status:** ✅ Session 20 Complete - Awaiting Jemina's Review  
-**Next Session:** After Jemina responds → Update chapters OR address feedback  
-**Critical Success:** Research questions now explicitly incorporate development & evaluation  
-**Updated:** October 12, 2025 - Conservative Revision Complete
+**Status:** ✅ Session 21 Complete - Awaiting Jemina's Approval  
+**Next Session:** After Jemina responds → Implement any feedback OR proceed to next phase  
+**Critical Success:** Comprehensive revision addressing ALL requirements  
+**Updated:** October 13, 2025 - Comprehensive Proposal Revision Complete

@@ -1,0 +1,82 @@
+{
+  "plan_id": "App_Support_20251014_184616",
+  "objective": "Server disk at 90%",
+  "created_by": "App Support",
+  "created_at": "2025-10-14T18:46:16.909098",
+  "problem_context": {
+    "subtask_mode": true,
+    "focus": "Assess application and database storage needs. Check for excessive logging, redundant backups, or other storage inefficiencies within applications.",
+    "questions": [
+      "Are there any applications generating large logs that can be archived or rotated?",
+      "Can database backups or application files be optimized or compressed to free up space?"
+    ],
+    "prior_findings": "No prior findings"
+  },
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Gather initial information about the issue",
+      "status": "completed",
+      "reasoning": "Need baseline understanding before diagnosis",
+      "expected_tools": [
+        "check_system_logs",
+        "gather_user_info"
+      ],
+      "findings": "{'application': '*', 'user_id': '', 'timeframe_hours': 24, 'total_entries': 89, 'error_count': 36, 'warning_count': 23, 'crash_count': 6, 'errors': [{'timestamp': '2025-10-13T19:45:19.233684', 'level': 'CRITICAL', 'message': '* log entry 1', 'user_id': ''}, {'timestamp': '2025-10-13T18:47:19.233684', 'level': 'ERROR', 'message': '* log entry 4', 'user_id': ''}, {'timestamp': '2025-10-14T13:17:19.233684', 'level': 'CRITICAL', 'message': '* log entry 5', 'user_id': ''}, {'timestamp': '2025-10-14T0",
+      "updated_at": "2025-10-14T18:47:19.236476",
+      "actual_tools": [
+        "query_app_logs"
+      ]
+    },
+    {
+      "step_number": 2,
+      "description": "Perform diagnostic checks",
+      "status": "pending",
+      "reasoning": "Need to identify root cause",
+      "expected_tools": [
+        "run_diagnostics"
+      ],
+      "findings": "",
+      "updated_at": null
+    },
+    {
+      "step_number": 3,
+      "description": "Test hypothesis and verify root cause",
+      "status": "pending",
+      "reasoning": "Confirm diagnosis before applying solution",
+      "expected_tools": [
+        "test_hypothesis"
+      ],
+      "findings": "",
+      "updated_at": null
+    },
+    {
+      "step_number": 4,
+      "description": "Apply solution and verify resolution",
+      "status": "pending",
+      "reasoning": "Fix issue and confirm it's resolved",
+      "expected_tools": [
+        "apply_fix",
+        "verify_resolution"
+      ],
+      "findings": "",
+      "updated_at": null
+    },
+    {
+      "step_number": 5,
+      "description": "Document solution and close investigation",
+      "status": "pending",
+      "reasoning": "Create knowledge for future similar issues",
+      "expected_tools": [
+        "document_solution"
+      ],
+      "findings": "",
+      "updated_at": null
+    }
+  ],
+  "status": "active",
+  "blockers": [],
+  "findings": {},
+  "updated_at": "2025-10-14T18:47:19.236476",
+  "completion_percentage": 20
+}

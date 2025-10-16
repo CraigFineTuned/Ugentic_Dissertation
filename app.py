@@ -12,7 +12,10 @@ from src.ugentic.agents.react_agents import (
 )
 from src.ugentic.core.rag_core import RAGCore, get_ollama_embeddings, get_text_splitter
 from src.ugentic.utils.investigation_logger import InvestigationLogger
+from src.ugentic.core.explicit_planning import ExplicitPlanner
+from src.ugentic.core.agent_memory import AgentMemory
 from src.ugentic.logging_config import setup_logging
+from src.ugentic.tools.support_tools import set_rag_system  # FIXED Session 22
 
 def get_embedding_model_from_config():
     """Reads the embedding model name from the config file."""
@@ -23,15 +26,15 @@ def get_embedding_model_from_config():
     except FileNotFoundError:
         return 'nomic-embed-text:latest'
 
-def initialize_react_agents(llm, logger=None):
-    """Initialize all React agents with orchestration and logging"""
+def initialize_react_agents(llm, logger=None, planner=None):
+    """Initialize all React agents with orchestration, logging, and planning"""
     
     # Initialize specialist agents first
     agents = {
-        'Network Support': NetworkSupportAgentReAct(llm=llm, logger=logger),
-        'App Support': AppSupportAgentReAct(llm=llm, logger=logger),
-        'IT Support': ITSupportAgentReAct(llm=llm, logger=logger),
-        'Service Desk Manager': ServiceDeskManagerAgentReAct(llm=llm, logger=logger)
+        'Network Support': NetworkSupportAgentReAct(llm=llm, logger=logger, planner=planner),
+        'App Support': AppSupportAgentReAct(llm=llm, logger=logger, planner=planner),
+        'IT Support': ITSupportAgentReAct(llm=llm, logger=logger, planner=planner),
+        'Service Desk Manager': ServiceDeskManagerAgentReAct(llm=llm, logger=logger, planner=planner)
     }
     
     # Initialize Infrastructure with orchestration (lead agent)
@@ -39,7 +42,8 @@ def initialize_react_agents(llm, logger=None):
         llm=llm,
         orchestrator=True,
         agents=agents,
-        logger=logger
+        logger=logger,
+        planner=planner
     )
     
     # Initialize IT Manager (delegates only, no investigation)
@@ -158,29 +162,58 @@ def run_demo(fast_mode=False):
     llm = ChatOllama(model=model_name, temperature=0.7)
     print("   LLM initialized\n")
     
-    # Initialize Investigation Logger
+    # Initialize Embeddings Model (for both RAG and Memory)
+    print("1.2. Initializing Embeddings Model...")
+    embedding_model_name = get_embedding_model_from_config()
+    ollama_embed = get_ollama_embeddings(embedding_model_name)
+    print(f"   Embeddings ready: {embedding_model_name}\n")
+    
+    # Initialize Agent Memory with embeddings (optional - graceful fallback if not available)
+    print("1.4. Initializing Agent Memory System...")
+    try:
+        memory = AgentMemory(embeddings_model=ollama_embed)
+        memory_started = memory.start()
+        if memory_started:
+            print("   ✅ Agent Memory: Enabled (cross-session learning with semantic similarity)\n")
+        else:
+            print("   ⚠️  Agent Memory: Failed to start (falling back to logs only)\n")
+            memory = None
+    except Exception as e:
+        print(f"   ⚠️  Agent Memory: Not available ({e})")
+        print("   Running with investigation logs only\n")
+        memory = None
+    
+    # Initialize Investigation Logger (with optional memory)
     print("1.5. Initializing Investigation Logger...")
-    logger = InvestigationLogger(base_dir="logs")
+    logger = InvestigationLogger(base_dir="logs", memory=memory)
     print("   Investigation Logger ready\n")
     
-    # Initialize React agents with orchestration and logging
-    print("2. Initializing React Agents with Ubuntu Orchestration...")
-    agents = initialize_react_agents(llm, logger=logger)
+    # Initialize Explicit Planning System
+    print("1.6. Initializing Explicit Planning System...")
+    planner = ExplicitPlanner(plans_directory="plans")
+    print("   Explicit Planner ready\n")
+    
+    # Initialize React agents with orchestration, logging, and planning
+    print("2. Initializing React Agents with Ubuntu Orchestration + Planning...")
+    agents = initialize_react_agents(llm, logger=logger, planner=planner)
     print(f"   {len(agents)} agents initialized")
-    print(f"   Ubuntu Orchestration: Enabled\n")
+    print(f"   Ubuntu Orchestration: Enabled")
+    print(f"   Explicit Planning: Enabled\n")
     
     # Initialize RAG system
     print("3. Initializing RAG Knowledge Base...")
-    embedding_model_name = get_embedding_model_from_config()
-    ollama_embed = get_ollama_embeddings(embedding_model_name)
     splitter = get_text_splitter()
-    rag_system = RAGCore(ollama_embed, splitter, None) # Passing None for unused filesystem_tool
+    rag_system = RAGCore(ollama_embed, splitter, None) # Using shared embeddings model
     doc_path = "knowledge_base"
     if os.path.exists(doc_path) and os.listdir(doc_path):
         rag_system.load_documents_from_directory(doc_path)
         print(f"   RAG system ready with {len(os.listdir(doc_path))} documents\n")
     else:
         print("   No documents found or directory is empty, RAG system initialized empty\n")
+    
+    # FIXED Session 22: Connect RAG system to support_tools for ask_questions
+    set_rag_system(rag_system)
+    print("   ✅ RAG system connected to IT Support tools\n")
     
     # Interactive loop
     print(f"{ '='*60}")
@@ -199,6 +232,25 @@ def run_demo(fast_mode=False):
         if user_input.lower() in ['quit', 'exit', 'q']:
             print("\nSaving session summary...")
             logger.save_session_summary()
+            
+            # Display memory statistics if available
+            if logger.memory:
+                print("\n" + "="*60)
+                print("AGENT MEMORY STATISTICS")
+                print("="*60)
+                memory_stats = logger.get_memory_stats()
+                if memory_stats:
+                    print(f"Total Investigations: {memory_stats.get('total_investigations', 0)}")
+                    print(f"Ubuntu Collaborations: {memory_stats.get('ubuntu_investigations', 0)}")
+                    print(f"Solo Investigations: {memory_stats.get('solo_investigations', 0)}")
+                    print(f"Ubuntu Success Rate: {memory_stats.get('ubuntu_success_rate', 0):.1f}%")
+                    print(f"Solo Success Rate: {memory_stats.get('solo_success_rate', 0):.1f}%")
+                    print(f"Ubuntu Advantage: {memory_stats.get('ubuntu_advantage', 0):+.1f}%")
+                print("="*60 + "\n")
+                
+                # Stop memory server
+                logger.memory.stop()
+            
             print("\nThank you for using UGENTIC!")
             break
         

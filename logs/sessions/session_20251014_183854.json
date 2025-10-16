@@ -1,0 +1,38 @@
+{
+  "session_id": "20251014_183854",
+  "session_start": "2025-10-14T18:38:54.067482",
+  "session_end": "2025-10-14T18:50:47.489608",
+  "metrics": {
+    "total_investigations": 2,
+    "successful_investigations": 0,
+    "orchestration_count": 2,
+    "agent_usage": {
+      "Infrastructure": 1,
+      "App Support": 1
+    },
+    "tool_usage": {
+      "check_server_metrics": 1,
+      "query_app_logs": 1
+    },
+    "avg_response_time": 177.96,
+    "total_response_time": 355.91225799999995
+  },
+  "investigation_count": 2,
+  "orchestration_count": 1,
+  "investigations": [
+    {
+      "id": "inv_20251014_184154",
+      "query": "Server disk at 90%",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 204.28
+    },
+    {
+      "id": "inv_20251014_184616",
+      "query": "Server disk at 90%",
+      "agent": "App Support",
+      "outcome": "needs_collaboration",
+      "duration": 151.63
+    }
+  ]
+}

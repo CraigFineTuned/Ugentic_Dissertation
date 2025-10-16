@@ -33,7 +33,7 @@ class AppSupportAgentReAct:
     - Consensus Building: Involves teams in app changes
     """
     
-    def __init__(self, llm, name="App Support", logger=None):
+    def __init__(self, llm, name="App Support", logger=None, planner=None):
         """
         Initialize App Support agent with ReAct engine
         
@@ -41,6 +41,7 @@ class AppSupportAgentReAct:
             llm: Language model for reasoning
             name: Agent name
             logger: InvestigationLogger instance (optional)
+            planner: ExplicitPlanner instance for structured planning
         """
         self.name = name
         self.agent_type = "Operational"
@@ -57,7 +58,8 @@ class AppSupportAgentReAct:
             tools=self.tools,
             llm=self.llm,
             max_iterations=10,
-            logger=logger
+            logger=logger,
+            planner=planner
         )
         
         # Ubuntu principles

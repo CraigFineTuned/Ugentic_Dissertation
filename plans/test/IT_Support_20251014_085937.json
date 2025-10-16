@@ -1,0 +1,84 @@
+{
+  "plan_id": "IT_Support_20251014_085937",
+  "objective": "User cannot access shared drive on server",
+  "created_by": "IT Support",
+  "created_at": "2025-10-14T08:59:37.597062",
+  "problem_context": {
+    "user": "john.doe",
+    "department": "finance",
+    "server": "FILE_SERVER_01"
+  },
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Gather initial information about the issue",
+      "status": "completed",
+      "reasoning": "Need baseline understanding before diagnosis",
+      "expected_tools": [
+        "check_system_logs",
+        "gather_user_info"
+      ],
+      "findings": "User confirmed unable to access \\\\FILE_SERVER_01\\finance",
+      "updated_at": "2025-10-14T08:59:37.601499",
+      "actual_tools": [
+        "check_system_logs",
+        "gather_user_info"
+      ]
+    },
+    {
+      "step_number": 2,
+      "description": "Check connectivity and network status",
+      "status": "completed",
+      "reasoning": "Connectivity issues require network diagnostics",
+      "expected_tools": [
+        "ping_test",
+        "check_network_config"
+      ],
+      "findings": "Network connectivity OK, issue is permissions-related",
+      "updated_at": "2025-10-14T08:59:37.603687",
+      "actual_tools": [
+        "ping_test",
+        "check_network_config"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "Test hypothesis and verify root cause",
+      "status": "pending",
+      "reasoning": "Confirm diagnosis before applying solution",
+      "expected_tools": [
+        "test_hypothesis"
+      ],
+      "findings": "",
+      "updated_at": null
+    },
+    {
+      "step_number": 4,
+      "description": "Apply solution and verify resolution",
+      "status": "pending",
+      "reasoning": "Fix issue and confirm it's resolved",
+      "expected_tools": [
+        "apply_fix",
+        "verify_resolution"
+      ],
+      "findings": "",
+      "updated_at": null
+    },
+    {
+      "step_number": 5,
+      "description": "Document solution and close investigation",
+      "status": "pending",
+      "reasoning": "Create knowledge for future similar issues",
+      "expected_tools": [
+        "document_solution"
+      ],
+      "findings": "",
+      "updated_at": null
+    }
+  ],
+  "status": "active",
+  "blockers": [],
+  "findings": {},
+  "updated_at": "2025-10-14T08:59:37.603687",
+  "completion_percentage": 40
+}

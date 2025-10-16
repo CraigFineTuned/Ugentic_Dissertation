@@ -1,0 +1,38 @@
+{
+  "session_id": "20251014_185103",
+  "session_start": "2025-10-14T18:51:03.563436",
+  "session_end": "2025-10-14T19:04:22.301963",
+  "metrics": {
+    "total_investigations": 2,
+    "successful_investigations": 0,
+    "orchestration_count": 2,
+    "agent_usage": {
+      "Infrastructure": 1,
+      "App Support": 1
+    },
+    "tool_usage": {
+      "check_disk_space": 1,
+      "check_app_database_performance": 1
+    },
+    "avg_response_time": 162.05,
+    "total_response_time": 324.101111
+  },
+  "investigation_count": 2,
+  "orchestration_count": 1,
+  "investigations": [
+    {
+      "id": "inv_20251014_185307",
+      "query": "Disk space low",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 214.98
+    },
+    {
+      "id": "inv_20251014_185738",
+      "query": "Disk space low",
+      "agent": "App Support",
+      "outcome": "needs_collaboration",
+      "duration": 109.13
+    }
+  ]
+}

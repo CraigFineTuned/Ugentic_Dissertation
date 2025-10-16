@@ -1,0 +1,38 @@
+{
+  "session_id": "20251015_090602",
+  "session_start": "2025-10-15T09:06:02.364871",
+  "session_end": "2025-10-15T10:07:16.160016",
+  "metrics": {
+    "total_investigations": 2,
+    "successful_investigations": 1,
+    "orchestration_count": 1,
+    "agent_usage": {
+      "Infrastructure": 1,
+      "IT Support": 1
+    },
+    "tool_usage": {
+      "check_disk_space": 1,
+      "ask_questions": 1
+    },
+    "avg_response_time": 92.41,
+    "total_response_time": 184.818733
+  },
+  "investigation_count": 2,
+  "orchestration_count": 1,
+  "investigations": [
+    {
+      "id": "inv_20251015_095140",
+      "query": "disk space is low",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 104.71
+    },
+    {
+      "id": "inv_20251015_095406",
+      "query": "disk space is low",
+      "agent": "IT Support",
+      "outcome": "success",
+      "duration": 80.11
+    }
+  ]
+}

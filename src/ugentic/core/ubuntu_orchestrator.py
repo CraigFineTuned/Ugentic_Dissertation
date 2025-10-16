@@ -25,7 +25,7 @@ class UbuntuOrchestrator:
     - Consensus Building: Solution reflects collective wisdom
     """
     
-    def __init__(self, llm, agents: Dict[str, Any], logger=None):
+    def __init__(self, llm, agents: Dict[str, Any], logger=None, planner=None):
         """
         Initialize Ubuntu Orchestrator
         
@@ -33,10 +33,12 @@ class UbuntuOrchestrator:
             llm: Language model for coordination reasoning
             agents: Dictionary of available agents {name: agent_instance}
             logger: InvestigationLogger instance (optional)
+            planner: ExplicitPlanner for collaboration planning (optional)
         """
         self.llm = llm
         self.agents = agents
         self.logger = logger
+        self.planner = planner
         self.collaboration_history = []
         
         logging.info(" Ubuntu Orchestrator initialized")
@@ -67,6 +69,21 @@ class UbuntuOrchestrator:
         logging.info(f"{'='*70}\n")
         
         collaboration_id = f"ubuntu_collab_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        
+        # Create Ubuntu collaboration plan (Deep Agents)
+        collab_plan_id = None
+        if self.planner:
+            collab_plan_id = self.planner.create_plan(
+                objective=f"Ubuntu Collaboration: {complex_issue}",
+                agent_name="Ubuntu_Orchestrator",
+                problem_context={
+                    "type": "multi_agent_collaboration",
+                    "lead_agent": lead_agent_name,
+                    "issue": complex_issue,
+                    "investigation_history": str(investigation_history)[:500]
+                }
+            )
+            logging.info(f"\n🤝 Ubuntu Collaboration Plan: {collab_plan_id}\n")
         
         # STEP 1: LLM analyzes complexity and plans coordination
         plan = self._create_coordination_plan(

@@ -1,0 +1,61 @@
+{
+  "session_id": "20251016_082446",
+  "session_start": "2025-10-16T08:24:46.118383",
+  "session_end": "2025-10-16T09:10:28.375500",
+  "metrics": {
+    "total_investigations": 4,
+    "successful_investigations": 1,
+    "orchestration_count": 1,
+    "agent_usage": {
+      "IT Support": 2,
+      "Infrastructure": 1,
+      "Network Support": 1
+    },
+    "tool_usage": {
+      "check_user_permissions": 2,
+      "check_user_permissiions": 1,
+      "get_user_profile": 1,
+      "check_service_status": 4,
+      "ping_test": 1,
+      "traceroute": 1,
+      "check_network_bandwidth": 1,
+      "check_switch_logs": 1,
+      "check_firewall_rules": 1,
+      "ask_questions": 4
+    },
+    "avg_response_time": 550.73,
+    "total_response_time": 2202.915664
+  },
+  "investigation_count": 4,
+  "orchestration_count": 1,
+  "investigations": [
+    {
+      "id": "inv_20251016_082753",
+      "query": "User John Smith can't access the printer in Building A",
+      "agent": "IT Support",
+      "outcome": "needs_collaboration",
+      "duration": 523.9
+    },
+    {
+      "id": "inv_20251016_083637",
+      "query": "User John Smith can't access the printer in Building A",
+      "agent": "Infrastructure",
+      "outcome": "INVESTIGATION_COMPLETE",
+      "duration": 593.68
+    },
+    {
+      "id": "inv_20251016_084810",
+      "query": "User John Smith can't access the printer in Building A",
+      "agent": "Network Support",
+      "outcome": "success",
+      "duration": 507.14
+    },
+    {
+      "id": "inv_20251016_085637",
+      "query": "User John Smith can't access the printer in Building A",
+      "agent": "IT Support",
+      "outcome": "INVESTIGATION_COMPLETE",
+      "duration": 578.2
+    }
+  ]
+}

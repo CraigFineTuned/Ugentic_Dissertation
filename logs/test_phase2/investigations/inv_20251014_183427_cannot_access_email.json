@@ -1,0 +1,12 @@
+{
+  "investigation_id": "inv_20251014_183427",
+  "timestamp_start": "2025-10-14T18:34:27.848007",
+  "query": "Cannot access email",
+  "agent": "Infrastructure",
+  "iterations": [],
+  "collaboration": null,
+  "outcome": "success",
+  "duration_seconds": 0.0,
+  "timestamp_end": "2025-10-14T18:34:27.848007",
+  "final_response": "Email server was down. Restarted email server."
+}

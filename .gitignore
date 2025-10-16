@@ -8,13 +8,22 @@ __pycache__/
 venv/
 ENV/
 
+# Memory system data (Phase 2)
+data/memory/
+data/test_memory/
+
 # Temporary files
 *.tmp
 *.temp
 temp_*.md
+temp_*.txt
 temp.md
 temp.txt
 temp_log.txt
+temp_prompt.md
+temp_prompt_now.md
+temp_terminal.md
+temp_terminal_out.md
 
 # OS-generated files
 .DS_Store
@@ -36,3 +45,7 @@ Thumbs.db
 
 # MS Office temporary files
 ~$*.docx
+
+# Obsolete files (to be removed)
+app_old.py
+main

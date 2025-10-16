@@ -16,7 +16,8 @@ from ...tools import (
     verify_email_config,
     test_remote_access,
     check_software_installation,
-    get_recent_tickets
+    get_recent_tickets,
+    ask_questions
 )
 
 
@@ -35,7 +36,7 @@ class ITSupportAgentReAct:
     - Consensus Building: Involves users in solutions
     """
     
-    def __init__(self, llm, name="IT Support", logger=None):
+    def __init__(self, llm, name="IT Support", logger=None, planner=None):
         """
         Initialize IT Support agent with ReAct engine
         
@@ -43,6 +44,7 @@ class ITSupportAgentReAct:
             llm: Language model for reasoning
             name: Agent name
             logger: InvestigationLogger instance for logging
+            planner: ExplicitPlanner instance for structured planning
         """
         self.name = name
         self.agent_type = "Operational"
@@ -59,7 +61,8 @@ class ITSupportAgentReAct:
             tools=self.tools,
             llm=self.llm,
             max_iterations=8,  # Shorter for simpler issues
-            logger=logger
+            logger=logger,
+            planner=planner
         )
         
         # Ubuntu principles
@@ -119,6 +122,11 @@ class ITSupportAgentReAct:
         self.tools.register(
             get_recent_tickets,
             "Gets recent support tickets for user. Returns ticket history and current status."
+        )
+        
+        self.tools.register(
+            ask_questions,
+            "Asks questions to gather additional information for troubleshooting. Queries knowledge base or simulates user inquiry. Returns contextualized answers."
         )
     
     def investigate(self, problem_report: str, context: Dict = None) -> Dict[str, Any]:

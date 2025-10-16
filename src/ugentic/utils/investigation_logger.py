@@ -2,6 +2,7 @@
 Investigation Logger - Persistent evidence collection system
 Logs all investigations, orchestration events, and system metrics
 Session 12 - Component 0 (Critical First Priority)
+Session 18 - Enhanced with AgentMemory integration (Phase 2)
 """
 
 import json
@@ -10,6 +11,18 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Any, Optional
 import re
+
+# Import AgentMemory (optional dependency)
+try:
+    from src.ugentic.core.agent_memory import AgentMemory
+    MEMORY_AVAILABLE = True
+except ImportError:
+    try:
+        from ugentic.core.agent_memory import AgentMemory
+        MEMORY_AVAILABLE = True
+    except ImportError:
+        MEMORY_AVAILABLE = False
+        print("[InvestigationLogger] AgentMemory not available - running without memory")
 
 
 class InvestigationLogger:
@@ -23,16 +36,23 @@ class InvestigationLogger:
     - Agent performance data
     """
     
-    def __init__(self, base_dir: str = "logs"):
+    def __init__(self, base_dir: str = "logs", memory: Optional[Any] = None):
         """
         Initialize investigation logger
         
         Args:
             base_dir: Base directory for all logs (default: "logs")
+            memory: Optional AgentMemory instance for persistent learning
         """
         self.base_dir = Path(base_dir)
         self.session_start = datetime.now()
         self.session_id = self.session_start.strftime("%Y%m%d_%H%M%S")
+        self.memory = memory
+        
+        if self.memory and MEMORY_AVAILABLE:
+            print("[InvestigationLogger] AgentMemory integration enabled")
+        else:
+            print("[InvestigationLogger] Running without AgentMemory")
         
         # Session-level tracking
         self.investigations = []
@@ -245,6 +265,10 @@ class InvestigationLogger:
         
         # Save investigation logs immediately
         self._save_investigation(investigation)
+        
+        # Store in AgentMemory if available
+        if self.memory and MEMORY_AVAILABLE:
+            self._store_in_memory(investigation)
     
     def _get_investigation(self, inv_id: str) -> Optional[Dict]:
         """Get investigation by ID"""
@@ -432,5 +456,141 @@ class InvestigationLogger:
         print(f"Logs saved to: {self.base_dir.absolute()}")
         print(f"{'='*60}\n")
     
+    def _store_in_memory(self, investigation: Dict):
+        """
+        Store investigation in AgentMemory for cross-session learning
+        
+        Args:
+            investigation: Investigation data
+        """
+        try:
+            # Extract key information
+            inv_id = investigation['investigation_id']
+            agent_name = investigation['agent']
+            problem = investigation['query']
+            
+            # Extract root cause and solution from iterations/collaboration
+            root_cause = None
+            solution = None
+            actions_taken = []
+            
+            # Check collaboration for root cause/solution
+            collab = investigation.get('collaboration') or {}
+            if collab.get('triggered'):
+                # Look for orchestration details
+                for orch in self.orchestrations:
+                    if orch['collaboration_id'] in str(collab):
+                        root_cause = orch.get('root_cause')
+                        solution = orch.get('solution')
+                        break
+            
+            # Extract actions from iterations
+            for iteration in investigation.get('iterations', []):
+                action = iteration.get('action')
+                if action:
+                    actions_taken.append(action)
+            
+            # Determine success - be more lenient with success criteria
+            # Success if: outcome is 'success', 'RESOLVED', 'INVESTIGATION_COMPLETE',
+            # or if outcome is 'NEEDS_COLLABORATION' but collaboration completed
+            outcome = investigation.get('outcome', '')
+            collab = investigation.get('collaboration') or {}
+            
+            # Success scenarios:
+            # 1. Explicitly marked as success
+            # 2. Investigation resolved/complete
+            # 3. Collaboration was triggered and completed (not just needs_collaboration)
+            success = (
+                outcome in ['success', 'RESOLVED', 'INVESTIGATION_COMPLETE'] or
+                (outcome == 'NEEDS_COLLABORATION' and collab.get('triggered', False))
+            )
+            iterations_count = len(investigation.get('iterations', []))
+            
+            # Check for Ubuntu collaboration
+            collab = investigation.get('collaboration') or {}
+            ubuntu_collab = collab.get('triggered', False)
+            collab_agents = []
+            
+            if ubuntu_collab:
+                # Find collaborating agents from orchestration
+                for orch in self.orchestrations:
+                    collab_reason = collab.get('reason', '')
+                    if collab_reason and collab_reason in str(orch):
+                        collab_agents = orch.get('participating_agents', [])
+                        break
+            
+            # Store in memory
+            stored = self.memory.store_investigation(
+                investigation_id=inv_id,
+                agent_name=agent_name,
+                problem=problem,
+                root_cause=root_cause,
+                solution=solution,
+                actions_taken=actions_taken,
+                ubuntu_collaboration=ubuntu_collab,
+                collaborating_agents=collab_agents,
+                success=success,
+                iterations=iterations_count,
+                timestamp=investigation['timestamp_start']
+            )
+            
+            if stored:
+                print(f"[InvestigationLogger] ✅ Investigation stored in memory: {inv_id}")
+            
+        except Exception as e:
+            print(f"[InvestigationLogger] Error storing in memory: {e}")
+    
+    def recall_similar_investigations(self, problem: str, limit: int = 3) -> List[Dict]:
+        """
+        Query AgentMemory for similar past investigations
+        
+        Args:
+            problem: Current problem description
+            limit: Maximum number of similar investigations to return
+        
+        Returns:
+            List of similar investigations with solutions
+        """
+        if not self.memory or not MEMORY_AVAILABLE:
+            return []
+        
+        try:
+            similar = self.memory.recall_similar_problem(problem, limit=limit)
+            
+            if similar:
+                print(f"[InvestigationLogger] Found {len(similar)} similar investigation(s)")
+                
+                # Enrich with solution details
+                for inv in similar:
+                    inv_id = inv.get('investigation_id')
+                    solution_details = self.memory.get_investigation_solution(inv_id)
+                    if solution_details:
+                        inv['solution'] = solution_details.get('description')
+                        inv['solution_success'] = solution_details.get('success')
+            
+            return similar
+            
+        except Exception as e:
+            print(f"[InvestigationLogger] Error recalling similar investigations: {e}")
+            return []
+    
+    def get_memory_stats(self) -> Dict:
+        """
+        Get statistics from AgentMemory
+        
+        Returns:
+            Dict with memory statistics (Ubuntu, learning metrics)
+        """
+        if not self.memory or not MEMORY_AVAILABLE:
+            return {}
+        
+        try:
+            ubuntu_stats = self.memory.get_ubuntu_collaboration_stats()
+            return ubuntu_stats
+        except Exception as e:
+            print(f"[InvestigationLogger] Error getting memory stats: {e}")
+            return {}
+    
     def __repr__(self) -> str:
-        return f"InvestigationLogger(session={self.session_id}, investigations={len(self.investigations)})"
+        memory_status = "with memory" if (self.memory and MEMORY_AVAILABLE) else "no memory"
+        return f"InvestigationLogger(session={self.session_id}, investigations={len(self.investigations)}, {memory_status})"

@@ -1,0 +1,47 @@
+{
+  "session_id": "20251014_142633",
+  "session_start": "2025-10-14T14:26:33.030251",
+  "session_end": "2025-10-14T14:40:13.805495",
+  "metrics": {
+    "total_investigations": 3,
+    "successful_investigations": 0,
+    "orchestration_count": 3,
+    "agent_usage": {
+      "Network Support": 2,
+      "Infrastructure": 1
+    },
+    "tool_usage": {
+      "ping_test": 2,
+      "check_server_logs": 1,
+      "check_network_bandwidth": 1,
+      "check_firewall_rules": 1
+    },
+    "avg_response_time": 207.57,
+    "total_response_time": 622.717929
+  },
+  "investigation_count": 3,
+  "orchestration_count": 1,
+  "investigations": [
+    {
+      "id": "inv_20251014_142817",
+      "query": "Cannot access shared drive",
+      "agent": "Network Support",
+      "outcome": "needs_collaboration",
+      "duration": 173.89
+    },
+    {
+      "id": "inv_20251014_143110",
+      "query": "Cannot access shared drive",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 197.39
+    },
+    {
+      "id": "inv_20251014_143509",
+      "query": "Cannot access shared drive",
+      "agent": "Network Support",
+      "outcome": "needs_collaboration",
+      "duration": 251.44
+    }
+  ]
+}

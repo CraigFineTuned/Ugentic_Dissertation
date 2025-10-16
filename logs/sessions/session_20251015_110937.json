@@ -1,0 +1,48 @@
+{
+  "session_id": "20251015_110937",
+  "session_start": "2025-10-15T11:09:37.889319",
+  "session_end": "2025-10-15T11:49:42.018925",
+  "metrics": {
+    "total_investigations": 3,
+    "successful_investigations": 1,
+    "orchestration_count": 2,
+    "agent_usage": {
+      "IT Support": 2,
+      "Infrastructure": 1
+    },
+    "tool_usage": {
+      "get_user_profile": 3,
+      "unlock_user_account": 2,
+      "get_recent_tickets": 1,
+      "check_server_logs": 1,
+      "check_user_permissions": 1
+    },
+    "avg_response_time": 486.04,
+    "total_response_time": 1458.1199720000002
+  },
+  "investigation_count": 3,
+  "orchestration_count": 1,
+  "investigations": [
+    {
+      "id": "inv_20251015_111241",
+      "query": "user forgot password",
+      "agent": "IT Support",
+      "outcome": "needs_collaboration",
+      "duration": 1088.01
+    },
+    {
+      "id": "inv_20251015_113049",
+      "query": "user forgot password",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 211.13
+    },
+    {
+      "id": "inv_20251015_113503",
+      "query": "user forgot password",
+      "agent": "IT Support",
+      "outcome": "success",
+      "duration": 158.98
+    }
+  ]
+}

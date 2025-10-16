@@ -1,0 +1,64 @@
+{
+  "session_id": "20251015_183744",
+  "session_start": "2025-10-15T18:37:44.055586",
+  "session_end": "2025-10-15T19:28:39.696836",
+  "metrics": {
+    "total_investigations": 5,
+    "successful_investigations": 1,
+    "orchestration_count": 0,
+    "agent_usage": {
+      "IT Support": 2,
+      "Infrastructure": 2,
+      "Network Support": 1
+    },
+    "tool_usage": {
+      "check_user_permissions": 3,
+      "get_user_profile": 1,
+      "measure_server_response_time": 2,
+      "check_server_logs": 2,
+      "check_firewall_rules": 1,
+      "ask_questions": 2
+    },
+    "avg_response_time": 376.02,
+    "total_response_time": 1880.1112979999998
+  },
+  "investigation_count": 5,
+  "orchestration_count": 1,
+  "investigations": [
+    {
+      "id": "inv_20251015_184025",
+      "query": "User John Smith can't access the printer in Building A",
+      "agent": "IT Support",
+      "outcome": "INVESTIGATION_COMPLETE",
+      "duration": 656.94
+    },
+    {
+      "id": "inv_20251015_185251",
+      "query": "Users are reporting slow response times when accessing the customer portal",
+      "agent": "Infrastructure",
+      "outcome": "INVESTIGATION_COMPLETE",
+      "duration": 342.38
+    },
+    {
+      "id": "inv_20251015_190316",
+      "query": "Multiple users across different departments can't access shared files on the network drive",
+      "agent": "Infrastructure",
+      "outcome": "INVESTIGATION_COMPLETE",
+      "duration": 399.14
+    },
+    {
+      "id": "inv_20251015_191134",
+      "query": "Multiple users across different departments can't access shared files on the network drive",
+      "agent": "Network Support",
+      "outcome": "success",
+      "duration": 104.82
+    },
+    {
+      "id": "inv_20251015_191319",
+      "query": "Multiple users across different departments can't access shared files on the network drive",
+      "agent": "IT Support",
+      "outcome": "INVESTIGATION_COMPLETE",
+      "duration": 376.83
+    }
+  ]
+}

@@ -43,7 +43,8 @@ from .support_tools import (
     verify_email_config,
     test_remote_access,
     check_software_installation,
-    get_recent_tickets
+    get_recent_tickets,
+    ask_questions
 )
 
 from .manager_tools import (
@@ -92,6 +93,7 @@ __all__ = [
     'test_remote_access',
     'check_software_installation',
     'get_recent_tickets',
+    'ask_questions',
     # Service Desk Manager
     'get_technician_workload',
     'get_team_availability',

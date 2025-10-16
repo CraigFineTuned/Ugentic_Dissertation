@@ -36,7 +36,7 @@ class InfrastructureAgentReAct:
     - Consensus Building: Involves teams in infrastructure decisions
     """
     
-    def __init__(self, llm, name="Infrastructure", orchestrator=True, agents=None, logger=None):
+    def __init__(self, llm, name="Infrastructure", orchestrator=True, agents=None, logger=None, planner=None):
         """
         Initialize Infrastructure agent with ReAct engine and orchestration
         
@@ -46,6 +46,7 @@ class InfrastructureAgentReAct:
             orchestrator: Can this agent orchestrate collaborations?
             agents: Dict of other agents for orchestration
             logger: InvestigationLogger instance for logging
+            planner: ExplicitPlanner instance for structured planning
         """
         self.name = name
         self.agent_type = "Operational"
@@ -63,14 +64,15 @@ class InfrastructureAgentReAct:
             tools=self.tools,
             llm=self.llm,
             max_iterations=10,
-            logger=logger
+            logger=logger,
+            planner=planner
         )
         
         # Initialize Ubuntu orchestration (if orchestrator)
         self.ubuntu_orchestrator = None
         self.collaboration_detector = None
         if orchestrator and agents:
-            self.ubuntu_orchestrator = UbuntuOrchestrator(llm=llm, agents=agents, logger=logger)
+            self.ubuntu_orchestrator = UbuntuOrchestrator(llm=llm, agents=agents, logger=logger, planner=planner)
             self.collaboration_detector = CollaborationDetector(llm=llm)
         
         # Ubuntu principles

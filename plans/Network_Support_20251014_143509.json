@@ -1,0 +1,89 @@
+{
+  "plan_id": "Network_Support_20251014_143509",
+  "objective": "Cannot access shared drive",
+  "created_by": "Network Support",
+  "created_at": "2025-10-14T14:35:09.130227",
+  "problem_context": {
+    "subtask_mode": true,
+    "focus": "Check network connectivity and performance, ensure no firewall rules are blocking access.",
+    "questions": [
+      "Is there any evidence that network connectivity or performance issues could be causing the problem?",
+      "Are there any active or recent changes in network security settings that might affect access?"
+    ],
+    "prior_findings": "No prior findings"
+  },
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Gather initial information about the issue",
+      "status": "completed",
+      "reasoning": "Need baseline understanding before diagnosis",
+      "expected_tools": [
+        "check_system_logs",
+        "gather_user_info"
+      ],
+      "findings": "{'host': '\\\\shared_drive', 'packets_sent': 10, 'packets_received': 10, 'packet_loss_percent': 0.0, 'min_latency_ms': 19.01, 'max_latency_ms': 80.06, 'avg_latency_ms': 50.83, 'status': 'reachable'}",
+      "updated_at": "2025-10-14T14:35:56.680875",
+      "actual_tools": [
+        "ping_test"
+      ]
+    },
+    {
+      "step_number": 2,
+      "description": "Check connectivity and network status",
+      "status": "completed",
+      "reasoning": "Connectivity issues require network diagnostics",
+      "expected_tools": [
+        "ping_test",
+        "check_network_config"
+      ],
+      "findings": "{'interface': 'eth0', 'timestamp': '2025-10-14T14:37:16.741412', 'download_mbps': 54.13, 'upload_mbps': 27.27, 'latency_ms': 36.85, 'packet_loss_percent': 0.19, 'jitter_ms': 1.79, 'status': 'normal'}",
+      "updated_at": "2025-10-14T14:37:16.742500",
+      "actual_tools": [
+        "check_network_bandwidth"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "Test hypothesis and verify root cause",
+      "status": "completed",
+      "reasoning": "Confirm diagnosis before applying solution",
+      "expected_tools": [
+        "test_hypothesis"
+      ],
+      "findings": "{'host': 'shared_drive_host', 'firewall_enabled': True, 'rules': [{'port': 22, 'protocol': 'tcp', 'action': 'allow', 'source': 'any'}, {'port': 80, 'protocol': 'tcp', 'action': 'allow', 'source': 'any'}, {'port': 443, 'protocol': 'tcp', 'action': 'allow', 'source': 'any'}, {'port': 3389, 'protocol': 'tcp', 'action': 'deny', 'source': 'external'}], 'blocked_ports': [3389, 445, 1433], 'recent_blocks': 40}",
+      "updated_at": "2025-10-14T14:38:36.166909",
+      "actual_tools": [
+        "check_firewall_rules"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "Apply solution and verify resolution",
+      "status": "pending",
+      "reasoning": "Fix issue and confirm it's resolved",
+      "expected_tools": [
+        "apply_fix",
+        "verify_resolution"
+      ],
+      "findings": "",
+      "updated_at": null
+    },
+    {
+      "step_number": 5,
+      "description": "Document solution and close investigation",
+      "status": "pending",
+      "reasoning": "Create knowledge for future similar issues",
+      "expected_tools": [
+        "document_solution"
+      ],
+      "findings": "",
+      "updated_at": null
+    }
+  ],
+  "status": "active",
+  "blockers": [],
+  "findings": {},
+  "updated_at": "2025-10-14T14:38:36.166909",
+  "completion_percentage": 60
+}
