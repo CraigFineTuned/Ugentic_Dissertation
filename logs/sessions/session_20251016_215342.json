@@ -1,0 +1,52 @@
+{
+  "session_id": "20251016_215342",
+  "session_start": "2025-10-16T21:53:42.847589",
+  "session_end": "2025-10-16T22:31:28.655441",
+  "metrics": {
+    "total_investigations": 4,
+    "successful_investigations": 4,
+    "orchestration_count": 0,
+    "agent_usage": {
+      "Infrastructure": 4
+    },
+    "tool_usage": {
+      "check_server_metrics": 9,
+      "check_server_logs": 5,
+      "check_service_status": 6
+    },
+    "avg_response_time": 27.48,
+    "total_response_time": 109.90672800000002
+  },
+  "investigation_count": 4,
+  "orchestration_count": 0,
+  "investigations": [
+    {
+      "id": "inv_20251016_222559",
+      "query": "User Sarah Chen in Building B can't print to the networked printer. She can connect to it but documents won't print. What's wrong",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 28.26
+    },
+    {
+      "id": "inv_20251016_222632",
+      "query": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 27.31
+    },
+    {
+      "id": "inv_20251016_222920",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours. Network team suspects either DNS or firewall, but IT Support suspects user VPN configs. None of the usual solutions (reconnect, reboot) help.",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 27.2
+    },
+    {
+      "id": "inv_20251016_223014",
+      "query": "Remote users are experiencing intermittent VPN connectivity issues. Connection drops for 30-60 seconds every 2-3 hours. Network team suspects DNS or firewall issues, but IT Support suspects user VPN configuration problems. None of the usual solutions (reconnect, reboot) help. This is affecting multiple users across different departments who need stable remote access.",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 27.14
+    }
+  ]
+}

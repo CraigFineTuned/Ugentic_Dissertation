@@ -1,11 +1,21 @@
+"""
+UGENTIC Logging Configuration
+Structured JSON logging with rotation and per-module handlers
+All paths are dynamic and cross-platform
+"""
 
 import logging
 import logging.config
 import json
 import os
+from pathlib import Path
+
 
 class JsonFormatter(logging.Formatter):
+    """Custom formatter that outputs JSON log entries"""
+    
     def format(self, record):
+        """Format log record as JSON"""
         log_record = {
             "timestamp": self.formatTime(record, self.datefmt),
             "level": record.levelname,
@@ -15,15 +25,32 @@ class JsonFormatter(logging.Formatter):
         }
         return json.dumps(log_record) + '\n'
 
+
 def setup_logging():
-    LOGS_DIR = "C:/Users/craig/Desktop/MainProjects/Ugentic_Dissertation/logs"
-    AGENTS_LOGS_DIR = os.path.join(LOGS_DIR, "agents")
-
-    if not os.path.exists(LOGS_DIR):
-        os.makedirs(LOGS_DIR)
-    if not os.path.exists(AGENTS_LOGS_DIR):
-        os.makedirs(AGENTS_LOGS_DIR)
-
+    """
+    Setup logging configuration with dynamic paths
+    
+    Supports:
+    - JSON structured logging
+    - Rotating file handlers (10MB per file, 5 backups)
+    - Per-module loggers
+    - Console and file output
+    - Error-specific logging
+    """
+    
+    # Import here to avoid circular dependency
+    from .config_manager import get_config
+    
+    config = get_config()
+    
+    LOGS_DIR = config.logs_dir
+    AGENTS_LOGS_DIR = config.agents_logs_dir
+    
+    # Ensure directories exist
+    Path(LOGS_DIR).mkdir(parents=True, exist_ok=True)
+    Path(AGENTS_LOGS_DIR).mkdir(parents=True, exist_ok=True)
+    
+    # Define logging configuration
     LOGGING_CONFIG = {
         "version": 1,
         "disable_existing_loggers": False,
@@ -42,7 +69,7 @@ def setup_logging():
                 "class": "logging.handlers.RotatingFileHandler",
                 "formatter": "json",
                 "filename": os.path.join(LOGS_DIR, "main.jsonl"),
-                "maxBytes": 10485760,
+                "maxBytes": 10485760,  # 10MB
                 "backupCount": 5,
                 "level": "INFO"
             },
@@ -179,4 +206,13 @@ def setup_logging():
             }
         }
     }
+    
+    # Apply configuration
     logging.config.dictConfig(LOGGING_CONFIG)
+    
+    # Log setup completion
+    logger = logging.getLogger("ugentic")
+    logger.info(
+        "Logging system initialized",
+        extra={"context": {"logs_directory": LOGS_DIR}}
+    )

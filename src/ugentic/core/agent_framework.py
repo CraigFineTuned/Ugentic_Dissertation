@@ -1,15 +1,9 @@
-# Main framework for UGENTIC agents
+"""Main framework for UGENTIC agents"""
 
 import logging
-from .tool_base import Tool
-
-# Initialize loggers
-agent_logger = logging.getLogger("ugentic.agent")
-llm_logger = logging.getLogger("ugentic.llm")
-tool_logger = logging.getLogger("ugentic.tool")
-workflow_logger = logging.getLogger("ugentic.workflow")
-
-import logging
+import os
+import json
+import inspect
 from .tool_base import Tool
 
 # Initialize loggers
@@ -22,13 +16,7 @@ workflow_logger = logging.getLogger("ugentic.workflow")
 from .time_tool import TimeTool
 from .rag_core import RAGCore, get_ollama_embeddings, get_text_splitter
 from .fetch_tool import FetchTool
-
 from .decision_tool import DecisionTool
-
-import os
-import json
-import inspect
-
 from langchain_community.llms import Ollama  # Import Ollama for live LLM interaction
 
 

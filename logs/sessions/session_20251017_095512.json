@@ -1,0 +1,95 @@
+{
+  "session_id": "20251017_095512",
+  "session_start": "2025-10-17T09:55:12.691865",
+  "session_end": "2025-10-17T10:18:49.223351",
+  "metrics": {
+    "total_investigations": 9,
+    "successful_investigations": 2,
+    "orchestration_count": 7,
+    "agent_usage": {
+      "Network Support": 4,
+      "Infrastructure": 2,
+      "IT Support": 2,
+      "App Support": 1
+    },
+    "tool_usage": {
+      "ping_test": 3,
+      "check_dns_resolution": 1,
+      "check_server_metrics": 2,
+      "test_remote_access": 1,
+      "get_user_profile": 1,
+      "get_network_utilization": 1,
+      "check_app_availability": 1,
+      "query_app_logs": 1
+    },
+    "avg_response_time": 12.83,
+    "total_response_time": 115.426097
+  },
+  "investigation_count": 9,
+  "orchestration_count": 2,
+  "investigations": [
+    {
+      "id": "inv_20251017_100053",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours. Network team suspects either DNS or firewall, but IT Support suspects user VPN configs. None of the usual solutions (reconnect, reboot) help.",
+      "agent": "Network Support",
+      "outcome": "needs_collaboration",
+      "duration": 20.81
+    },
+    {
+      "id": "inv_20251017_100113",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours. Network team suspects either DNS or firewall, but IT Support suspects user VPN configs. None of the usual solutions (reconnect, reboot) help.",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 8.89
+    },
+    {
+      "id": "inv_20251017_100132",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours. Network team suspects either DNS or firewall, but IT Support suspects user VPN configs. None of the usual solutions (reconnect, reboot) help.",
+      "agent": "Network Support",
+      "outcome": "needs_collaboration",
+      "duration": 12.78
+    },
+    {
+      "id": "inv_20251017_100145",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours. Network team suspects either DNS or firewall, but IT Support suspects user VPN configs. None of the usual solutions (reconnect, reboot) help.",
+      "agent": "IT Support",
+      "outcome": "needs_collaboration",
+      "duration": 5.91
+    },
+    {
+      "id": "inv_20251017_100509",
+      "query": "User forgot password",
+      "agent": "IT Support",
+      "outcome": "success",
+      "duration": 17.69
+    },
+    {
+      "id": "inv_20251017_100912",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours.",
+      "agent": "Network Support",
+      "outcome": "needs_collaboration",
+      "duration": 8.75
+    },
+    {
+      "id": "inv_20251017_100920",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours.",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 13.53
+    },
+    {
+      "id": "inv_20251017_100943",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours.",
+      "agent": "Network Support",
+      "outcome": "needs_collaboration",
+      "duration": 8.09
+    },
+    {
+      "id": "inv_20251017_100952",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours.",
+      "agent": "App Support",
+      "outcome": "needs_collaboration",
+      "duration": 18.98
+    }
+  ]
+}

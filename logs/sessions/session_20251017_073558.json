@@ -1,0 +1,37 @@
+{
+  "session_id": "20251017_073558",
+  "session_start": "2025-10-17T07:35:58.960121",
+  "session_end": "2025-10-17T07:40:14.935843",
+  "metrics": {
+    "total_investigations": 2,
+    "successful_investigations": 2,
+    "orchestration_count": 0,
+    "agent_usage": {
+      "Infrastructure": 2
+    },
+    "tool_usage": {
+      "check_server_metrics": 5,
+      "check_server_logs": 5
+    },
+    "avg_response_time": 20.3,
+    "total_response_time": 40.591836
+  },
+  "investigation_count": 2,
+  "orchestration_count": 0,
+  "investigations": [
+    {
+      "id": "inv_20251017_073842",
+      "query": "User Sarah Chen in Building B can't print to the networked printer. She can connect to it but documents won't print. What's wrong?",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 20.8
+    },
+    {
+      "id": "inv_20251017_073927",
+      "query": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 19.79
+    }
+  ]
+}

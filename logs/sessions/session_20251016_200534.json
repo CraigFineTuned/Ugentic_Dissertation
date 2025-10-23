@@ -1,0 +1,58 @@
+{
+  "session_id": "20251016_200534",
+  "session_start": "2025-10-16T20:05:34.949098",
+  "session_end": "2025-10-16T20:14:18.423824",
+  "metrics": {
+    "total_investigations": 5,
+    "successful_investigations": 5,
+    "orchestration_count": 0,
+    "agent_usage": {
+      "Infrastructure": 5
+    },
+    "tool_usage": {
+      "check_server_metrics": 15,
+      "check_server_logs": 10
+    },
+    "avg_response_time": 10.52,
+    "total_response_time": 52.579425
+  },
+  "investigation_count": 5,
+  "orchestration_count": 0,
+  "investigations": [
+    {
+      "id": "inv_20251016_200844",
+      "query": "User Sarah Chen in Building B can't print to the networked printer. She can connect to it but documents won't print. What's wrong?",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 11.66
+    },
+    {
+      "id": "inv_20251016_200900",
+      "query": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 7.76
+    },
+    {
+      "id": "inv_20251016_200922",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours. Network team suspects either DNS or firewall, but IT Support suspects user VPN configs. None of the usual solutions (reconnect, reboot) help.",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 9.86
+    },
+    {
+      "id": "inv_20251016_201012",
+      "query": "Multiple remote office users report sporadic internet disconnections. Connection drops for 30-60 seconds every 2-3 hours. Network team suspects either DNS or firewall, but IT Support suspects user VPN configs. None of the usual solutions (reconnect, reboot) help.",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 13.08
+    },
+    {
+      "id": "inv_20251016_201029",
+      "query": "Remote users are experiencing intermittent VPN connectivity issues. Connection drops for 30-60 seconds every 2-3 hours. Network team suspects DNS or firewall issues, but IT Support suspects user VPN configuration problems. None of the usual solutions (reconnect, reboot) help. This is affecting multiple users across different departments who need stable remote access.",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 10.22
+    }
+  ]
+}

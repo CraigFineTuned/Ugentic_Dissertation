@@ -1,5 +1,5 @@
 """
-ReAct Engine - Reasoning and Acting Pattern (FIXED SESSION 23)
+ReAct Engine - Reasoning and Acting Pattern (FIXED SESSIONS 23, 25, 27)
 General-purpose LLM-guided diagnostic system
 Based on 2024/2025 research
 
@@ -8,9 +8,27 @@ SESSION 23 FIX: Tool Selection & Diversity Enforcement
 - Enhanced _generate_thought prompt with tool history and constraints
 - Added action validation to enforce tool diversity
 - LLM now receives explicit instructions to avoid recently used tools
+
+SESSION 25 FIX (CRITICAL): LLM Reliability & Fallback Mechanisms
+- Added exponential backoff retry logic for both thought and reflection generation
+- Detects 401/connection errors and automatically retries with delays
+- Smart fallback tool selection based on keywords when LLM fails
+- Reflection engine now has 2-attempt retry before fallback analysis
+- Thought generation has 3-attempt retry before smart tool selection
+- All errors logged with specific type detection (auth vs connection vs other)
+- Investigation can continue even when LLM service is unavailable
+
+SESSION 27 FIX: Solo Investigation Summary Generation
+- Added _synthesize_findings_with_llm() method for LLM-powered summary generation
+- Updated _synthesize_solution() to call LLM synthesis instead of placeholders
+- Updated _synthesize_from_plan() to call LLM synthesis instead of placeholders
+- Added _create_fallback_summary() for graceful degradation when LLM fails
+- Solo investigations now produce detailed, specific summaries matching orchestration quality
+- Root cause and solution now include technical details from actual findings
 """
 
 import json
+import time
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
@@ -339,15 +357,55 @@ class ReactEngine:
             self.logger.end_investigation(self.current_inv_id, 'escalated', str(result))
         return result
     
+    def _select_fallback_tool(self, problem_report: str) -> str:
+        """
+        Session 25 Fix: Smart tool selection when LLM fails
+        Uses keyword matching to select appropriate tool based on problem statement
+        """
+        problem_lower = problem_report.lower()
+        
+        # Keyword-based tool selection
+        keywords_to_tools = {
+            'printer': 'check_printer_status',
+            'network': 'check_network_bandwidth',
+            'dns': 'check_dns_resolution',
+            'firewall': 'check_firewall_rules',
+            'vpn': 'check_service_status',
+            'permission': 'check_user_permissions',
+            'cpu': 'check_server_metrics',
+            'memory': 'check_server_metrics',
+            'disk': 'check_disk_space',
+            'error': 'check_server_logs',
+            'crash': 'check_server_logs',
+            'service': 'check_service_status',
+            'process': 'check_process_list',
+            'response': 'measure_server_response_time',
+            'connection': 'check_network_bandwidth',
+            'disconnect': 'check_network_bandwidth',
+            'slowness': 'measure_server_response_time'
+        }
+        
+        # Find best matching tool
+        available_tools = [t['name'] for t in self.tools.list()]
+        tools_to_avoid = self._get_tools_to_avoid()
+        available_tools = [t for t in available_tools if t not in tools_to_avoid]
+        
+        for keyword, tool in keywords_to_tools.items():
+            if keyword in problem_lower and tool in available_tools:
+                return tool
+        
+        # Fallback: return first available tool not in avoid list
+        return available_tools[0] if available_tools else self._select_default_tool()
+    
     def _generate_thought(self, problem_report: str, context: Dict) -> Dict[str, Any]:
         """
-        FIXED Session 23: LLM generates reasoning with tool diversity constraints
+        FIXED Session 25: LLM generates reasoning with RETRY LOGIC
         
-        Now includes:
-        - Recent tool history
-        - Explicit forbidden tools
-        - Tool alternative suggestions
-        - Action validation to enforce constraints
+        Added:
+        - Exponential backoff retry on 401/connection errors
+        - Smart fallback tool selection when LLM fails
+        - Better error detection and reporting
+        - Tool diversity from Session 23 still enforced
         """
         # Extract important context values
         context_hints = self._extract_context_hints(context)
@@ -404,50 +462,92 @@ MANDATORY: Respond in JSON with this EXACT structure:
     "status": "INVESTIGATING" or "ROOT_CAUSE_FOUND"
 }}"""
         
-        try:
-            response = self.llm.invoke(prompt)
-            response_text = response.content if hasattr(response, 'content') else str(response)
+        # SESSION 25 FIX: Retry logic with exponential backoff
+        max_retries = 3
+        retry_delay = 1
+        
+        for attempt in range(max_retries):
+            try:
+                response = self.llm.invoke(prompt)
+                response_text = response.content if hasattr(response, 'content') else str(response)
+                
+                if '{' in response_text:
+                    start = response_text.find('{')
+                    end = response_text.rfind('}') + 1
+                    json_str = response_text[start:end]
+                    thought = json.loads(json_str)
+                    
+                    # FIXED Session 23: VALIDATE tool selection
+                    tool_name = thought.get('next_action', {}).get('tool_name', '')
+                    if tool_name in tools_to_avoid:
+                        print(f"   [FORCED OVERRIDE] LLM selected forbidden tool '{tool_name}', forcing alternative...")
+                        if alternative_tools:
+                            thought['next_action']['tool_name'] = alternative_tools[0]
+                            thought['next_action']['parameters'] = {}
+                            print(f"   [NOW USING] {alternative_tools[0]}")
+                        else:
+                            thought['next_action']['tool_name'] = self._select_default_tool()
+                    
+                    return thought
+                else:
+                    return {
+                        "reasoning": response_text,
+                        "current_hypothesis": "Investigation",
+                        "next_action": {
+                            "tool_name": (alternative_tools[0] if alternative_tools else self._select_default_tool()),
+                            "parameters": {},
+                            "expectation": "Gather information"
+                        },
+                        "status": "INVESTIGATING"
+                    }
             
-            if '{' in response_text:
-                start = response_text.find('{')
-                end = response_text.rfind('}') + 1
-                json_str = response_text[start:end]
-                thought = json.loads(json_str)
+            except Exception as e:
+                error_msg = str(e)
+                is_auth_error = "401" in error_msg or "unauthorized" in error_msg.lower()
+                is_connection_error = "connection" in error_msg.lower() or "refused" in error_msg.lower()
                 
-                # FIXED Session 23: VALIDATE tool selection
-                tool_name = thought.get('next_action', {}).get('tool_name', '')
-                if tool_name in tools_to_avoid:
-                    print(f"   [FORCED OVERRIDE] LLM selected forbidden tool '{tool_name}', forcing alternative...")
-                    if alternative_tools:
-                        thought['next_action']['tool_name'] = alternative_tools[0]
-                        thought['next_action']['parameters'] = {}
-                        print(f"   [NOW USING] {alternative_tools[0]}")
-                    else:
-                        thought['next_action']['tool_name'] = self._select_default_tool()
+                print(f" [Attempt {attempt + 1}/{max_retries}] LLM Error: {type(e).__name__}")
                 
-                return thought
-            else:
-                return {
-                    "reasoning": response_text,
-                    "current_hypothesis": "Investigation",
-                    "next_action": {
-                        "tool_name": (alternative_tools[0] if alternative_tools else self._select_default_tool()),
-                        "parameters": {},
-                        "expectation": "Gather information"
-                    },
-                    "status": "INVESTIGATING"
-                }
-        except Exception as e:
-            print(f" Error generating thought: {e}")
-            return {
-                "reasoning": f"Error: {e}",
-                "status": "INVESTIGATING",
-                "next_action": {
-                    "tool_name": (alternative_tools[0] if alternative_tools else self._select_default_tool()),
-                    "parameters": {},
-                    "expectation": "Basic check"
-                }
+                if is_auth_error:
+                    print(f" ✗ AUTHENTICATION ERROR (401): Possible Ollama connection issue")
+                elif is_connection_error:
+                    print(f" ✗ CONNECTION ERROR: Ollama not responding")
+                else:
+                    print(f" ✗ ERROR: {error_msg[:80]}")
+                
+                if attempt < max_retries - 1:
+                    print(f" ⏳ Retrying in {retry_delay}s...")
+                    time.sleep(retry_delay)
+                    retry_delay *= 2  # Exponential backoff
+                else:
+                    print(f" ✗ All {max_retries} attempts failed. Using fallback tool selection.")
+                    
+                    # Fallback: Smart tool selection without LLM
+                    fallback_tool = self._select_fallback_tool(problem_report)
+                    
+                    return {
+                        "reasoning": f"LLM unavailable. Using fallback tool selection based on problem keywords.",
+                        "current_hypothesis": "Fallback investigation mode",
+                        "next_action": {
+                            "tool_name": fallback_tool,
+                            "parameters": {},
+                            "expectation": "Gather baseline information"
+                        },
+                        "status": "INVESTIGATING",
+                        "fallback_mode": True,
+                        "error": error_msg[:100]
+                    }
+        
+        # Should not reach here, but fallback just in case
+        return {
+            "reasoning": "Critical error in thought generation",
+            "status": "INVESTIGATING",
+            "next_action": {
+                "tool_name": self._select_fallback_tool(problem_report),
+                "parameters": {},
+                "expectation": "Gather information"
             }
+        }
     
     def _execute_tool(self, action: Dict) -> Dict[str, Any]:
         """Execute diagnostic tool with validation"""
@@ -468,7 +568,7 @@ MANDATORY: Respond in JSON with this EXACT structure:
         return self.tools.execute(tool_name, parameters)
     
     def _generate_reflection(self, thought: Dict, observation: Dict) -> Dict[str, Any]:
-        """LLM reflects on observation vs expectation"""
+        """LLM reflects on observation vs expectation - WITH RETRY LOGIC (Session 25)"""
         prompt = f"""You are {self.agent_name}. Analyze this:
 
 Expected: {thought.get('next_action', {}).get('expectation', 'Unknown')}
@@ -483,37 +583,66 @@ Respond in JSON:
     "needs_collaboration": true/false
 }}"""
         
-        try:
-            response = self.llm.invoke(prompt)
-            response_text = response.content if hasattr(response, 'content') else str(response)
-            
-            if '{' in response_text:
-                start = response_text.find('{')
-                end = response_text.rfind('}') + 1
-                json_str = response_text[start:end]
-                return json.loads(json_str)
-            else:
-                return {
-                    "interpretation": response_text,
-                    "hypothesis_confirmed": False,
-                    "hypothesis_refuted": False,
-                    "root_cause_found": False,
-                    "needs_collaboration": False
-                }
-        except Exception as e:
-            return {
-                "interpretation": f"Reflection error: {e}",
-                "hypothesis_confirmed": False,
-                "hypothesis_refuted": False,
-                "root_cause_found": False
-            }
+        # Session 25 Fix: Retry logic for reflection
+        max_retries = 2
+        retry_delay = 0.5
+        
+        for attempt in range(max_retries):
+            try:
+                response = self.llm.invoke(prompt)
+                response_text = response.content if hasattr(response, 'content') else str(response)
+                
+                if '{' in response_text:
+                    start = response_text.find('{')
+                    end = response_text.rfind('}') + 1
+                    json_str = response_text[start:end]
+                    return json.loads(json_str)
+                else:
+                    return {
+                        "interpretation": response_text,
+                        "hypothesis_confirmed": False,
+                        "hypothesis_refuted": False,
+                        "root_cause_found": False,
+                        "needs_collaboration": False
+                    }
+            except Exception as e:
+                error_msg = str(e)
+                is_critical = "401" in error_msg or "unauthorized" in error_msg.lower()
+                
+                if attempt < max_retries - 1:
+                    print(f" [Reflection Attempt {attempt + 1}/{max_retries}] Retrying...")
+                    time.sleep(retry_delay)
+                else:
+                    print(f" [Reflection] Using fallback after {max_retries} attempts")
+                    # Fallback: Simple analysis based on observation
+                    return {
+                        "interpretation": f"Unable to analyze. Observation success: {observation.get('success', False)}",
+                        "hypothesis_confirmed": observation.get('success', False),
+                        "hypothesis_refuted": not observation.get('success', True),
+                        "root_cause_found": False,
+                        "needs_collaboration": False,
+                        "fallback_mode": True,
+                        "error": error_msg[:80]
+                    }
+        
+        # Ultimate fallback
+        return {
+            "interpretation": "Unable to reflect",
+            "hypothesis_confirmed": False,
+            "hypothesis_refuted": False,
+            "root_cause_found": False,
+            "needs_collaboration": False
+        }
     
     def _synthesize_solution(self, final_state: Dict) -> Dict[str, Any]:
-        """Create final solution"""
+        """Create final solution with LLM synthesis"""
+        # Use LLM to synthesize professional summary
+        summary = self._synthesize_findings_with_llm(final_state)
+        
         return {
             "status": "RESOLVED",
-            "root_cause": final_state.get('root_cause', 'Identified through investigation'),
-            "solution": final_state.get('solution', 'Solution derived from findings'),
+            "root_cause": summary.get('root_cause', 'Root cause identified through investigation'),
+            "solution": summary.get('solution', 'Solution recommendations based on findings'),
             "investigation_history": self._get_history_summary(),
             "iterations": len(self.history)
         }
@@ -672,6 +801,124 @@ Respond in JSON:
             "detailed_findings": detailed_findings
         }
     
+    def _synthesize_findings_with_llm(self, context: Dict) -> Dict[str, Any]:
+        """
+        SESSION 27 FIX: Use LLM to synthesize professional investigation summary
+        
+        Args:
+            context: Dict containing investigation context (findings, objective, etc.)
+            
+        Returns:
+            Dict with 'root_cause' and 'solution' keys
+        """
+        # Prepare investigation summary
+        objective = context.get('objective', 'Unknown problem')
+        findings = context.get('findings', [])
+        
+        # Format investigation steps for context
+        steps_summary = []
+        if isinstance(findings, list):
+            for i, finding in enumerate(findings, 1):
+                if isinstance(finding, dict):
+                    step_desc = finding.get('step', f"Step {i}")
+                    step_result = finding.get('finding', 'No result')
+                    steps_summary.append(f"Step {i}: {step_desc}\n  Result: {str(step_result)[:200]}")
+                else:
+                    steps_summary.append(f"Step {i}: {str(finding)[:200]}")
+        
+        steps_text = "\n".join(steps_summary) if steps_summary else "No detailed steps available"
+        
+        # Format tool usage history
+        tools_used = " → ".join(self.tool_usage_history[-5:]) if self.tool_usage_history else "Various tools"
+        
+        # Format recent observations
+        recent_observations = []
+        for step in self.history[-3:]:
+            obs = step.observation
+            if obs.get('success'):
+                tool = step.action.get('tool_name', 'unknown')
+                data = obs.get('data', {})
+                recent_observations.append(f"- {tool}: {str(data)[:150]}")
+        
+        observations_text = "\n".join(recent_observations) if recent_observations else "No observations"
+        
+        # Create LLM synthesis prompt
+        prompt = f"""You are {self.agent_name}, completing an IT support investigation.
+
+PROBLEM:
+{objective}
+
+INVESTIGATION CONDUCTED:
+{steps_text}
+
+TOOLS USED:
+{tools_used}
+
+KEY OBSERVATIONS:
+{observations_text}
+
+Based on this investigation, provide a professional summary with:
+1. ROOT CAUSE: A clear, specific explanation of what caused the problem (be technical and precise)
+2. SOLUTION: Step-by-step instructions to resolve the issue (be actionable and detailed)
+
+Respond in JSON format:
+{{
+    "root_cause": "Detailed technical explanation of the root cause",
+    "solution": "Step-by-step solution with specific actions"
+}}
+
+IMPORTANT: Be specific and reference actual findings from the investigation. Do NOT use generic phrases."""
+        
+        try:
+            response = self.llm.invoke(prompt)
+            response_text = response.content if hasattr(response, 'content') else str(response)
+            
+            # Extract JSON from response
+            if '{' in response_text:
+                start = response_text.find('{')
+                end = response_text.rfind('}') + 1
+                json_str = response_text[start:end]
+                summary = json.loads(json_str)
+                
+                return {
+                    'root_cause': summary.get('root_cause', 'Root cause identified through investigation'),
+                    'solution': summary.get('solution', 'Solution derived from findings')
+                }
+            else:
+                # Fallback: Create better summary from observations
+                return self._create_fallback_summary(context)
+                
+        except Exception as e:
+            print(f" [Summary Synthesis] LLM error: {str(e)[:50]}. Using fallback.")
+            return self._create_fallback_summary(context)
+    
+    def _create_fallback_summary(self, context: Dict) -> Dict[str, Any]:
+        """
+        Create summary from findings when LLM synthesis fails
+        Better than generic placeholders
+        """
+        findings = context.get('findings', [])
+        objective = context.get('objective', 'Unknown')
+        
+        # Try to extract meaningful info from last finding
+        if findings and isinstance(findings, list) and len(findings) > 0:
+            last_finding = findings[-1]
+            if isinstance(last_finding, dict):
+                finding_text = str(last_finding.get('finding', ''))
+                root_cause = f"Investigation identified: {finding_text[:200]}"
+                solution = "Review findings above and apply appropriate remediation based on root cause"
+            else:
+                root_cause = f"Issue related to: {objective[:150]}"
+                solution = "Detailed solution requires manual review of investigation findings"
+        else:
+            root_cause = f"Investigation completed for: {objective[:150]}"
+            solution = "Refer to investigation findings for remediation steps"
+        
+        return {
+            'root_cause': root_cause,
+            'solution': solution
+        }
+    
     def _conclude_early(self, reason: str, tool_name: str = None) -> Dict[str, Any]:
         """Conclude investigation early"""
         self._print_optimization_summary()
@@ -721,7 +968,7 @@ Respond in JSON:
         )
     
     def _synthesize_from_plan(self, plan_id: str) -> Dict[str, Any]:
-        """Synthesize solution from completed plan"""
+        """Synthesize solution from completed plan with LLM synthesis"""
         plan = self.planner.get_plan(plan_id)
         
         all_findings = []
@@ -732,12 +979,19 @@ Respond in JSON:
                     'finding': step['findings']
                 })
         
+        # Use LLM to synthesize professional summary
+        summary = self._synthesize_findings_with_llm({
+            'objective': plan['objective'],
+            'findings': all_findings,
+            'investigation_type': 'plan_based'
+        })
+        
         return {
             "status": "INVESTIGATION_COMPLETE",
             "plan_id": plan_id,
             "objective": plan['objective'],
             "steps_completed": len([s for s in plan['steps'] if s['status'] == 'completed']),
             "findings": all_findings,
-            "solution": "Solution synthesized from completed investigation plan",
-            "root_cause": "Identified through structured investigation"
+            "solution": summary.get('solution', 'Solution derived from investigation findings'),
+            "root_cause": summary.get('root_cause', 'Root cause identified through investigation')
         }

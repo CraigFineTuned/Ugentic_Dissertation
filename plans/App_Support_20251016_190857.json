@@ -1,0 +1,100 @@
+{
+  "plan_id": "App_Support_20251016_190857",
+  "objective": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+  "created_by": "App Support",
+  "created_at": "2025-10-16T19:08:57.445027",
+  "problem_context": {
+    "user_input": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+    "knowledge_base": [
+      {
+        "doc_id": "knowledge_base\\00_IT_Policies_and_Procedures.md",
+        "chunk_text": "# IT Policies and Procedures\n\nThis document contains the official IT policies and procedures for the organization.",
+        "similarity": 0.6251432447635278
+      },
+      {
+        "doc_id": "knowledge_base\\04_Infrastructure_Support\\04-02_Server_Configuration_Database.md",
+        "chunk_text": "### Upcoming Upgrades\n\n| Server | Upgrade Type | Details | Planned Date | Risk |\n|--------|-------------|---------|--------------|------|\n| [VM-DB-01] | Version upgrade | SQL 2019 \u2192 2022 | [Date] | [High/Medium/Low] |\n\n---\n\n## 14. TROUBLESHOOTING QUICK REFERENCE\n\n### Server-Specific Known Issues\n\n#### VM-APP-01\n- **Issue:** Memory leak in App Service\n- **Symptom:** RAM usage climbs over 3 days\n- **Workaround:** Weekly service restart\n- **Permanent Fix:** [Pending vendor patch]\n\n#### VM-DB-01\n- **Issue:** High CPU during batch jobs\n- **Symptom:** CPU > 90% between 2-4 AM\n- **Expected:** Normal during batch window\n- **No Action Needed:** Unless extends past 5 AM\n\n---\n\n## 15. CONTACT AND OWNERSHIP\n\n### Server Ownership Matrix\n\n| Server | Technical Owner | Business Owner | On-Call Contact |\n|--------|----------------|----------------|----------------|\n| VM-APP-01 | [IT person] | [Department] | [Phone/pager] |\n| VM-DB-01 | [DBA name] | [Department] | [Phone/pager] |\n\n---",
+        "similarity": 0.6003037753126552
+      },
+      {
+        "doc_id": "knowledge_base\\02_Application_Support\\02-01_App_Support_Playbook.md",
+        "chunk_text": "---\n\n## 2. COMMON ISSUES AND SOLUTIONS\n\n### [Application Name 1]\n\n#### Issue: [e.g., \"Slow Login Performance\"]\n- **Symptoms:** [How users describe the problem]\n- **Frequency:** [How often this occurs]\n- **Impact:** [What business processes are affected]\n- **Troubleshooting Steps:**\n  1. [First diagnostic step]\n  2. [Second diagnostic step]\n  3. [Third diagnostic step]\n- **Common Causes:**\n  - [Cause 1 with explanation]\n  - [Cause 2 with explanation]\n- **Resolution:**\n  - [Solution approach]\n  - [Expected time to resolve]\n- **Escalation Criteria:** [When to escalate to vendor or Infrastructure]\n- **Known Workarounds:** [Temporary fixes users can apply]\n\n#### Issue: [e.g., \"Cannot Access Reports\"]\n- **Symptoms:** \n- **Frequency:** \n- **Impact:** \n- **Troubleshooting Steps:**\n  1. \n  2. \n  3. \n- **Common Causes:**\n  - \n  - \n- **Resolution:**\n  - \n  - \n- **Escalation Criteria:** \n- **Known Workarounds:** \n\n### [Application Name 2]",
+        "similarity": 0.5929995377410678
+      }
+    ]
+  },
+  "steps": [
+    {
+      "step_number": 1,
+      "description": "Gather initial information about the issue",
+      "status": "completed",
+      "reasoning": "Need baseline understanding before diagnosis",
+      "expected_tools": [
+        "check_system_logs",
+        "gather_user_info"
+      ],
+      "findings": "{'application': 'default_app', 'user_id': None, 'timeframe_hours': 1, 'total_entries': 57, 'error_count': 20, 'warning_count': 19, 'crash_count': 4, 'errors': [{'timestamp': '2025-10-16T18:38:47.718737', 'level': 'CRITICAL', 'message': 'default_app log entry 3', 'user_id': None}, {'timestamp': '2025-10-16T18:57:47.718737', 'level': 'ERROR', 'message': 'default_app log entry 5', 'user_id': None}, {'timestamp': '2025-10-16T18:44:47.718737', 'level': 'CRITICAL', 'message': 'default_app log entry 6'",
+      "updated_at": "2025-10-16T19:10:47.726880",
+      "actual_tools": [
+        "query_app_logs"
+      ]
+    },
+    {
+      "step_number": 2,
+      "description": "Investigate error logs and messages",
+      "status": "completed",
+      "reasoning": "Errors typically leave traces in logs",
+      "expected_tools": [
+        "check_error_logs",
+        "analyze_stack_trace"
+      ],
+      "findings": "{'application': 'default_app', 'available': True, 'status': 'online', 'response_time_ms': 483.62, 'uptime_percent': 97.84, 'last_outage': None}",
+      "updated_at": "2025-10-16T19:13:54.849430",
+      "actual_tools": [
+        "check_app_availability"
+      ]
+    },
+    {
+      "step_number": 3,
+      "description": "Test hypothesis and verify root cause",
+      "status": "completed",
+      "reasoning": "Confirm diagnosis before applying solution",
+      "expected_tools": [
+        "test_hypothesis"
+      ],
+      "findings": "{'application': 'default_app', 'timeframe_hours': 24, 'total_requests': 60894, 'error_count': 422, 'error_rate_percent': 0.693, 'status': 'healthy', 'top_errors': [{'code': '500', 'count': 73}, {'code': '404', 'count': 16}, {'code': '503', 'count': 3}]}",
+      "updated_at": "2025-10-16T19:16:20.946092",
+      "actual_tools": [
+        "get_app_error_rate"
+      ]
+    },
+    {
+      "step_number": 4,
+      "description": "Apply solution and verify resolution",
+      "status": "pending",
+      "reasoning": "Fix issue and confirm it's resolved",
+      "expected_tools": [
+        "apply_fix",
+        "verify_resolution"
+      ],
+      "findings": "",
+      "updated_at": null
+    },
+    {
+      "step_number": 5,
+      "description": "Document solution and close investigation",
+      "status": "pending",
+      "reasoning": "Create knowledge for future similar issues",
+      "expected_tools": [
+        "document_solution"
+      ],
+      "findings": "",
+      "updated_at": null
+    }
+  ],
+  "status": "active",
+  "blockers": [],
+  "findings": {},
+  "updated_at": "2025-10-16T19:16:20.946092",
+  "completion_percentage": 60
+}

@@ -1,9 +1,5 @@
 {
-  "reasoning_model": "gemma3n:e4b",
-  "alternative_models": {
-    "fast": "gemma3n:e4b",
-    "reasoning": "deepseek-r1:7b",
-    "multilingual": "granite4:small-h"
-  },
-  "embedding_model": "embeddinggemma:latest"
+  "reasoning_model": "deepseek-v3.1:671b-cloud",
+  "embedding_model": "embeddinggemma:latest",
+  "fast_model": "gemma3n:e4b"
 }

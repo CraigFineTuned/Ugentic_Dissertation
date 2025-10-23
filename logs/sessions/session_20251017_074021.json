@@ -1,0 +1,87 @@
+{
+  "session_id": "20251017_074021",
+  "session_start": "2025-10-17T07:40:21.116744",
+  "session_end": "2025-10-17T07:46:27.334564",
+  "metrics": {
+    "total_investigations": 8,
+    "successful_investigations": 2,
+    "orchestration_count": 6,
+    "agent_usage": {
+      "IT Support": 3,
+      "Infrastructure": 2,
+      "Network Support": 1,
+      "App Support": 2
+    },
+    "tool_usage": {
+      "check_printer_status": 2,
+      "check_service_status": 2,
+      "check_user_permissions": 1,
+      "check_firewall_rules": 1,
+      "check_app_availability": 1,
+      "query_app_logs": 1,
+      "get_user_profile": 1
+    },
+    "avg_response_time": 14.52,
+    "total_response_time": 116.18428
+  },
+  "investigation_count": 8,
+  "orchestration_count": 2,
+  "investigations": [
+    {
+      "id": "inv_20251017_074246",
+      "query": "User Sarah Chen in Building B can't print to the networked printer. She can connect to it but documents won't print. What's wrong?",
+      "agent": "IT Support",
+      "outcome": "needs_collaboration",
+      "duration": 11.11
+    },
+    {
+      "id": "inv_20251017_074257",
+      "query": "User Sarah Chen in Building B can't print to the networked printer. She can connect to it but documents won't print. What's wrong?",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 10.04
+    },
+    {
+      "id": "inv_20251017_074317",
+      "query": "User Sarah Chen in Building B can't print to the networked printer. She can connect to it but documents won't print. What's wrong?",
+      "agent": "IT Support",
+      "outcome": "success",
+      "duration": 23.3
+    },
+    {
+      "id": "inv_20251017_074340",
+      "query": "User Sarah Chen in Building B can't print to the networked printer. She can connect to it but documents won't print. What's wrong?",
+      "agent": "Network Support",
+      "outcome": "needs_collaboration",
+      "duration": 6.29
+    },
+    {
+      "id": "inv_20251017_074413",
+      "query": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+      "agent": "App Support",
+      "outcome": "needs_collaboration",
+      "duration": 23.51
+    },
+    {
+      "id": "inv_20251017_074436",
+      "query": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+      "agent": "Infrastructure",
+      "outcome": "needs_collaboration",
+      "duration": 11.0
+    },
+    {
+      "id": "inv_20251017_074502",
+      "query": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+      "agent": "App Support",
+      "outcome": "needs_collaboration",
+      "duration": 11.91
+    },
+    {
+      "id": "inv_20251017_074514",
+      "query": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+      "agent": "IT Support",
+      "outcome": "success",
+      "duration": 19.02
+    }
+  ]
+}

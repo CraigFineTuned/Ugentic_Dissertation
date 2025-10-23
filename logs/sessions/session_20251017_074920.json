@@ -1,0 +1,49 @@
+{
+  "session_id": "20251017_074920",
+  "session_start": "2025-10-17T07:49:20.149014",
+  "session_end": "2025-10-17T07:57:21.744300",
+  "metrics": {
+    "total_investigations": 3,
+    "successful_investigations": 2,
+    "orchestration_count": 1,
+    "agent_usage": {
+      "IT Support": 1,
+      "Infrastructure": 1,
+      "App Support": 1
+    },
+    "tool_usage": {
+      "get_recent_tickets": 1,
+      "check_service_status": 1,
+      "check_server_logs": 1,
+      "get_client_metrics": 1,
+      "query_app_logs": 1
+    },
+    "avg_response_time": 97.83,
+    "total_response_time": 293.487803
+  },
+  "investigation_count": 3,
+  "orchestration_count": 0,
+  "investigations": [
+    {
+      "id": "inv_20251017_075145",
+      "query": "User Sarah Chen in Building B can't print to the networked printer. She can connect to it but documents won't print. What's wrong?",
+      "agent": "IT Support",
+      "outcome": "needs_collaboration",
+      "duration": 48.72
+    },
+    {
+      "id": "inv_20251017_075234",
+      "query": "User Sarah Chen in Building B can't print to the networked printer. She can connect to it but documents won't print. What's wrong?",
+      "agent": "Infrastructure",
+      "outcome": "success",
+      "duration": 126.21
+    },
+    {
+      "id": "inv_20251017_075519",
+      "query": "Finance department reports that the expense reporting application crashes immediately on startup for all users in that department. System logs show permission errors.",
+      "agent": "App Support",
+      "outcome": "success",
+      "duration": 118.56
+    }
+  ]
+}
