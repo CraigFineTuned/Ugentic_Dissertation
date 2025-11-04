@@ -410,6 +410,16 @@ class ReactEngine:
         # Extract important context values
         context_hints = self._extract_context_hints(context)
         
+        # SESSION 30: Extract diagnostic tree if available
+        diagnostic_tree_text = ""
+        if context and 'diagnostic_tree' in context:
+            diagnostic_tree_text = f"""
+{context['diagnostic_tree']}
+
+NOTE: This is a proven procedure for '{context.get('problem_type', 'this issue')}' issues.
+Follow these steps UNLESS you have a good reason to deviate.
+"""
+        
         # FIXED Session 23: Get tools to avoid
         tools_to_avoid = self._get_tools_to_avoid()
         all_tools = [t['name'] for t in self.tools.list()]
@@ -434,7 +444,7 @@ Problem: {problem_report}
 
 Context Information: {json.dumps(context, indent=2)}
 {context_hints}
-
+{diagnostic_tree_text}
 Investigation History:
 {self._format_history()}
 {constraint_text}
@@ -692,8 +702,15 @@ Respond in JSON:
         if not context:
             return "No additional context."
         
+        # SESSION 30: Don't include diagnostic_tree in hints (it's shown separately)
+        filtered_context = {k: v for k, v in context.items() 
+                          if k not in ['diagnostic_tree', 'problem_type']}
+        
+        if not filtered_context:
+            return "No additional context."
+        
         hints = ["\nKey Context:"]
-        for key, value in context.items():
+        for key, value in filtered_context.items():
             hints.append(f"  - {key}: {value}")
         
         return "\n".join(hints)

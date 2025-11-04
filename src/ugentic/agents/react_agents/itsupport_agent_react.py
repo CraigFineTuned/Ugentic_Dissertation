@@ -7,6 +7,7 @@ import logging
 from typing import Dict, Any
 from ...core.react_engine import ReactEngine
 from ...core.tool_registry import ToolRegistry
+from ...core.diagnostic_trees import DiagnosticTrees
 from ...tools import (
     get_user_profile,
     check_user_permissions,
@@ -55,6 +56,9 @@ class ITSupportAgentReAct:
         self.tools = ToolRegistry("user_support")
         self._register_tools()
         
+        # SESSION 30 OPTIMIZATION: Initialize diagnostic trees
+        self.diagnostic_trees = DiagnosticTrees()
+        
         # Initialize ReAct engine
         self.react_engine = ReactEngine(
             agent_name=self.name,
@@ -75,6 +79,7 @@ class ITSupportAgentReAct:
         
         logging.info(f" {self.name} Agent initialized with ReAct pattern")
         logging.info(f"   Tools: {self.tools.count()}")
+        logging.info(f"   Diagnostic Trees: {len(self.diagnostic_trees.get_available_trees())} (SESSION 30 optimization)")
     
     def _register_tools(self):
         """Register IT support diagnostic tools"""
@@ -147,6 +152,22 @@ class ITSupportAgentReAct:
         if context and 'user_id' in context:
             logging.info(f"User: {context['user_id']}")
         logging.info(f"{'='*60}\n")
+        
+        # SESSION 30 OPTIMIZATION: Identify problem type and provide diagnostic tree
+        problem_type = self.diagnostic_trees.identify_problem_type(problem_report)
+        diagnostic_tree = self.diagnostic_trees.get_diagnostic_tree(problem_type)
+        
+        if diagnostic_tree:
+            logging.info(f"📋 Diagnostic tree identified: {problem_type.upper()}")
+            logging.info(f"   Providing {len(diagnostic_tree)}-step procedure to guide investigation\n")
+            
+            # Add tree to context for ReAct engine
+            if context is None:
+                context = {}
+            context['diagnostic_tree'] = self.diagnostic_trees.format_tree_for_prompt(diagnostic_tree)
+            context['problem_type'] = problem_type
+        else:
+            logging.info(f"   No specific diagnostic tree for this issue - using general ReAct pattern\n")
         
         result = self.react_engine.investigate(problem_report, context)
         

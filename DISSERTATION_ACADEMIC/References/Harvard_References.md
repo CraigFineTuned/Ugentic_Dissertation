@@ -2,8 +2,8 @@
 
 **File Type:** STABLE (Content grows, rules remain constant)  
 **Foundation Link:** `C:\Users\craig\Desktop\MainProjects\Ugentic_Dissertation\DISSERTATION_ACADEMIC\Planning\SESSION_ENTRY.md`  
-**Last Updated:** October 23, 2025 - Session 34 (Enhanced with self-enforcement rules)  
-**Current Sources:** 95 peer-reviewed references (all 2020-2025)  
+**Last Updated:** October 30, 2025 - Session 38 (Citation corrections complete)  
+**Current Sources:** 97 peer-reviewed references (all 2020-2025)  
 **Purpose:** Master bibliography for dissertation with strict 5-year recency requirement
 
 ---
@@ -136,7 +136,7 @@ When Claude reads this file, it MUST:
 - 2020: 0 sources
 - **Exception:** 1 source (Murove 2012 - seminal Ubuntu work, verified Session 34)
 
-**Total: 95 peer-reviewed references**
+**Total: 97 peer-reviewed references**
 
 ---
 
@@ -203,11 +203,15 @@ Frempong, G. and Kadam, R. (2024) 'Harmonizing AI and Human Values: The Ubuntu A
 
 Gwagwa, A., Kazim, E., Kachidza, P., Hilliard, A., Siminyu, K. and Smith, M. (2022) 'The role of the African value of Ubuntu in global AI inclusion discourse: A normative ethics perspective', *Philosophy & Technology*, 35, 21. doi: 10.1007/s13347-022-00530-5.
 
+Kolawole, O. and Ncube, C.B. (2024) 'Rethinking Ownership, Power and Policy in Drug Patents: The Case for an Ubuntu-Infused Approach', *Journal of African Law*. Published online by Cambridge University Press: 13 November 2024. doi: 10.1017/S0021855324000536. 🆕 **VERIFIED SESSION 38**
+
 Mahamadou, A. J. D., Ochasi, A. and Altman, R. B. (2024) 'The Ubuntu Way: Ensuring Ethical AI Integration in Health Research', *Wellcome Open Research*, 9, p. 518. doi: 10.12688/wellcomeopenres.21795.1. Available at: https://pmc.ncbi.nlm.nih.gov/articles/PMC11599802/ (Accessed: 15 January 2025).
 
 Mhlambi, S. (2020) *From Rationality to Relationality: Ubuntu as an Ethical and Human Rights Framework for Artificial Intelligence Governance*. Discussion Paper Series. Cambridge, MA: Carr Center for Human Rights Policy, Harvard Kennedy School. Available at: https://cyber.harvard.edu/story/2020-07/rationality-relationality-ubuntu-ethical-and-human-rights-framework-artificial (Accessed: 15 January 2025).
 
 Murove, M. F. (2012) 'Ubuntu', *Diogenes*, 59(3-4), pp. 36-47. doi: 10.1177/0392192113493737. 🆕 **VERIFIED SESSION 34**
+
+Metz, T. (2022) *A Relational Moral Theory: African Ethics in and Beyond the Continent*. Oxford: Oxford University Press. ISBN: 9780198748960. 🆕 **VERIFIED SESSION 38**
 
 Mutswiri, P., Kavhu, K. and Chisango, F. F. U. (2025) 'Artificial Intelligence (AI) Ethics Meets Ubuntu: Towards A Context-Aware Governance Model For Sustainable Innovation In Africa', *International Journal of Scientific Research and Management*, 13(08), pp. 2481-2492. doi: 10.18535/ijsrm/v13i08.ec01.
 

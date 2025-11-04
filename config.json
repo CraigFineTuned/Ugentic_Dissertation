@@ -1,5 +1,5 @@
 {
-  "reasoning_model": "deepseek-v3.1:671b-cloud",
+  "reasoning_model": "ugentic_3b:latest",
   "embedding_model": "embeddinggemma:latest",
   "fast_model": "gemma3n:e4b"
 }

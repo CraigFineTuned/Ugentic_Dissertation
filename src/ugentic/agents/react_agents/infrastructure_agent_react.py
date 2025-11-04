@@ -9,6 +9,7 @@ from ...core.react_engine import ReactEngine
 from ...core.tool_registry import ToolRegistry
 from ...core.ubuntu_orchestrator import UbuntuOrchestrator
 from ...core.collaboration_detector import CollaborationDetector
+from ...core.collaboration_triage_engine import CollaborationTriageEngine
 from ...tools import (
     check_server_metrics,
     check_server_logs,
@@ -71,9 +72,11 @@ class InfrastructureAgentReAct:
         # Initialize Ubuntu orchestration (if orchestrator)
         self.ubuntu_orchestrator = None
         self.collaboration_detector = None
+        self.triage_engine = None
         if orchestrator and agents:
             self.ubuntu_orchestrator = UbuntuOrchestrator(llm=llm, agents=agents, logger=logger, planner=planner)
             self.collaboration_detector = CollaborationDetector(llm=llm)
+            self.triage_engine = CollaborationTriageEngine()
         
         # Ubuntu principles
         self.ubuntu_principles = {
@@ -88,6 +91,7 @@ class InfrastructureAgentReAct:
         logging.info(f"   Orchestrator: {self.is_orchestrator}")
         if self.is_orchestrator and self.ubuntu_orchestrator:
             logging.info(f"   Ubuntu Orchestration: Enabled")
+            logging.info(f"   Upfront Triage: Enabled (SESSION 30 optimization)")
     
     def _register_tools(self):
         """Register infrastructure diagnostic tools"""
@@ -149,6 +153,28 @@ class InfrastructureAgentReAct:
         logging.info(f"{'='*60}")
         logging.info(f"Problem: {problem_report}")
         logging.info(f"{'='*60}\n")
+        
+        # SESSION 30 OPTIMIZATION: Upfront Collaboration Triage
+        # Check if we should skip solo investigation and orchestrate immediately
+        if self.is_orchestrator and self.triage_engine:
+            should_orchestrate, reason, confidence = self.triage_engine.should_orchestrate_immediately(problem_report)
+            
+            if should_orchestrate:
+                logging.info(f"\n⚡ UPFRONT TRIAGE: Immediate orchestration detected!")
+                logging.info(f"   Reason: {reason}")
+                logging.info(f"   Confidence: {confidence:.2f}")
+                logging.info(f"   Skipping solo investigation - Going straight to Ubuntu collaboration\n")
+                
+                # Skip solo investigation, orchestrate immediately
+                collaboration_result = self.ubuntu_orchestrator.orchestrate(
+                    complex_issue=problem_report,
+                    lead_agent_name=self.name,
+                    investigation_history=[]
+                )
+                
+                return collaboration_result
+            else:
+                logging.info(f"   Triage: Solo investigation appropriate (confidence: {confidence:.2f})\n")
         
         # Use ReAct engine to investigate
         result = self.react_engine.investigate(problem_report, context)

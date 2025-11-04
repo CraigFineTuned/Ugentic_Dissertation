@@ -49,3 +49,9 @@ Thumbs.db
 # Obsolete files (to be removed)
 app_old.py
 main
+
+# Directories to ignore
+Secret_World/
+DISSERTATION_ACADEMIC/
+logs/
+plans/

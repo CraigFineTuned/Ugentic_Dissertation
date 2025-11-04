@@ -5,9 +5,14 @@ Multi-agent IT support system with hierarchical orchestration
 Entry point for the system with robust configuration management and error handling
 """
 
+import sys
+import os
+
+# Force Python to use the local source code
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'src'))
+
 import json
 import argparse
-import sys
 from pathlib import Path
 from typing import Optional, Dict, Any
 
@@ -93,13 +98,8 @@ def initialize_agents(
     """
     Initialize all ReAct agents with orchestration
     
-    Args:
-        llm: Initialized LLM instance
-        logger: Investigation logger (optional)
-        planner: Explicit planner (optional)
-        
-    Returns:
-        Dictionary of initialized agents
+    SESSION 30 FIX: Set orchestrator reference after Infrastructure creation
+    Enables upfront triage at IT Manager level
     """
     print("✓ Initializing React Agents")
     print("  Creating specialist agents...")
@@ -122,12 +122,18 @@ def initialize_agents(
         planner=planner
     )
     
-    # Initialize IT Manager (delegates only, no investigation)
+    # Initialize IT Manager WITHOUT orchestrator reference
     print("  Creating IT Manager...")
     agents['IT Manager'] = ITManagerAgentReAct(llm=llm, agents=agents)
     
+    # SESSION 30 FIX: Set orchestrator reference AFTER Infrastructure is created
+    # This enables upfront triage at delegation layer
+    print("  Linking IT Manager to Orchestrator (SESSION 30 fix)...")
+    agents['IT Manager'].set_orchestrator(agents['Infrastructure'])
+    
     print(f"✓ {len(agents)} agents initialized")
-    print(f"  Ubuntu Orchestration: Enabled\n")
+    print(f"  Ubuntu Orchestration: Enabled")
+    print(f"  Upfront Triage: Enabled\n")
     
     return agents
 

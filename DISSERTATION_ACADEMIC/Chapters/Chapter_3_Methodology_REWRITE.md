@@ -110,7 +110,7 @@ This reframing transforms UGENTIC from **product** to **research instrument**:
 
 ### 3.3.2 DSR as Philosophical Inquiry Methodology
 
-Recent DSR scholarship positions design science as not merely technical practice but **philosophical inquiry through materialization** (Haj-Bolouri et al., 2025). This research embraces this expanded DSR conception: creating UGENTIC isn't just building a system—it's **materializing Ubuntu philosophy in computational form to investigate its bridging properties**.
+Recent DSR scholarship positions design science as not merely technical practice but **philosophical inquiry through materialization** (vom Brocke et al., 2020). This research embraces this expanded DSR conception: creating UGENTIC isn't just building a system—it's **materializing Ubuntu philosophy in computational form to investigate its bridging properties**.
 
 This approach addresses a fundamental research challenge: Ubuntu philosophy is abstract and conceptual. How do we empirically investigate whether collective responsibility, interconnectedness awareness, or communal decision-making can bridge AI-organizational gaps? **We materialize these principles computationally, then study what happens**.
 
@@ -219,7 +219,7 @@ Reflexive TA proves essential for Ubuntu bridging research because:
 
 ### 3.4.3 Six-Phase Reflexive TA Process
 
-Following Braun, Clarke and Rance (2024), analysis proceeds through six recursive phases:
+Following Braun & Clarke (2024), analysis proceeds through six recursive phases:
 
 **Phase 1: Data Familiarization**
 - **Activities:** Transcribing all 10-14 interviews (if not professionally transcribed), reading transcripts multiple times, making initial analytical notes
@@ -636,7 +636,7 @@ Beyond formal ethics compliance, this research embraces **Ubuntu relational ethi
 
 ### 3.10.1 Reflexive TA Quality: RTARG Criteria
 
-Following Braun, Clarke and Rance's (2024) Reflexive Thematic Analysis Rigour Guidelines:
+Following Braun & Clarke's (2024) Reflexive Thematic Analysis Rigour Guidelines (RTARG):
 
 **Analytic Transparency:**
 - ✅ Clear six-phase process documentation
