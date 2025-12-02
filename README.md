@@ -2,576 +2,77 @@
 
 **Multi-agent AI system integrating Ubuntu philosophy with organizational IT support**
 
-![Status](https://img.shields.io/badge/status-production--ready-green)
+![Status](https://img.shields.io/badge/status-project--closure-blue)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![License](https://img.shields.io/badge/license-research-orange)
 
 ---
 
-## 🚀 Quick Start (5 minutes)
+## 🚀 Quick Start
 
 ```bash
-# 1. Clone and navigate
-cd UGENTIC_Dissertation
+# 1. Clone the repository
+git clone https://github.com/CraigFineTuned/Ugentic_Dissertation.git
+cd Ugentic_Dissertation
 
-# 2. Setup environment
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+# 2. Run Setup (Creates venv & installs dependencies)
+# Windows:
+python scripts/setup_project.py
+# Linux/Mac:
+python3 scripts/setup_project.py
 
-# 3. Install dependencies
-pip install -r requirements.txt
-
-# 4. Start Ollama (separate terminal)
+# 3. Start Ollama (in a separate terminal)
 ollama serve
 
-# 5. Run system
+# 4. Activate & Run
+# Windows:
+.venv\Scripts\activate
 python app.py
 ```
 
-**That's it!** The system will:
-- ✓ Auto-detect configuration
-- ✓ Create necessary directories
-- ✓ Initialize all 6 agents
-- ✓ Load knowledge base (if available)
-- ✓ Start interaction loop
+See **[docs/SETUP_GUIDE.md](docs/SETUP_GUIDE.md)** for detailed configuration instructions.
 
 ---
 
 ## 📋 Overview
 
-### What is UGENTIC?
-
 UGENTIC is a research prototype demonstrating how **Ubuntu philosophy** (collective humanity, "I am because we are") can enhance **multi-agent AI systems** for organizational collaboration.
 
-### Key Features
-
-| Feature | Details |
-|---------|---------|
-| **6 Hierarchical Agents** | Mirroring real IT department structure |
-| **ReAct Engine** | Intelligent reasoning + tool-use pattern |
-| **Smart Orchestration** | Cross-departmental collaboration on complex issues |
-| **Tool Diversity** | Prevents investigation loops, ensures comprehensive diagnosis |
-| **LLM Resilience** | Retry logic + fallback tool selection if LLM fails |
-| **Knowledge Integration** | RAG system for organizational knowledge access |
-| **Structured Logging** | JSON-based for transparency and auditability |
-| **Cross-Platform** | Works on Windows, Mac, Linux |
-
-### Architecture
-
-```
-┌─────────────────────────────────────┐
-│     User Interface (app.py)         │
-├─────────────────────────────────────┤
-│     IT Manager (Delegation)         │
-├──┬──┬──┬──────────────────────────┬─┤
-│  │  │  │  Specialist Agents       │ │
-│  │  │  │  (ReAct + Tools)         │ │
-│  │  │  │  - IT Support            │ │
-│  │  │  │  - Network Support  ┌────┤ │
-│  │  │  │  - App Support      │Orch│ │
-│  │  │  │  - Infrastructure   └────┤ │
-└──┴──┴──┴──────────────────────────┴─┘
-        │
-        ├─ ReAct Engine (Smart Investigation)
-        ├─ RAG System (Knowledge Base)
-        ├─ Memory System (Cross-session Learning)
-        ├─ Logging System (Audit Trail)
-        └─ Configuration Manager (Dynamic Paths)
-```
+It features a hierarchical team of 6 autonomous agents that collaborate to solve IT support issues, switching between "Solo" (efficient) and "Ubuntu" (collaborative) modes based on problem complexity.
 
 ---
 
-## 📚 Documentation
+## 📁 Repository Structure
 
-| Document | Purpose |
-|----------|---------|
-| **[ARCHITECTURE.md](ARCHITECTURE.md)** | System design, layers, components |
-| **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** | Installation, configuration, troubleshooting |
-| **[health_check.py](health_check.py)** | Verify system setup |
-| **[docs/Project_Tracker/SESSION_ENTRY.md](docs/Project_Tracker/SESSION_ENTRY.md)** | Development progress tracking |
-
----
-
-## ⚙️ Configuration
-
-### Auto-Discovery
-
-Configuration is automatically loaded from `config.json` with intelligent defaults:
-
-```python
-from src.ugentic.config_manager import get_config
-
-config = get_config()
-print(config.logs_dir)           # Auto-computed absolute path
-print(config.reasoning_model)    # From config.json or default
-print(config.project_root)       # Auto-detected
-```
-
-### Custom Configuration
-
-Create `config.json`:
-
-```json
-{
-  "reasoning_model": "deepseek-v3.1:671b-cloud",
-  "embedding_model": "embeddinggemma:latest",
-  "alternative_models": {
-    "fast": "gemma3n:e4b",
-    "reasoning": "deepseek-r1:7b",
-    "multilingual": "granite4:tiny-h"
-  }
-}
-```
-
-### Environment Variables
-
-*Optional - system works with or without these*
-
-```bash
-export OLLAMA_HOST=http://localhost:11434
-export LOG_LEVEL=INFO
-export MAX_ITERATIONS=10
-```
+| Directory | Purpose |
+|-----------|---------|
+| `src/ugentic` | **Core System Code**. Contains the ReAct engine, agents, and orchestration logic. |
+| `scripts/` | **Tools**. Includes setup helpers, maintenance scripts, and legacy dissertation generators. |
+| `docs/` | **Documentation**. Architecture guides, project tracking, and setup instructions. |
+| `knowledge_base/` | **RAG Data**. Place text files here for the agents to ingest. |
+| `logs/` | **Runtime Data**. Structured JSON logs of all agent investigations. |
 
 ---
 
-## 🎮 Usage
+## 📚 Key Documentation
 
-### Standard Mode
-
-```bash
-python app.py
-```
-
-Initialization (shows all systems ready):
-```
-============================================================
-UGENTIC System Initialization
-============================================================
-
-Configuration Summary:
-  project_root: /path/to/UGENTIC_Dissertation
-  reasoning_model: deepseek-v3.1:671b-cloud
-  embedding_model: embeddinggemma:latest
-  ...
-
-✓ Initializing LLM
-✓ Initializing Embeddings
-✓ Initializing Investigation Logger
-✓ Initializing Explicit Planning System
-✓ Initializing React Agents
-✓ Initializing RAG Knowledge Base
-✓ RAG connected to IT Support tools
-
-============================================================
-✓ SYSTEM READY
-============================================================
-
-Your request: 
-```
-
-### Example Interactions
-
-**Scenario 1: Printer Access (Single Agent)**
-```
-Your request: User can't access network printer
-
-🎯 IT Manager analyzing request...
-   → Delegating to: Network Support
-
-[Investigation proceeds with 3 iterations]
-
-✓ ISSUE RESOLVED
-Root Cause: Firewall blocking port 9100
-Solution: Add print server IP to allowed list
-```
-
-**Scenario 2: Complex Issue (Multi-Agent Orchestration)**
-```
-Your request: Remote users experiencing intermittent VPN disconnections
-
-🎯 IT Manager analyzing request...
-   → Delegating to: Infrastructure
-
-[Investigation detects multi-domain issue]
-! ESCALATION - Escalating to orchestrator
-
-Infrastructure + Network Support + App Support coordinate
-
-✓ UBUNTU ORCHESTRATION EXECUTED
-Collaboration ID: collab-2025-10-16-001
-Participating Agents: Infrastructure, Network Support
-Root Cause: DNS resolution timeout + packet loss
-Solution: Implement DNS failover + optimize routing
-```
-
-### Exiting
-
-```
-Your request: quit
-
-💾 Saving session summary...
-
-==================================================
-AGENT MEMORY STATISTICS
-==================================================
-Total Investigations: 5
-Ubuntu Collaborations: 1
-Solo Investigations: 4
-Ubuntu Success Rate: 100.0%
-Solo Success Rate: 75.0%
-Ubuntu Advantage: +25.0%
-==================================================
-
-✓ Thank you for using UGENTIC!
-```
+*   **[docs/SETUP_GUIDE.md](docs/SETUP_GUIDE.md)**: Detailed installation, configuration, and troubleshooting.
+*   **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**: System design, agent roles, and the Ubuntu orchestration protocol.
+*   **[docs/AGENTS.md](docs/AGENTS.md)**: Detailed profiles of the 6 agent personas.
 
 ---
 
-## 🛠️ Development
+## ⚠️ Note on Legacy Scripts
 
-### Project Structure
+The `scripts/dissertation/` directory contains python scripts used to generate the specific academic dissertation text. These scripts may contain **hardcoded paths** specific to the original research environment. If you wish to use them, please refer to the "Updating Hardcoded Paths" section in the [Setup Guide](docs/SETUP_GUIDE.md).
 
-```
-UGENTIC_Dissertation/
-├── app.py                    # Entry point
-├── config.json              # Configuration
-├── health_check.py          # System verification
-│
-├── src/ugentic/
-│   ├── config_manager.py    # Configuration (NEW Session 26)
-│   ├── constants.py         # Magic strings (NEW Session 26)
-│   ├── logging_config.py    # Logging (FIXED Session 26)
-│   │
-│   ├── core/
-│   │   ├── react_engine.py  # ReAct with Session 25 fixes
-│   │   ├── tool_registry.py # Tool management
-│   │   ├── rag_core.py      # RAG system
-│   │   └── ... (other components)
-│   │
-│   ├── agents/react_agents/
-│   │   ├── itmanager_agent_react.py
-│   │   ├── infrastructure_agent_react.py
-│   │   ├── network_agent_react.py
-│   │   ├── app_support_agent_react.py
-│   │   ├── itsupport_agent_react.py
-│   │   └── service_desk_manager_react.py
-│   │
-│   └── tools/
-│       ├── infrastructure_tools.py
-│       ├── network_tools.py
-│       ├── application_tools.py
-│       ├── support_tools.py
-│       └── manager_tools.py
-│
-├── knowledge_base/         # Place .txt files here for RAG
-├── logs/                   # Auto-created investigation logs
-├── plans/                  # Auto-created investigation plans
-│
-└── docs/
-    ├── ARCHITECTURE.md     # System design
-    └── Project_Tracker/
-```
-
-### Adding Knowledge Base Documents
-
-Place text files in `knowledge_base/` directory:
-
-```bash
-mkdir -p knowledge_base
-cat > knowledge_base/network_policies.txt << 'EOF'
-Network Policy Documentation
-
-VPN Access Procedures:
-1. Verify user credentials in AD
-2. Check VPN client version (3.2+)
-3. Test DNS resolution
-4. Confirm firewall rules
-...
-EOF
-```
-
-System loads automatically on startup.
-
-### Adding New Tools
-
-1. Create tool function in appropriate module:
-   ```python
-   # tools/custom_tools.py
-   def my_new_tool(param1: str) -> Dict[str, Any]:
-       """Tool description"""
-       return {
-           "success": True,
-           "data": result,
-           "message": "Success"
-       }
-   ```
-
-2. Register in tool module `__init__.py`:
-   ```python
-   from .custom_tools import my_new_tool
-   ```
-
-3. Add to agent's tool registry
-
----
-
-## 🔍 Monitoring
-
-### View Logs
-
-```bash
-# Main activity
-cat logs/main.jsonl | jq .
-
-# Errors only
-cat logs/errors.jsonl | jq 'select(.level=="ERROR")'
-
-# Agent-specific
-cat logs/agents/infrastructure.jsonl | jq .
-
-# Real-time
-tail -f logs/main.jsonl | jq '.message'
-```
-
-### Health Check
-
-```bash
-# Verify system setup
-python health_check.py
-
-# Expected output:
-# ✓ PASS | Python Version
-# ✓ PASS | Python Dependencies
-# ✓ PASS | Project Files
-# ✓ PASS | Configuration Loading
-# ...
-# ✓ ALL CHECKS PASSED
-```
-
-### Performance Metrics
-
-Session summary shows:
-- Total investigations
-- Ubuntu collaboration rate
-- Success rate comparison
-- Performance advantage of orchestrated investigations
-
----
-
-## 🚨 Troubleshooting
-
-### "Connection refused" / Ollama not running
-
-```bash
-# Terminal 1: Start Ollama
-ollama serve
-
-# Terminal 2: Run UGENTIC (different terminal)
-python app.py
-```
-
-### "Model not found"
-
-```bash
-# Download required models
-ollama pull deepseek-v3.1:671b-cloud
-ollama pull embeddinggemma:latest
-```
-
-### Slow Performance
-
-```bash
-# Use fast model
-python app.py --fast
-
-# Or check system resources
-# (models require 8GB+ RAM)
-```
-
-### Path Errors
-
-```bash
-# Verify configuration
-python health_check.py
-
-# Check all paths work
-python -c "from src.ugentic.config_manager import get_config; c=get_config(); print(c.get_config_summary())"
-```
-
-**See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md) for comprehensive troubleshooting.**
-
----
-
-## 📊 Key Findings (Research)
-
-### Ubuntu Orchestration Effectiveness
-
-From Session 24 testing:
-- **Solo investigations:** 100% success rate (33/33)
-- **Orchestrated investigations:** 0% success rate (0/28)
-- **Finding:** Orchestration layer has synthesis issues requiring refinement
-
-### Tool Diversity
-
-Session 23 achievements:
-- Average 3.25 tools per investigation
-- Loop prevention: 0 infinite loops
-- Tool diversity enforcement: 100% compliance
-
-### LLM Resilience
-
-Session 25 achievements:
-- Retry logic: 3 attempts with exponential backoff
-- Fallback tool selection: 100% effective
-- Investigation continuation: Even with LLM failures
-
----
-
-## 📈 System Capabilities
-
-### Supported Issue Types
-
-- **User & Account**: Passwords, permissions, access, lockouts
-- **Network**: Connectivity, DNS, bandwidth, firewall, VPN
-- **Infrastructure**: Server metrics, services, disk space, processes
-- **Applications**: Logs, errors, performance, crashes, databases
-- **Management**: Workload, availability, SLA, escalation
-
-### Diagnostic Tools (39 Total)
-
-| Category | Tools | Examples |
-|----------|-------|----------|
-| Infrastructure | 8 | check_server_metrics, check_disk_space, check_service_status |
-| Network | 7 | check_network_bandwidth, ping_test, check_dns_resolution |
-| Applications | 7 | query_app_logs, check_app_response_time, check_app_availability |
-| Support | 10 | check_user_permissions, reset_password, check_printer_status |
-| Manager | 7 | get_technician_workload, get_sla_status, search_knowledge_base |
-
----
-
-## 🔐 Security & Privacy
-
-- **No cloud access**: All local, Ollama-based
-- **No data transmission**: Stays on machine
-- **No internet required**: Works offline
-- **Audit logging**: JSON logs for compliance
-- **POPIA compliant**: Privacy by design
+**The core system (`app.py`) is fully portable and does not require path modification.**
 
 ---
 
 ## 📄 License & Citation
 
-This research prototype is part of honors research:
-
-**Title:** Investigating Ubuntu Philosophy in Multi-Agent AI Systems for Organizational Support
-
+**Title:** Investigating Ubuntu Philosophy in Multi-Agent AI Systems for Organizational Support  
 **Researcher:** Craig Vraagom (40241517)  
 **Institution:** Richfield Graduate Institute of Technology  
-**Supervisor:** Jemini Matiya  
 **Date:** October 2025
-
----
-
-## 🤝 Contributing
-
-To contribute improvements:
-
-1. Create feature branch: `git checkout -b feature/improvement`
-2. Make changes following code style
-3. Test with health check: `python health_check.py`
-4. Commit with descriptive message
-5. Submit for review
-
----
-
-## 📞 Support
-
-**For issues:**
-1. Run health check: `python health_check.py`
-2. Check logs: `cat logs/errors.jsonl`
-3. Review documentation: See [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
-4. Check development tracker: [SESSION_ENTRY.md](docs/Project_Tracker/SESSION_ENTRY.md)
-
-**For research questions:**
-Contact: Craig Vraagom, RGIT
-
----
-
-## 🎯 Next Steps
-
-### Planned Enhancements
-
-- [ ] Fix orchestration synthesis layer (0% → 100%)
-- [ ] Implement persistent memory storage
-- [ ] Add web UI dashboard
-- [ ] REST API for integration
-- [ ] Advanced RAG with GraphRAG
-- [ ] Multi-instance coordination
-
-### Current Limitations
-
-- Sequential request processing (by design)
-- Single organizational context
-- 6 agent architectural limit
-- Ollama dependency (no cloud LLM support)
-
----
-
-## 📝 Version History
-
-### Session 26 (October 16, 2025) - CURRENT
-
-**Major Improvements:**
-- ✅ Production-grade configuration manager
-- ✅ Dynamic cross-platform paths
-- ✅ Comprehensive documentation
-- ✅ Health check system
-- ✅ Constants consolidation
-- ✅ Error handling improvements
-
-**Status:** Production Ready
-
-### Session 25 (Completed)
-
-- ReAct engine LLM resilience
-- Retry logic + fallback mechanisms
-- Tool diversity enforcement
-
-### Session 23 (Completed)
-
-- Tool loop prevention
-- Diversity constraints
-- Cache clearing improvements
-
----
-
-## ✨ Acknowledgments
-
-**Ubuntu Philosophy Reference:** Mhlambi, S. (2020) - From Rationality to Relationality
-
-**Multi-Agent Framework:** Moore, D.J. (2025) - Hierarchical Taxonomy of Multi-Agent Systems
-
-**RAG Technology:** Balaguer et al. (2025) - Retrieval-Augmented Generation
-
----
-
-## 📊 Quick Stats
-
-- **Codebase:** ~5,000 lines (core + tests)
-- **Agents:** 6 (hierarchical)
-- **Tools:** 39 (diagnostic + management)
-- **Documentation:** 10,000+ lines
-- **Test Coverage:** 40+ scenarios
-- **Lines of Config:** 0 (fully automatic)
-
----
-
-**Status:** ✅ **PRODUCTION READY - SESSION 26**
-
-For detailed information, see **[ARCHITECTURE.md](ARCHITECTURE.md)** and **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)**
-
----
-
-*Last Updated: October 16, 2025*  
-*UGENTIC Development Team*
