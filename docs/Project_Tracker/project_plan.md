@@ -1,1 +1,0 @@
-project plan includes scope, timelines, deliverables, and resource allocation
