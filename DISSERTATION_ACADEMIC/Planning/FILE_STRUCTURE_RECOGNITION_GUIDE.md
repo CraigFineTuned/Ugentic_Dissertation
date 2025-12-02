@@ -193,11 +193,10 @@ DISSERTATION_ACADEMIC/
 - Ubuntu integration
 - Status: COMPLETE
 
-⏳ **Chapter_5_Results.md** (placeholder)
-- Requires interview data
-- NOT YET WRITTEN
-- Blocked on ethics approval
-- Status: PENDING
+ **Chapter_5_Results.md** (updated status)
+- Session 47 overlay: Drafted through 5.15.3; Theme 1 quotes inserted in 5.2.1 [VERIFIED SESSION 47]
+- Next: Insert quotes for Themes 24; finalize Sections 5.2.25.2.4
+- Note: This file section originally reflected an Oct 8 snapshot; updated to reflect current status.
 
 ✅ **Chapter_6_Discussion.md** (9,400 words)
 - Research question responses

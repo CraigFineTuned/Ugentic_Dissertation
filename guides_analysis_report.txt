@@ -1,0 +1,217 @@
+
+
+--- ANALYSIS OF: Dissertation Format Guide.pdf ---This should be in single spacing and about half a page.  Indicate here what has actually
+unstructured, audio-taped interviews with managers responsible for the projects. The
+TABLE OF CONTENTS
+Table of Contents
+Chapters:
+6. References
+The dissertation should not be less than 80 pages (1.5 line spacing including references)
+Dissertation composition structure:
+Font:
+The Times New Roman font should be used, as well as a font size of 12. The font colour
+
+--- ANALYSIS OF: Dissertation Headings.pdf ---DISSERTATION HEADINGS & GUIDELINES
+Table of Contents (Automatic)
+Chapter 1: Introduction
+• Structure of the Dissertation
+Chapter 2: Literature Review
+Chapter 3: Problem Statement
+Chapter 4: Research Methodology
+Chapter 5: Presentation of results
+Chapter 6: Conclusion
+References (Harvard Referencing Style)
+
+--- ANALYSIS OF: Referencing Guide.pdf ---REFERENCING & CITATIONS
+Why do we reference?
+When do we reference?
+How do we reference?
+What to reference?
+Referencing can be described as giving credit, with citation, to the source of information
+Why do we reference?
+How do we reference?
+Citation
+You make a short reference
+Reference List
+The citation acts as a key so that
+reference easily on the list of
+references at the end of your
+In-text citation:
+Reference:
+In-text citation:
+Reference:
+In-text citation:
+Reference:
+SUMMARY EXAMPLES - REFERENCES
+N.B. Give ALL the names in your reference list:
+BIBLIOGRAPHY & REFERENCES
+A reference list contains details of only those sources cited in text.
+WHAT DO I NEED TO REFERENCE?
+You should always provide a reference to all material that you:
+You should also provide a reference to any:
+Rephrasing someone else’s ideas without citation.
+Directly copying a passage of text without citation
+Combining text and ideas from different sources without citation
+Incorrect Citation
+Failing to give all the necessary information in your source citation.
+REFERENCES
+
+--- ANALYSIS OF: Sample Dissertation. Postgraduate. Richfield.pdf ---A bibliometric analysis of IoT-based smart cities
+A dissertation submitted in partial fulfilment of
+the requirements for the Bachelor of Science
+Honours in Information Technology
+Supervisor: Dr Stephen Akandwanaho
+2023
+Acknowledgements
+Foremost, I extend my heartfelt gratitude to the Almighty for bestowing upon me the
+strength, courage, and determination necessary to surmount the numerous challenges
+encountered during my research study.
+I am deeply indebted to my supervisor, Dr Stephen Akandwanaho, for his invaluable
+guidance and unwavering support. His mentorship, which entailed both encouragement
+and rigorous challenge, has been a cornerstone of my academic journey. Dr
+Akandwanaho's commitment to excellence has profoundly influenced my work, guiding
+me to strive for nothing less than my best.
+I would also like to express my sincere appreciation to my administrators, whose
+continuous support and constructive feedback have been instrumental throughout my
+academic endeavours.
+My heartfelt thanks go to my girlfriend, Michaela Moodley, for her steadfast support
+and motivation. Her guidance and clear-mindedness have been a source of strength and
+inspiration during challenging times.
+To my friend, Sonali Rambhuron, I am grateful for your unwavering support and
+encouragement throughout the journey of completing my dissertation.
+Lastly, I am profoundly grateful to my immediate family, particularly my mother Ranie
+Naidoo and father Pravendra Naidu. Their unwavering support, tolerance, inspiration,
+and immense sacrifices have been the bedrock of my perseverance and success. Their
+enduring belief in my capabilities has been a constant source of encouragement and
+strength.
+It is with deep respect and gratitude that I acknowledge these individuals, whose
+contributions have been pivotal in the completion of my dissertation.
+i
+Declaration
+I Shanthan Naidu declare that:
+(i) The research reported in this dissertation, except where otherwise indicated, is my
+original research.
+(ii) This dissertation has not been submitted for any degree or examination at any other
+university.
+(iii) This dissertation does not contain other persons’ data, pictures, graphs or other
+information, unless specifically acknowledged as being sourced from other persons.
+(iv) This dissertation does not contain other persons’ writing, unless specifically
+acknowledged as being sourced from other researchers. Where other written sources
+have been quoted, then:
+a) their words have been re-written, but the general information attributed to them has
+been referenced;
+been referenced;
+b) where their exact words have been used, their writing has been placed inside
+quotation marks, and referenced.
+quotation marks, and referenced.
+(v) Where I have reproduced a publication of which I am author, co-author or editor, I
+have indicated in detail which part of the publication was actually written by myself
+alone and have fully referenced such publications.
+dissertation and in the References sections.
+domain. VOSviewer will be utilized for co-authorship and co-citation network analysis,
+support quantitative analysis, enabling the examination of publication trends, citation
+Table of Contents
+Table of Contents .................................................................................................................................. iv
+Chapter One: Introduction of the Study .......................................................................................... 1
+Chapter Two: Literature Review ..................................................................................................... 14
+Chapter Three: Research Problem .................................................................................................. 45
+Chapter Four: Research Methodology ........................................................................................... 48
+4.6. Citation Analysis: .................................................................................................................... 54
+Chapter Five: Data Analysis and Presentation ................................................................................. 65
+5.2.1. Citation Analysis ................................................................................................................ 74
+5.2.2. Co-Citation Analysis .......................................................................................................... 85
+Chapter Six: Summary and Recommendations ......................................................................... 120
+6.7. Evolving Citation Patterns and Research Publications .................................................... 122
+References ............................................................................................................................................ 124
+Figure 5.2.1.2.a - Top 15 Organisations by Total Number of Citations ............................. 78
+Figure 5.2.1.2.b - Network View of Organisations and Citations ......................................... 79
+Figure 5.2.1.2.c - Density View of Organisations and Citations ........................................... 79
+Figure 5.2.1.4 - Top 15 Author Collaborations by Citations .................................................. 83
+Figure 5.2.1.5 - Top 15 Countries by Number of Citations .................................................... 84
+Figure 5.2.2.2.a - Density View of Cited References ............................................................... 89
+Figure 5.2.2.2.b - Network View of Cited References ............................................................. 89
+Figure 5.2.3.1.a - Top 15 Authors by Total Link Strength, Citations and Documents ...92
+Figure 5.2.3.2.a - Top 15 Countries by Total Link Strength, Citations and Documents 94
+Figure 5.2.3.3.a - Top 15 Documents by Total Link Strength and Citations ..................... 97
+Figure 5.2.3.4.a - Top 15 Organisations by Total Link Strength, Documents and Citations
+Figure 5.2.3.5.a - Top 15 Sources by Total Link Strength, Documents and Citations . 101
+Figure 5.2.5.1 - Top 15 Authors by Documents and Citations ............................................110
+Figure 5.2.5.2.a - Top 15 Countries by Total Link Strength, Documents and Citations
+Citation Impact
+examines publication patterns, citations, and collaborations among authors and
+FWCI (Field-Weighted Citation Impact): A metric that measures the impact of
+research by comparing the number of citations received to the expected average number
+of citations in the respective field.
+Chapter One: Introduction of the Study
+convergence of technology and urban infrastructure has led to innovative solutions in
+IoT infrastructures in urban environments. The socio-economic impact of IoT-based
+policymakers wishing to address unexplored aspects (Rejeb et al., 2022). The citation
+To analyze citation patterns to understand the prevalence and the impact of key
+How have citation patterns for significant publications in the IoT-based smart
+to make informed decisions about urban planning, infrastructure development and IoT
+structured and comprehensive understanding of the IoT and smart city research
+publications, citations, and collaborations in scientific literature. It provides
+Citation Patterns: Investigate citation networks to identify highly cited works,
+Citation Count: The number of citations received by publications, indicating
+Citation Analysis: Examining citation patterns to identify seminal works and
+smart cities provides a structured and thorough approach to understanding research
+and relevance; and the use of bibliometric indicators like citation counts; co-citation
+
+--- ANALYSIS OF: Dissertation Support Session - 03112025-en-US.docx ---So, so in terms of the structure, now you, I'm sure now you've completed your data collection, your data analysis, you're now putting together a dissertation, a report.
+So you need to go back and check, make sure your introduction, your background, your significance of study, all those different, the different sections and chapters, they all speak to the work that you have done, not the work that you intend to do, right?
+Then from there, you go into your preliminary pages, your declaration, your acknowledgements, your abstract, your table of contents, and so on and so forth, right?
+I start with your chapters, Chapter 1, the introduction, chapter 2.
+And so the introduction chapter one.
+But this is that's the structure.
+But in a in a in a summary form, you don't for example, like say all the objectives are or maybe put sub headings, objectives or questions.
+OK, so let's go into chapters.
+Your introduction chapter, that's chapter 1.
+So chapter one will have the background.
+So you must have citations and your citations must not be ordered in five years.
+That's the same thing with the introduction with with, Yeah, with the introduction you don't put, please don't put citations in the objectives in the, in the in maybe aim you can, you can, but don't put citations the objectives don't put citations in the questions, only the significance of studied introduction.
+If you want, you can put those things and the structure of the dissertation, please, the structure of the dissertation is, is just one paragraph.
+Remember, this is at the end of chapter 1.
+And is that this that section of structure of the dissertation has already already almost covered chapter 1.
+So you don't need even to put chapter one in the structure of the dissertation.
+You just say Chapter 2 is literature review.
+Chapter 3 is, you know, research methodology.
+Chapter 4 is the just to in one paragraph.
+Don't don't have like 2 pages, 3 pages explaining this chapter by chapter.
+Already those chapters, you have that information in the chapters themselves, so you don't need to explain again in that section.
+The chapters you just need to state in be concise and precise and just briefly, succinctly just state that Chapter 2 is is based on this.
+Chapter 3 is about this.
+Chapter 4 is about this just short sentences, just one paragraph.
+That's the structure of the dissertation, right?
+So chapter 2, Chapter 2 is your literature review.
+But you all this must be structured around the motifs, the themes that you have identified in connection to your topic, right?
+You can always, you can have like a brief introduction just to introduce your chapter.
+Just provide an overview of the chapter and you set the stage right.
+And then after that, you go into your key studies, you discuss those findings and gaps and you mention each you should have those headings, those each, each theme section should begin with a clear heading that describes the theme.
+So, so here you can also start with your introduction and then you're going to the program maybe just before that, please on the literature, if you please, make sure you have as many citations as possible, please.
+Sorry, how many citations and references should I?
+There's no number of citation, no number of references, right, Because these chapters are different.
+You, the references for Chapter 1, they're not, they're not the same as references for Chapter 2 literature review.
+Obviously you have so many citations, right?
+So, so you can't say, oh, for each chapter you should have this, this number of set of references of citations.
+For every like line, you must have a citation.
+You, you can't write, for example, more than two lines without a citation.
+So the more citations, the better.
+Then when it comes, if you definitely here, it's, you know, you must have many citations here, right?
+And then after that you can't, you also provide the conclusion, hey now, maybe just to make a point, Chapter 3, I've seen some students also combine this with Chapter 1, which is fine.
+That structure is also acceptable, right?
+You just have to make sure you've you've discussed it thoroughly in your chapter 1.
+OK, that's fine if you want to do it that way, but the best structure is this where you have a you use separate your program, put on, give it a chapter on its own, and then you provide detailed discussion and you link it to your literature review, right?
+Then after that you go into your methodology, same thing you start, you give it some background, some context, and the foundation for your methodology chapter, you explain the overarching research design.
+OK, all right, then we come to the most important chapter, which is the results.
+So here you, the results chapter is very, very, it's crucial.
+After that, you go into the last chapter, which is your conclusion.
+And, and even someone who is reading this chapter, the end of it all, definitely it will give them assurance and confidence even when they're upgrading your work and, and will give you work credibility and respect.
+OK, so please take time to to, to write your conclusion very well, OK, and make sure you, you don't miss anything important and you connect everything to what you already discussed in the other chapters.
+All right, reference, you know, Harvard, please, please make sure that you're referencing is, is is is correct.
+So I can't, there are no like I can't tell you that, Oh, if you, if you, if you, you have incorrect references, they are going to take off these marks or something.
+So please make sure that there's proper referencing using your Harvard style, your citations.
+Make sure that your references are not ordered in five years.
+Otherwise when you have these old ones, they all they'll say your work is outdated and like you if for example, if they see like 2 dated references at the beginning, you know it's just they've come.
+Don't put them in the in the other chapters, right?
+Please don't put them in the other chapters, your code.
+On the on the rubric and the structure that that will be used for grading the dissertation and check each chapter, each section, everything write properly do everything the formatting and then after that they give you a certificate and you attach that certificate to your submission proving that your dissertation has been proof read by the profession.

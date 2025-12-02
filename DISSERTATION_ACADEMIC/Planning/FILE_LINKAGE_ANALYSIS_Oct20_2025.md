@@ -380,9 +380,9 @@ TIER 5: INTERVIEW MATERIALS (11 files)
 
 ### **Chapter_5_Results.md**
 **Path:** `C:\Users\craig\Desktop\MainProjects\Ugentic_Dissertation\DISSERTATION_ACADEMIC\Chapters\Chapter_5_Results.md`
-**Type:** PLACEHOLDER (AWAITING INTERVIEWS)
+**Type:** DRAFTED (Session 47 mirror)
 **Size:** 16 KB
-**Status:** ⏳ Will be written after data collection (Week 6)
+**Status:** Drafted through 5.15.3; Theme 1 quotes inserted in 5.2.1 [VERIFIED SESSION 47]
 
 **Outbound Links (Future):**
 1. → `NEW_RESEARCH_QUESTIONS_FINAL_Oct20_2025.md` (organized by RQ1-4)
@@ -403,7 +403,7 @@ TIER 5: INTERVIEW MATERIALS (11 files)
 - Section 5.3: RQ3 Results (stakeholder validation)
 - Section 5.4: RQ4 Results (transferability insights)
 
-**Timeline:** Write November 27-30, 2025 (Week 6)
+**Timeline (superseded):** Originally planned Nov 27-30; actual drafting commenced Nov 6-7 (Session 47)
 
 ---
 
