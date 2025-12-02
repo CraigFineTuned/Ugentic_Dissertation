@@ -364,63 +364,53 @@ UGENTIC_Dissertation/
 ├── app.py                          # Entry point
 ├── config.json                     # Configuration
 ├── requirements.txt                # Dependencies
+├── .gitignore                      # Git ignore rules
+├── README.md                       # Project overview
 │
 ├── src/ugentic/                   # Main package
 │   ├── __init__.py
-│   ├── config_manager.py          # [NEW] Configuration system
-│   ├── constants.py               # [NEW] Magic string constants
-│   ├── config.py                  # Legacy (Brave API key)
-│   ├── logging_config.py          # [FIXED] Dynamic paths
+│   ├── config_manager.py          # Configuration system
+│   ├── constants.py               # Magic string constants
+│   ├── logging_config.py          # Dynamic paths & logging
 │   │
 │   ├── core/                      # Core infrastructure
-│   │   ├── react_engine.py        # ReAct with Session 25 fixes
+│   │   ├── react_engine.py        # ReAct engine
 │   │   ├── tool_registry.py       # Tool management
-│   │   ├── agent_framework.py     # [FIXED] Removed duplicates
 │   │   ├── rag_core.py            # RAG system
 │   │   ├── agent_memory.py        # Memory system
-│   │   ├── reflection_engine.py   # Progress reflection
 │   │   └── ... (other core modules)
 │   │
 │   ├── agents/                    # Agent implementations
-│   │   ├── react_agents/
-│   │   │   ├── itmanager_agent_react.py
-│   │   │   ├── service_desk_manager_react.py
-│   │   │   ├── itsupport_agent_react.py
-│   │   │   ├── app_support_agent_react.py
-│   │   │   ├── network_agent_react.py
-│   │   │   └── infrastructure_agent_react.py
-│   │   └── __init__.py
+│   │   ├── react_agents/          # All 6 agent classes
+│   │   └── ...
 │   │
-│   ├── tools/                     # Tool implementations
-│   │   ├── infrastructure_tools.py
-│   │   ├── network_tools.py
-│   │   ├── application_tools.py
-│   │   ├── support_tools.py
-│   │   └── manager_tools.py
-│   │
-│   └── utils/
-│       └── investigation_logger.py
+│   └── tools/                     # Tool implementations
+│       ├── infrastructure_tools.py
+│       ├── network_tools.py
+│       ├── application_tools.py
+│       ├── support_tools.py
+│       └── manager_tools.py
+│
+├── scripts/                       # Automation & Maintenance
+│   ├── setup_project.py           # Cross-platform setup
+│   ├── maintenance/               # Health checks & cleanup
+│   └── dissertation/              # Legacy generation scripts
 │
 ├── logs/                          # [DYNAMIC] Created on startup
 │   ├── main.jsonl
-│   ├── errors.jsonl
-│   └── agents/
-│       ├── orchestrator.jsonl
-│       └── ... (per-agent logs)
+│   └── ...
 │
 ├── knowledge_base/                # [DYNAMIC] RAG documents
-│   └── (place .txt files here)
-│
-├── plans/                         # [DYNAMIC] Investigation plans
-│
-├── test_results/                  # [DYNAMIC] Test runs
 │
 ├── docs/                          # Documentation
-│   ├── ARCHITECTURE.md            # [NEW] This file
-│   └── Project_Tracker/
-│       └── SESSION_ENTRY.md
+│   ├── AGENTS.md                  # Agent personas
+│   ├── ARCHITECTURE.md            # System design
+│   ├── MASTER_STATUS_REPORT.md    # Status tracking
+│   ├── SETUP_GUIDE.md             # Detailed setup/config
+│   └── Project_Tracker/           # Development history
+│       └── SESSION_ENTRY.md       # NUCLEUS
 │
-└── [other supporting files]
+└── V2_COMPLETED...docx            # The Dissertation Artifact
 ```
 
 ---
@@ -451,9 +441,9 @@ All tools follow standard interface:
 def tool_function(param1, param2) -> Dict[str, Any]:
     return {
         "success": bool,
-        "data": object,  # or "result"
-        "error": str,    # if success=False
-        "message": str   # optional
+        "data": object,
+        "error": str,
+        "message": str
     }
 ```
 
@@ -506,59 +496,13 @@ for attempt in range(3):
 
 ## Deployment Guide
 
-### Prerequisites
+**See `docs/SETUP_GUIDE.md` for detailed instructions.**
 
-1. **Python 3.10+**
-   ```bash
-   python --version  # Must be 3.10 or higher
-   ```
+### Quick Start
 
-2. **Ollama Running**
-   ```bash
-   ollama serve  # Start in separate terminal
-   ```
-
-3. **Models Downloaded**
-   ```bash
-   ollama pull deepseek-v3.1:671b-cloud
-   ollama pull embeddinggemma:latest
-   ```
-
-### Installation
-
-1. **Clone/Extract Project**
-   ```bash
-   cd UGENTIC_Dissertation
-   ```
-
-2. **Create Virtual Environment**
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
-
-3. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Create config.json** (optional)
-   ```bash
-   cp config.json.example config.json
-   # Edit as needed, or use defaults
-   ```
-
-### Running
-
-**Standard Mode** (using configured model):
-```bash
-python app.py
-```
-
-**Fast Mode** (using gemma:2b for quick testing):
-```bash
-python app.py --fast
-```
+1.  **Setup:** `python scripts/setup_project.py`
+2.  **Serve:** `ollama serve`
+3.  **Run:** `python app.py`
 
 ### Troubleshooting
 
@@ -573,35 +517,6 @@ ollama serve
 # Solution: Download the model
 ollama pull deepseek-v3.1:671b-cloud
 ```
-
-**Issue:** "No config.json found"
-```bash
-# Solution: Not critical, system uses defaults
-# You can create one to override defaults
-```
-
-**Issue:** "Path errors on Windows/Mac"
-```bash
-# Solution: Already fixed! ConfigManager handles cross-platform paths automatically
-```
-
-### Performance Tuning
-
-1. **Use Fast Model for Testing**
-   ```bash
-   python app.py --fast
-   ```
-
-2. **Disable Optional Components**
-   - No embeddings model → RAG/Memory disabled automatically
-   - System still works with basic tools
-
-3. **Monitor Logs**
-   ```bash
-   tail -f logs/main.jsonl        # Main activity
-   tail -f logs/errors.jsonl      # Errors only
-   tail -f logs/agents/*.jsonl    # Per-agent logs
-   ```
 
 ---
 
