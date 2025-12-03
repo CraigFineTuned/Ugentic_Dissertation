@@ -51,6 +51,9 @@ It dynamically links to all active system components, reference documents, and t
 **System Health:** `docs/SYSTEM_HEALTH_REPORT.md` (Version 2.0 - New Test Scenarios)
 **Refactoring Summary:** `docs/REFACTORING_SUMMARY_DEC3.md` (Architectural Change Log)
 
+### 4. Enhancement Specifications (Next-Phase Planning)
+**Consultation Mode:** `docs/CONSULTATION_MODE_SPEC.md` (Priority #1 - Design Complete, Awaiting Implementation)
+
 ---
 
 ## 🛠️ REPO STRUCTURE & SYNCHRONIZATION
@@ -132,10 +135,11 @@ All actions regarding repo organization are logged in `docs/Project_Tracker/SESS
 
 ---
 
-## 🛑 STATUS: BUG FIXES COMPLETE | READY FOR RETEST
+## 🛑 STATUS: ENHANCEMENT PLANNING PHASE
 
 **Architectural refactoring complete (Dec 3, 2025 AM).**
-**Bug fixes complete (Dec 3, 2025 PM).**
+**Bug fixes complete & validated (Dec 3, 2025 PM).**
+**Next-phase specification complete (Dec 3, 2025 PM).**
 
 **Test Results:** See `docs/TEST_RESULTS_DEC3.md` for initial test analysis
 
@@ -193,14 +197,44 @@ All actions regarding repo organization are logged in `docs/Project_Tracker/SESS
 
 **Status:** 🎉 **FIXES CONFIRMED WORKING IN PRODUCTION**
 
-**Next Session Action:**
-1. ✅ Test 1 Complete - Continue with Tests 2-3 from TEST_PROMPTS_DEC3.md
-2. **Recommended:** Test specialist routing (VPN slow scenario)
-3. **Optional:** Implement Consultation Mode (Creative Innovation #1)
+---
 
-**Token Usage This Session:** 138k/200k (69% - efficient optimization + validation session)
+## 📋 NEXT-PHASE ROADMAP (Post Bug Fixes)
+
+**CONSULTATION MODE SPECIFICATION COMPLETE:**
+- ✅ **Specification Created:** `docs/CONSULTATION_MODE_SPEC.md` (500+ lines, comprehensive design)
+- ✅ **Architecture Defined:** Integration points, data flow, decision logic documented
+- ✅ **Testing Strategy:** 5 test scenarios + success metrics defined
+- ✅ **Implementation Plan:** 3-phase rollout (Core → Logging → Learning)
+- ✅ **Risk Assessment:** Mitigation strategies + rollback plan included
+
+**Key Features Designed:**
+1. **Lightweight Consultation:** IT Support requests specialist advice without ticket transfer
+2. **Smart Decision Logic:** 3-way routing (continue | consult | escalate)
+3. **Fallback Ready:** Automatic escalation if consultation insufficient
+4. **Performance Gains:** 30-40% time reduction vs full escalation (estimated)
+5. **Knowledge Transfer:** Level 1 learns from specialist responses
+
+**Implementation Readiness:**
+- **Status:** READY FOR APPROVAL
+- **Complexity:** MEDIUM (5 files modified, ~200-300 LOC)
+- **Estimated Time:** 5-8 hours (all 3 phases)
+- **Dependencies:** Code unfreeze approval required
+- **Testing:** Extends existing TEST_PROMPTS_DEC3.md scenarios
+
+**Next Session Actions:**
+1. **If Code Unfrozen:** Implement Consultation Mode Phase 1 (Core Mechanism)
+2. **If Code Frozen:** Continue with remaining validation tests (Tests 2-3)
+3. **Alternative:** Specify next creative innovation (Escalation Pattern Learning #2)
+
+**Additional Creative Innovations (From Dec 3 Session):**
+- Priority #2: Escalation Pattern Learning (auto-tune thresholds)
+- Priority #3: User Feedback Loop (train on actual outcomes)
+- Priority #4-10: See `docs/SESSION_COMPLETE_DEC3.md` for full list
+
+**Token Usage This Session:** 138k/200k (validation) + 38k/200k (consultation spec) = 176k/200k (88%)
 
 ---
 **Document:** SESSION_ENTRY.md (Active Nucleus)
 **Maintained By:** Craig Vraagom / Claude Sonnet 4.5
-**Last Session:** Dec 3, 2025 - Bug Fixes Complete + Testing Infrastructure + Creative Innovations
+**Last Session:** Dec 3, 2025 - Bug Fixes Validated + Consultation Mode Specification Complete
