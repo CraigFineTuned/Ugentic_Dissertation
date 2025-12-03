@@ -505,10 +505,42 @@ CREATE TABLE agent_learnings (
 
 ## 🔧 Implementation Priorities (Immediate Next Steps)
 
+### Priority 0: Functional Enhancements (Current System) - 1-3 weeks
+*Improve existing 6-agent system efficiency before scaling infrastructure*
+
+**Consultation Mode (HIGH PRIORITY - Ready for Implementation)**
+- ✅ Specification complete: `docs/CONSULTATION_MODE_SPEC.md`
+- ✅ Architecture designed: 5 files to modify, ~200-300 LOC
+- ✅ Testing strategy defined: 5 test scenarios + success metrics
+- [ ] Implementation Phase 1: Core consultation mechanism (2-3 hours)
+- [ ] Implementation Phase 2: Logging & analytics (1-2 hours)
+- [ ] Implementation Phase 3: Learning & optimization (2-3 hours)
+- **Impact:** 30-40% time reduction for consultation-eligible issues
+- **Status:** READY FOR APPROVAL (awaiting code unfreeze)
+
+**Escalation Pattern Learning (MEDIUM PRIORITY - Spec Pending)**
+- [ ] Create specification document
+- [ ] Design auto-tuning thresholds based on outcomes
+- [ ] Implement pattern recognition for common escalations
+- **Impact:** Reduce false escalations by 20-30%
+
+**User Feedback Loop (MEDIUM PRIORITY - Spec Pending)**
+- [ ] Create specification document
+- [ ] Design feedback collection mechanism
+- [ ] Implement training on actual resolution outcomes
+- **Impact:** Improve resolution accuracy over time
+
+**Why Before Phase 1?**
+These functional enhancements improve current system efficiency and can be implemented quickly (1-3 weeks) without major architectural changes. They provide immediate value while planning larger scalability work.
+
+---
+
 ### Priority 1: Fix Critical Issues (1-2 weeks)
-✅ SESSION_ENTRY.md paths (DONE)
-✅ config.json structure (DONE)
-✅ AGENTS.md population (DONE)
+✅ SESSION_ENTRY.md paths (DONE - Dec 3)
+✅ config.json structure (DONE - Dec 3)
+✅ AGENTS.md population (DONE - Dec 3)
+✅ Bug fixes complete (DONE - Dec 3: username handling, escalation logic, routing validation)
+✅ Testing infrastructure created (DONE - Dec 3: 12 test scenarios documented)
 - [ ] Add integration tests for all 6 agents
 - [ ] Document current scalability limits in README
 - [ ] Create ARCHITECTURE_V2.md with scaling roadmap
@@ -541,7 +573,13 @@ CREATE TABLE agent_learnings (
 - [ ] Integration testing
 - [ ] Documentation
 
-**Total Estimated:** 9-14 weeks for Phases 1-2 foundation
+**Total Estimated:**
+- **Priority 0 (Functional Enhancements):** 1-3 weeks
+- **Priority 1-5 (Infrastructure Foundation):** 9-14 weeks
+- **Phase 2 (Agent Expansion):** 8-12 weeks
+- **Phase 3 (Full Company):** 16-24 weeks
+- **Phase 4 (Visualization):** 12-16 weeks
+- **Grand Total:** 46-69 weeks (~1-1.5 years for complete vision)
 
 ---
 
