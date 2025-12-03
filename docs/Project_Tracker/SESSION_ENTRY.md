@@ -53,6 +53,7 @@ It dynamically links to all active system components, reference documents, and t
 
 ### 4. Enhancement Specifications (Next-Phase Planning)
 **Consultation Mode:** `docs/CONSULTATION_MODE_SPEC.md` (Priority #1 - Design Complete, Awaiting Implementation)
+**Escalation Pattern Learning:** `docs/ESCALATION_PATTERN_LEARNING_SPEC.md` (Priority #2 - Design Complete, Awaiting Implementation)
 
 ---
 
