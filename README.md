@@ -73,6 +73,6 @@ The `scripts/dissertation/` directory contains python scripts used to generate t
 ## 📄 License & Citation
 
 **Title:** Investigating Ubuntu Philosophy in Multi-Agent AI Systems for Organizational Support  
-**Researcher:** Craig Vraagom (40241517)  
+**Researcher:** Craig Vraagom (402415017)  
 **Institution:** Richfield Graduate Institute of Technology  
 **Date:** October 2025
