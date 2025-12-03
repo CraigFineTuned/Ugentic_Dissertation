@@ -29,28 +29,31 @@ def _hash_user_id(user_id: str) -> int:
     """Generate deterministic integer from user ID"""
     return int(hashlib.md5(user_id.encode()).hexdigest(), 16) % 100
 
-def get_user_profile(user_id: str) -> Dict[str, Any]:
+def get_user_profile(username: str) -> Dict[str, Any]:
     """
     Gets user profile information
     FIXED Session 22: Now deterministic based on user_id
+    FIXED Dec 3: Parameter renamed from user_id to username for LLM compatibility
     """
+    # Normalize username for processing
+    user_id = username.lower().replace(" ", "_")
     hash_val = _hash_user_id(user_id)
     departments = ["IT", "HR", "Finance", "Operations", "Marketing"]
     statuses = ["active", "locked", "disabled"]
-    
+
     # Deterministic based on hash
     dept_idx = hash_val % len(departments)
     status_idx = (hash_val // len(departments)) % len(statuses)
-    
+
     # John Smith specific: locked account (realistic for test scenario)
     if "john" in user_id.lower() and "smith" in user_id.lower():
         account_status = "locked"
     else:
         account_status = statuses[status_idx]
-    
+
     return {
         "user_id": user_id,
-        "username": f"user_{user_id}",
+        "username": username,
         "email": f"{user_id}@company.com",
         "department": departments[dept_idx],
         "account_status": account_status,
@@ -60,13 +63,16 @@ def get_user_profile(user_id: str) -> Dict[str, Any]:
     }
 
 
-def check_user_permissions(user_id: str, resource: str) -> Dict[str, Any]:
+def check_user_permissions(username: str, resource: str) -> Dict[str, Any]:
     """
     Checks user permissions for a specific resource
     FIXED Session 22: Now deterministic based on user_id and resource
+    FIXED Dec 3: Parameter renamed from user_id to username for LLM compatibility
     """
+    # Normalize username for processing
+    user_id = username.lower().replace(" ", "_")
     hash_val = _hash_user_id(user_id)
-    
+
     # John Smith specific: no printer access in Building A (realistic for test)
     if "john" in user_id.lower() and "smith" in user_id.lower():
         if "printer" in resource.lower() and "building a" in resource.lower():
@@ -75,9 +81,10 @@ def check_user_permissions(user_id: str, resource: str) -> Dict[str, Any]:
             has_access = hash_val % 2 == 0
     else:
         has_access = hash_val % 3 == 0
-    
+
     return {
         "user_id": user_id,
+        "username": username,
         "resource": resource,
         "has_access": has_access,
         "permission_level": ["read", "write", "admin"][hash_val % 3] if has_access else None,
@@ -86,16 +93,20 @@ def check_user_permissions(user_id: str, resource: str) -> Dict[str, Any]:
     }
 
 
-def reset_user_password(user_id: str) -> Dict[str, Any]:
+def reset_user_password(username: str) -> Dict[str, Any]:
     """
     Resets user password
     FIXED Session 22: Deterministic 85% success rate
+    FIXED Dec 3: Parameter renamed from user_id to username for LLM compatibility
     """
+    # Normalize username for processing
+    user_id = username.lower().replace(" ", "_")
     hash_val = _hash_user_id(user_id)
     success = hash_val % 100 < 85  # 85% success rate
-    
+
     return {
         "user_id": user_id,
+        "username": username,
         "success": success,
         "temporary_password": "TempPass@2025!" if success else None,
         "must_change_on_login": True if success else None,
@@ -104,16 +115,20 @@ def reset_user_password(user_id: str) -> Dict[str, Any]:
     }
 
 
-def unlock_user_account(user_id: str) -> Dict[str, Any]:
+def unlock_user_account(username: str) -> Dict[str, Any]:
     """
     Unlocks user account
     FIXED Session 22: Deterministic 90% success rate
+    FIXED Dec 3: Parameter renamed from user_id to username for LLM compatibility
     """
+    # Normalize username for processing
+    user_id = username.lower().replace(" ", "_")
     hash_val = _hash_user_id(user_id)
     success = hash_val % 100 < 90  # 90% success rate
-    
+
     return {
         "user_id": user_id,
+        "username": username,
         "success": success,
         "previous_status": "locked",
         "new_status": "active" if success else "locked",
@@ -148,14 +163,17 @@ def check_printer_status(printer_name: str) -> Dict[str, Any]:
     }
 
 
-def verify_email_config(user_id: str) -> Dict[str, Any]:
+def verify_email_config(username: str) -> Dict[str, Any]:
     """
     Verifies email configuration for user
     FIXED Session 22: Deterministic
+    FIXED Dec 3: Parameter renamed from user_id to username for LLM compatibility
     """
+    # Normalize username for processing
+    user_id = username.lower().replace(" ", "_")
     hash_val = _hash_user_id(user_id)
     config_ok = hash_val % 100 > 20  # 80% config ok
-    
+
     issues = []
     if not config_ok:
         issue_types = [
@@ -165,9 +183,10 @@ def verify_email_config(user_id: str) -> Dict[str, Any]:
             "SSL certificate issue"
         ]
         issues = [issue_types[hash_val % len(issue_types)]]
-    
+
     return {
         "user_id": user_id,
+        "username": username,
         "email": f"{user_id}@company.com",
         "configuration_ok": config_ok,
         "server": "mail.company.com",
@@ -179,16 +198,20 @@ def verify_email_config(user_id: str) -> Dict[str, Any]:
     }
 
 
-def test_remote_access(user_id: str) -> Dict[str, Any]:
+def test_remote_access(username: str) -> Dict[str, Any]:
     """
     Tests remote access (VPN) for user
     FIXED Session 22: Deterministic 80% success
+    FIXED Dec 3: Parameter renamed from user_id to username for LLM compatibility
     """
+    # Normalize username for processing
+    user_id = username.lower().replace(" ", "_")
     hash_val = _hash_user_id(user_id)
     can_connect = hash_val % 100 > 20  # 80% success
-    
+
     return {
         "user_id": user_id,
+        "username": username,
         "vpn_status": "connected" if can_connect else "connection_failed",
         "can_access": can_connect,
         "ip_address": f"10.0.{hash_val % 255}.{(hash_val * 3) % 255}" if can_connect else None,
@@ -198,16 +221,20 @@ def test_remote_access(user_id: str) -> Dict[str, Any]:
     }
 
 
-def check_software_installation(user_id: str, software_name: str) -> Dict[str, Any]:
+def check_software_installation(username: str, software_name: str) -> Dict[str, Any]:
     """
     Checks if software is installed on user's machine
     FIXED Session 22: Deterministic
+    FIXED Dec 3: Parameter renamed from user_id to username for LLM compatibility
     """
+    # Normalize username for processing
+    user_id = username.lower().replace(" ", "_")
     hash_val = _hash_user_id(user_id)
     installed = hash_val % 2 == 0
-    
+
     return {
         "user_id": user_id,
+        "username": username,
         "software": software_name,
         "installed": installed,
         "version": f"{(hash_val % 10) + 1}.{hash_val % 9}.{hash_val % 99}" if installed else None,
@@ -217,17 +244,21 @@ def check_software_installation(user_id: str, software_name: str) -> Dict[str, A
     }
 
 
-def get_recent_tickets(user_id: str = None) -> Dict[str, Any]:
+def get_recent_tickets(username: str = None) -> Dict[str, Any]:
     """
     Gets recent support tickets for user or all users
     FIXED Session 22: Deterministic
+    FIXED Dec 3: Parameter renamed from user_id to username for LLM compatibility
     """
-    if user_id:
+    if username:
+        # Normalize username for processing
+        user_id = username.lower().replace(" ", "_")
         hash_val = _hash_user_id(user_id)
         ticket_count = 2 + (hash_val % 3)
     else:
+        user_id = None
         ticket_count = 5
-    
+
     tickets = []
     subjects = [
         "Password reset needed",
@@ -236,38 +267,42 @@ def get_recent_tickets(user_id: str = None) -> Dict[str, Any]:
         "Email not syncing",
         "VPN connection issues"
     ]
-    
+
     for i in range(ticket_count):
         tickets.append({
             "ticket_id": f"TKT-{1000 + i}",
             "user_id": user_id or f"user_{i}",
+            "username": username or f"user_{i}",
             "subject": subjects[i % len(subjects)],
             "status": ["open", "in_progress", "resolved"][i % 3],
             "priority": ["low", "medium", "high"][i % 3],
             "created": datetime.now().isoformat(),
             "assigned_to": "IT Support"
         })
-    
+
     return {
         "user_id": user_id,
+        "username": username,
         "total_tickets": ticket_count,
         "open_tickets": len([t for t in tickets if t["status"] == "open"]),
         "tickets": tickets
     }
 
 
-def ask_questions(questions: list, user_id: str = "") -> Dict[str, Any]:
+def ask_questions(questions: list, username: str = "") -> Dict[str, Any]:
     """
     Asks questions to gather additional information for troubleshooting.
-    
+
     FIXED Session 22: Now uses RAG system to retrieve real answers from knowledge base
     instead of simulating responses with pattern matching.
-    
+
     Session 23 FIX: Handle both string and list inputs (LLM may generate string)
-    
+
+    FIXED Dec 3: Parameter renamed from user_id to username for LLM compatibility
+
     Args:
         questions: List of questions to ask (strings), or a single question string
-        user_id: Optional user identifier for context
+        username: Optional user identifier for context
         
     Returns:
         Dictionary with responses retrieved from knowledge base or fallback answers
@@ -292,7 +327,7 @@ def ask_questions(questions: list, user_id: str = "") -> Dict[str, Any]:
             "tool": "ask_questions",
             "domain": "user_support",
             "data": {
-                "user_id": user_id if user_id else "general_inquiry",
+                "username": username if username else "general_inquiry",
                 "questions_asked": 0,
                 "responses": [],
                 "timestamp": datetime.now().isoformat(),
@@ -352,7 +387,7 @@ def ask_questions(questions: list, user_id: str = "") -> Dict[str, Any]:
         "tool": "ask_questions",
         "domain": "user_support",
         "data": {
-            "user_id": user_id if user_id else "general_inquiry",
+            "username": username if username else "general_inquiry",
             "questions_asked": len(questions),
             "responses": responses,
             "timestamp": datetime.now().isoformat(),

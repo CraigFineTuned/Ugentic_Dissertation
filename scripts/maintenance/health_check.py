@@ -12,6 +12,10 @@ import json
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+# Force Python to use the local source code (Project Root)
+project_root = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(project_root))
+
 # Color codes for terminal output
 class Colors:
     GREEN = '\033[92m'
@@ -68,7 +72,7 @@ def check_project_structure() -> Tuple[bool, List[str]]:
         'src/ugentic/constants.py',
     ]
     
-    project_root = Path(__file__).parent
+    # project_root is defined at module level
     missing = []
     
     for file in required_files:

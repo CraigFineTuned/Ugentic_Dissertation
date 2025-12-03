@@ -158,24 +158,25 @@ class ITManagerAgentReAct:
 
     def delegate(self, user_issue: str, context: Dict = None) -> Dict[str, Any]:
         """
-        SESSION 31 OPTIMIZED: Hybrid delegation strategy with upfront triage
-        
-        Strategy:
-        0. Check upfront triage for obvious multi-domain issues (IMMEDIATE orchestration)
-        1. Try rule-based triage (instant, efficient) - handles 70-80% of cases
-        2. Fall back to LLM reasoning (flexible, adaptive) - handles 20-30% ambiguous cases
-        
-        This mirrors real IT department triage:
-        - Experienced managers route clear-cut issues instantly (rules)
-        - Triage emergency/multi-domain issues before delegation (upfront triage)
-        - Complex/ambiguous issues require analytical thinking (LLM)
-        
+        DEPRECATED (Dec 3, 2025): Entry point changed to IT Support (Level 1)
+
+        IT Manager no longer performs universal triage on all tickets.
+        This method is preserved for strategic decision-making only.
+
+        NEW FLOW:
+        - ALL requests start at IT Support (Level 1)
+        - IT Support escalates to Service Desk Manager if needed
+        - Service Desk Manager routes to specialists
+        - IT Manager handles STRATEGIC issues only (budget, policy, approvals)
+
+        This method now only called for strategic escalations from Service Desk Manager.
+
         Args:
-            user_issue: User's problem description
+            user_issue: Strategic issue description
             context: Additional context
-            
+
         Returns:
-            Dictionary with agent name, reasoning, and delegation method used
+            Dictionary with strategic decision/guidance
         """
         logging.info(f"\n{'='*60}")
         logging.info(f"🎯 {self.name} - Strategic Triage (SESSION 31 OPTIMIZED)")
@@ -382,6 +383,101 @@ Respond in JSON format:
                 "error": str(e)
             }
 
+    def handle_strategic_issue(self, issue: str, level1_findings: Dict, context: Dict = None) -> Dict[str, Any]:
+        """
+        Handle strategic decision-making (ARCHITECTURAL CHANGE Dec 3, 2025)
+
+        IT Manager now focuses on STRATEGIC issues only:
+        - Budget approvals (software purchases, hardware upgrades)
+        - Policy decisions (security policies, access control)
+        - Vendor/contract negotiations
+        - Department-wide initiatives
+        - Resource allocation across teams
+
+        Args:
+            issue: Strategic issue description
+            level1_findings: Escalation context from IT Support
+            context: Additional context
+
+        Returns:
+            Strategic decision/guidance
+        """
+        logging.info(f"\n{'='*60}")
+        logging.info(f"🎯 {self.name} - Strategic Decision Required")
+        logging.info(f"{'='*60}")
+        logging.info(f"Issue: {issue}")
+        logging.info(f"Escalated from: {level1_findings.get('agent', 'Unknown')}")
+        logging.info(f"Escalation Reason: {level1_findings.get('escalation_details', {}).get('reason', 'N/A')}")
+        logging.info(f"{'='*60}\n")
+
+        # Use LLM for strategic decision-making
+        strategic_prompt = f"""You are the IT Manager making a strategic decision.
+
+Issue requiring management decision:
+{issue}
+
+Context from Level 1 Support:
+{level1_findings.get('escalation_details', {}).get('reason', 'No additional context')}
+
+Strategic decision types you handle:
+- Budget approvals (purchases, upgrades, licenses)
+- Policy decisions (security, access control, standards)
+- Vendor/contract negotiations
+- Department-wide initiatives
+- Cross-departmental coordination
+- Resource allocation
+
+Your task:
+1. Analyze if this truly requires strategic decision (vs technical escalation)
+2. If strategic: Provide decision/approval with justification
+3. If technical: Redirect to appropriate specialist
+
+Respond in JSON format:
+{{
+    "decision_type": "strategic/technical_redirect",
+    "decision": "Your strategic decision or redirect guidance",
+    "reasoning": "Why this decision was made",
+    "action_required": "What needs to happen next"
+}}"""
+
+        try:
+            response = self.llm.invoke(strategic_prompt)
+            response_text = response.content if hasattr(response, 'content') else str(response)
+
+            if '{' in response_text:
+                start = response_text.find('{')
+                end = response_text.rfind('}') + 1
+                decision = json.loads(response_text[start:end])
+            else:
+                decision = {
+                    "decision_type": "strategic",
+                    "decision": "Requires further analysis",
+                    "reasoning": "LLM response parsing failed",
+                    "action_required": "Manual review by IT Manager"
+                }
+
+            logging.info(f"✅ Strategic Decision Made")
+            logging.info(f"   Type: {decision.get('decision_type')}")
+            logging.info(f"   Decision: {decision.get('decision')[:100]}...")
+            logging.info(f"   Action: {decision.get('action_required')}\n")
+
+            return {
+                'status': 'STRATEGIC_DECISION_MADE',
+                'decision': decision,
+                'root_cause': issue,
+                'solution': decision.get('decision'),
+                'agent': self.name
+            }
+
+        except Exception as e:
+            logging.error(f"❌ Strategic decision error: {e}")
+            return {
+                'status': 'STRATEGIC_DECISION_ERROR',
+                'error': str(e),
+                'fallback': 'Escalate to executive management',
+                'agent': self.name
+            }
+
     def _format_agents(self) -> str:
         """Format available agents for LLM prompt"""
         agent_descriptions = []
@@ -391,7 +487,7 @@ Respond in JSON format:
             else:
                 agent_descriptions.append(f"- {name}")
         return "\n".join(agent_descriptions)
-    
+
     def register_agent(self, name: str, agent):
         """Register an agent for delegation"""
         self.agents[name] = agent

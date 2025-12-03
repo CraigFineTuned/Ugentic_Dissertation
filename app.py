@@ -215,30 +215,24 @@ def process_user_request(
 ) -> Dict[str, Any]:
     """
     Process a user request through the agent system
-    
+
+    ARCHITECTURAL CHANGE (Dec 3, 2025):
+    Entry point changed from IT Manager to IT Support (Level 1)
+    Flow: IT Support → Escalate if needed → Service Desk routes → Specialist
+
     Args:
         user_input: User's problem description
         agents: Dictionary of initialized agents
         rag_system: RAG system instance
         logger: Investigation logger
-        
+
     Returns:
         Investigation result
     """
     print(f"\n{'='*60}")
     print(f"Processing: {user_input}")
     print(f"{'='*60}\n")
-    
-    # Step 1: IT Manager delegates
-    print("🎯 IT Manager analyzing request...")
-    it_manager = agents.get('IT Manager')
-    delegation = it_manager.delegate(user_input)
-    target_agent_name = delegation['agent']
-    print(f"   → Delegating to: {target_agent_name}\n")
-    
-    # Step 2: Agent investigates with ReAct
-    target_agent = agents.get(target_agent_name)
-    
+
     # Add RAG context if available
     rag_context = []
     if rag_system:
@@ -246,30 +240,69 @@ def process_user_request(
             rag_context = rag_system.retrieve(user_input, top_k=3)
         except Exception as e:
             print(f"⚠ Warning: RAG retrieval failed: {str(e)}")
-    
+
     context = {
         'user_input': user_input,
         'knowledge_base': rag_context
     }
-    
-    # Agent investigates (ReAct + automatic orchestration)
-    result = target_agent.investigate(user_input, context)
-    
-    # Check if collaboration is needed
-    if result.get('status') == 'NEEDS_COLLABORATION' and not getattr(target_agent, 'is_orchestrator', False):
-        print(f"\n{'!'*20} ESCALATION {'!'*20}")
-        print(f"Escalating to orchestrator for multi-agent collaboration...")
-        print(f"{'!'*48}\n")
-        
-        orchestrator_agent = agents.get('Infrastructure')
-        if orchestrator_agent:
-            result = orchestrator_agent.investigate(user_input, context)
-        else:
-            print("⚠ ERROR: Orchestrator agent not found!")
-    
+
+    # STEP 1: IT Support (Level 1) attempts resolution
+    print("🎧 Level 1: IT Support handling request...")
+    it_support = agents.get('IT Support')
+    result = it_support.investigate(user_input, context)
+
+    # STEP 2: Check if escalation is needed
+    if result.get('status') == 'NEEDS_ESCALATION':
+        escalation = result.get('escalation_details', {})
+        print(f"\n{'⬆'*20} ESCALATION {'⬆'*20}")
+        print(f"Reason: {escalation.get('reason', 'Requires specialist expertise')}")
+        print(f"{'⬆'*48}\n")
+
+        if escalation.get('type') == 'technical':
+            # Service Desk Manager routes to appropriate specialist
+            print("📋 Level 2: Service Desk Manager routing to specialist...")
+            service_desk = agents.get('Service Desk Manager')
+
+            # Get routing decision from Service Desk Manager
+            specialist_name = service_desk.route_escalation(
+                issue=user_input,
+                level1_findings=result,
+                context=context
+            )
+
+            print(f"   → Routing to: {specialist_name}\n")
+
+            # Specialist investigates (ReAct + possible orchestration)
+            specialist = agents.get(specialist_name)
+            if specialist:
+                result = specialist.investigate(user_input, context)
+
+                # Check if multi-agent collaboration needed
+                if result.get('status') == 'NEEDS_COLLABORATION':
+                    print(f"\n{'!'*20} MULTI-AGENT COLLABORATION {'!'*20}")
+                    print(f"Escalating to Infrastructure orchestrator...")
+                    print(f"{'!'*58}\n")
+
+                    orchestrator = agents.get('Infrastructure')
+                    if orchestrator:
+                        result = orchestrator.investigate(user_input, context)
+                    else:
+                        print("⚠ ERROR: Orchestrator agent not found!")
+            else:
+                print(f"⚠ ERROR: Specialist '{specialist_name}' not found!")
+
+        elif escalation.get('type') == 'strategic':
+            # Strategic decision needed - escalate to IT Manager
+            print("🎯 Level 3: IT Manager handling strategic decision...")
+            it_manager = agents.get('IT Manager')
+            if it_manager:
+                result = it_manager.handle_strategic_issue(user_input, result, context)
+            else:
+                print("⚠ ERROR: IT Manager not found!")
+
     # Display results
     display_results(result, rag_context)
-    
+
     return result
 
 

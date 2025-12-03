@@ -266,12 +266,18 @@ Level 3: Graceful Degradation
 
 ## Data Flow
 
-### Request Processing Flow
+### Request Processing Flow (UPDATED Dec 3, 2025)
+
+**ARCHITECTURAL CHANGE:** Entry point is now IT Support (Level 1), not IT Manager
 
 ```
 User Input
     ↓
-IT Manager (Delegates)
+IT Support (Level 1 - First Contact)
+    ├─ ReAct Investigation (80% resolution)
+    └─ Escalation Decision
+        ↓
+Service Desk Manager (Level 2 - Routing)
     ↓
 Primary Agent (Investigates with ReAct)
     ├─ LLM Reasoning (with retry/fallback)
