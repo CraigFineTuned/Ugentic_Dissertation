@@ -17,6 +17,9 @@ env/
 *.swp
 *.swo
 
+# Claude Code
+.claude/
+
 # Project Runtime Data (Ignored for clean repo)
 logs/
 plans/
@@ -26,22 +29,18 @@ temp_*.md
 temp_*.txt
 *.tmp
 *.log
-
-# Knowledge Base (User specific)
-# knowledge_base/*
-# !knowledge_base/.gitkeep
+nul
 
 # Secrets & Configuration
 .env
-# config.json is committed as example, but specific user configs might be ignored if preferred. 
-# For now, we keep config.json tracked as it has defaults.
 
-# Dissertation Specific (Personal)
+# Personal Planning & Dissertation Files (NOT for public repo)
 DISSERTATION_ACADEMIC/
+docs/
+scripts/dissertation/
+knowledge_base/
 Secret_World/
 claud_ugentic/
-V2_COMPLETED-Craig Vraagom_402415017_Research_Disertation.docx
-docs/Project_Tracker/
 *.docx
 *.pdf
 *.pub
